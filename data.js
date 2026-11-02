@@ -288,8 +288,8 @@ window.SKY = {
     {
       id: "geotab", group: "story", size: 1,
       title: "Software Engineer Intern, Geotab",
-      kind: "Toronto", when: "2022",
-      body: ["Built a Django tool for managing Google Cloud storage buckets from the database."],
+      kind: "Toronto", when: "2022 and 2024",
+      body: ["Two internships: January to August 2022, and again February to September 2024. The first built a Django tool for managing Google Cloud storage buckets from the database."],
       related: ["bsc", "fullstack"],
     },
     {

@@ -103,7 +103,7 @@
       title: "An AI front desk for a health centre",
       role: "AI Solution Intern", when: "Sep 2025 – Sep 2026", where: "SFU Health Care Center",
       stack: ["GPT", "LangGraph", "LangChain", "Retrieval"],
-      lead: "Front-desk staff spend their day on the same few tasks: booking, rescheduling, intake forms, common questions and routing calls. I led a team of three that built an agent to take on that work.",
+      lead: "Front-desk staff spend their day on the same few tasks: booking, rescheduling, intake forms, common questions and routing calls. In a team of three, I built an agent to take on that work.",
       sections: [
         ["What I did", [
           "Designed the agent's workflow in LangGraph, with tool calls to scheduling, patient records, calendars and messaging, plus retrieval over the centre's policies.",
@@ -116,9 +116,9 @@
     {
       id: "geotab", group: "Work", star: "geotab",
       title: "Cloud storage tooling at Geotab",
-      role: "Software Engineer Intern", when: "Jan – Aug 2022", where: "Geotab, Toronto",
+      role: "Software Engineer Intern", when: "Jan – Aug 2022 and Feb – Sep 2024", where: "Geotab, Toronto",
       stack: ["Python", "Django", "Google Cloud Platform", "SQL"],
-      lead: "My first software job: eight months on a team that runs a large fleet-telematics platform.",
+      lead: "My first software job, and I came back for a second internship: two stints on a team that runs a large fleet-telematics platform.",
       sections: [
         ["What I did", ["Built a Django interface that creates, reads, updates and deletes Google Cloud Storage buckets directly from database records, so the team could manage storage without hand-written scripts."]],
       ],
