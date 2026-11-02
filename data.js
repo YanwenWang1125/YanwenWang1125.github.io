@@ -1,0 +1,588 @@
+// Every star on the map. Facts come from Research/Job/Profile.md and the project READMEs.
+// orbit: 1 research (inner) · 2 projects · 3 knowledge · 4 code · 5 story · 6 life (outer)
+// size: 1 small · 2 medium · 3 large
+
+window.SKY = {
+  me: {
+    id: "me",
+    title: "Yanwen Wang",
+    kind: "PhD student, Computer Science",
+    when: "London, Ontario",
+    body: [
+      "I started my PhD at Western University in September 2026, supervised by Prof. Fang Fang. My research uses machine learning to help build fault-tolerant quantum computers.",
+      "I came to quantum through machine learning and software: a BSc in Computer Science, an MSc in Artificial Intelligence, and AI products built for clinics, realtors and classrooms. I also teach, and I like turning a hard idea into something people can run, test and use.",
+      "Outside research: reading, gaming, cooking, badminton, and making animations that explain science.",
+    ],
+    facts: [
+      ["Now", "PhD, Computer Science, Western, 2026–"],
+      ["Research", "Machine learning for fault-tolerant quantum computing"],
+      ["Tools", "PennyLane, Qiskit, PyTorch, Slurm on H100 GPUs"],
+    ],
+    links: [
+      ["Email", "mailto:yanwenwang1125@gmail.com"],
+      ["GitHub", "https://github.com/YanwenWang1125"],
+    ],
+  },
+
+  groups: {
+    research: { name: "Research", orbit: 1, colour: "#f2c46d" },
+    project: { name: "Projects", orbit: 2, colour: "#9cc7ff" },
+    knowledge: { name: "Knowledge", orbit: 3, colour: "#8fe0cf" },
+    code: { name: "Code", orbit: 4, colour: "#c9d3e3" },
+    story: { name: "Story", orbit: 5, colour: "#ff9e7a" },
+    life: { name: "Life", orbit: 6, colour: "#f5a3c7" },
+  },
+
+  stars: [
+    // ── Research ─────────────────────────────────────────────
+    {
+      id: "ftqc", group: "research", size: 3,
+      title: "ML for fault-tolerant quantum computing",
+      kind: "PhD direction", when: "2026–",
+      body: [
+        "Quantum computers make errors faster than they make progress. Fault tolerance is the engineering that lets them run long programs anyway, and much of it is search and pattern recognition, which machine learning is good at.",
+        "My PhD asks where learning can take over hand-designed parts of that machinery: writing circuits, and reading the error signals a quantum chip produces.",
+      ],
+      related: ["rewrite", "clifford", "pinq", "qec"],
+    },
+    {
+      id: "rewrite", group: "research", size: 3,
+      title: "Learning-guided fault-tolerant rewrites",
+      kind: "Main PhD project", when: "Oct 2026–",
+      body: [
+        "Error correction needs syndrome-extraction circuits that stay fault tolerant yet use few ancilla qubits and gates. I start from a circuit known to be fault tolerant and change it only with rewrite rules that provably keep it that way. Machine learning ranks the candidates and steers the search, so fewer costly Monte Carlo simulations are needed.",
+        "For the distance-5 [[17,1,5]] colour code, the search found circuits that use 12 ancillas per Z half-round instead of the reference circuit's 15, pass a distance-5 check, and show no significant difference in logical error rate. An 11-ancilla circuit also passed the distance check but erred more at low noise: a clean look at the trade between resources and reliability.",
+      ],
+      facts: [
+        ["Tools", "Stim, beam search, MILP-based exact checks, Slurm"],
+        ["Also found", "Circuits that are equal on paper can differ in error rate with scheduling and idle noise, so counting gates is not enough"],
+      ],
+      related: ["ftqc", "qec", "stim", "pinq"],
+    },
+    {
+      id: "pinq", group: "research", size: 2,
+      title: "Rewrites on real hardware",
+      kind: "PINQ² · IBM Quantum System One", when: "Dec 2026–Mar 2027",
+      body: [
+        "I run the original and rewritten [[7,1,3]] circuits on the IBM Quantum System One at PINQ²: five ancillas cut to three, nine CNOTs cut to seven, each under several schedules, about 50 circuits and up to two million shots.",
+        "Comparing the measured error rates with Stim simulations gives the rewrite search a cost function that knows about real hardware.",
+      ],
+      related: ["rewrite", "qiskit"],
+    },
+    {
+      id: "clifford", group: "research", size: 2,
+      title: "Clifford circuit synthesis with RL",
+      kind: "PhD project", when: "Oct 2026",
+      body: [
+        "Clifford circuits are the backbone of error correction, and shorter ones leave fewer chances for errors to creep in.",
+        "My first PhD topic explored reinforcement learning for writing them, building on arXiv:2605.10910, with exact synthesis and the MQT compiler as baselines. It later narrowed into the rewrite search.",
+      ],
+      related: ["ftqc", "rl", "pytorch"],
+    },
+
+    // ── Projects ─────────────────────────────────────────────
+    {
+      id: "vqe", group: "project", size: 3,
+      title: "VQE on H2, LiH and BeH2",
+      kind: "Quantum chemistry", when: "Oct 2026",
+      image: "assets/fig/lih_error_vs_bond_length.png",
+      imageAlt: "Plot of energy error against Li–H bond length: UCCSD stays far below the 1.6 mHa line, the hardware-efficient ansatz stays far above it.",
+      body: [
+        "Under one optimisation budget, which is easier to train to chemical accuracy: UCCSD, built for the problem, or a generic hardware-efficient ansatz?",
+        "UCCSD reached chemical accuracy at all 5 LiH bond lengths. The hardware-efficient ansatz reached it in 0 of 150 runs, and a control that started it from Hartree–Fock showed the starting point was not the whole story.",
+      ],
+      facts: [
+        ["Molecules", "H₂ (4 qubits), LiH (12), BeH₂ (14)"],
+        ["Runs", "Over 300, 5 seeds each"],
+        ["ADAPT-VQE", "Chemical accuracy on LiH with 4–7 of 92 gates"],
+        ["GPU", "5.6× faster than 4 CPU cores at 20 qubits on an H100"],
+      ],
+      links: [["Code and results", "https://github.com/YanwenWang1125/qml-chemistry-projects"]],
+      related: ["vqealg", "pennylane", "hpc", "qiskit"],
+    },
+    {
+      id: "qcnn", group: "project", size: 2,
+      title: "QCNN design ablation",
+      kind: "Quantum machine learning", when: "Oct 2026",
+      image: "assets/nist-sd-19-f1002-33.png",
+      imageAlt: "A 1989 NIST handwriting sample form with rows of hand-printed digits.",
+      imagePos: "50% 22%",
+      body: [
+        "An 8-qubit quantum convolutional network told handwritten 3s from 8s. I varied how complex its convolutions were and whether they shared parameters.",
+        "All four designs landed between 0.948 and 0.961 test accuracy. A 9-parameter logistic regression on the same features reached 0.981, so the honest conclusion is that the QCNN did not beat the baseline.",
+      ],
+      facts: [["Seeds", "5 per design"], ["Parameters", "12 to 51"]],
+      related: ["qnn", "pennylane", "pytorch"],
+    },
+    {
+      id: "papers", group: "project", size: 2,
+      title: "Checking QML papers by hand",
+      kind: "Paper verification", when: "Sep 2026–",
+      body: [
+        "I read quantum machine learning papers with a script open beside them and try to reproduce the claims.",
+        "Kernel concentration from Shaydulin & Wild reproduced, and bandwidth scaling removed it. On a QCNN paper's MNIST task, PCA plus logistic regression reached 99.91%. For EQE-QAOA, the symmetry reduction matched to 1e-15, and adding the global bit-flip symmetry gave smaller subspaces.",
+      ],
+      related: ["kernels", "qaoa", "qnn"],
+    },
+    {
+      id: "wildfire", group: "project", size: 3,
+      title: "Wildfire prediction across Canada",
+      kind: "Multimodal ML · MSc", when: "2024–2025",
+      image: "assets/northwest-crown-fire-experiment.png",
+      imageAlt: "A crown fire burning through boreal forest in the Northwest Territories.",
+      body: [
+        "Next-day wildfire occurrence for all of Canada, from seven years of fire-danger maps, satellite hotspots and weather.",
+        "A Vision Transformer read the maps, an LSTM read the weather, and the fused model beat both on their own: accuracy 0.87, F1 0.82, AUC-ROC 0.91.",
+      ],
+      facts: [["Data", "CWFIS FireM3 and Fire Weather Index, 2017–2023"], ["With", "Guan Qiang and Prof. Fang Fang"]],
+      related: ["vit", "pytorch", "msc"],
+    },
+    {
+      id: "flight", group: "project", size: 2,
+      title: "Flight school cancellation recovery",
+      kind: "Scheduling system", when: "2026–",
+      image: "assets/hfa-cessna-172-training-aircraft.jpg",
+      imageAlt: "A Cessna 172 training aircraft in flight.",
+      body: [
+        "When a lesson at Diamond Flight Centre London is cancelled, the slot needs a new student, a qualified instructor and an available aircraft, under weather, daylight and maintenance rules.",
+        "I designed the system so the rule-based scheduler can later be swapped for an optimiser or a learned policy. I built the Spring Boot backend, the PostgreSQL schema and the React frontend, and wrote the pilot's evaluation plan: time to refill, refill rate and recovered flight hours.",
+      ],
+      facts: [["Stack", "Java 21, Spring Boot, PostgreSQL, React"]],
+      related: ["fullstack", "rl"],
+    },
+    {
+      id: "agent", group: "project", size: 2,
+      title: "An AI front desk",
+      kind: "Agentic AI", when: "2025–2026",
+      body: [
+        "With a team of three I built an LLM agent that books and reschedules appointments, takes patient intake, answers common questions and routes calls.",
+        "It connects to scheduling, patient records, calendars and messaging, retrieves from the centre's policies, and staff review every action before it takes effect. Patient data is used only with signed consent.",
+      ],
+      related: ["langgraph", "sfu"],
+    },
+    {
+      id: "courseml", group: "project", size: 1,
+      title: "Coursework in classical ML",
+      kind: "Course projects", when: "2023–2024",
+      body: [
+        "Stock prices with ARIMA against LSTMs. Cardiovascular risk on 68,425 records with SHAP. Speech emotion with SVMs. German traffic signs with a CNN.",
+      ],
+      links: [["Cardiovascular risk code", "https://github.com/YanwenWang1125/Cardiovascular-Risk-Prediction"]],
+      related: ["pytorch", "msc"],
+    },
+
+    // ── Knowledge ────────────────────────────────────────────
+    {
+      id: "qec", group: "knowledge", size: 2,
+      title: "Quantum error correction",
+      kind: "Learning now", when: "2026",
+      body: ["Stabiliser codes, syndrome extraction, surface and colour codes, and what it takes for a circuit to be fault tolerant: the ground my PhD stands on."],
+      related: ["ftqc", "rewrite", "stim"],
+    },
+    {
+      id: "stim", group: "knowledge", size: 1,
+      title: "Stim",
+      kind: "Quantum software", when: "Oct 2026",
+      body: ["Fast stabiliser simulation for noisy error-correction circuits; the Monte Carlo engine behind my rewrite search."],
+      related: ["rewrite", "qec"],
+    },
+    {
+      id: "vqealg", group: "knowledge", size: 2,
+      title: "VQE, UCCSD, ADAPT-VQE",
+      kind: "Quantum algorithms", when: "2026",
+      body: ["Variational eigensolvers for molecular ground states, and how ansatz choice decides whether training succeeds."],
+      related: ["vqe"],
+    },
+    {
+      id: "kernels", group: "knowledge", size: 1,
+      title: "Quantum kernels",
+      kind: "Quantum ML", when: "Sep 2026",
+      body: ["Feature maps, kernel concentration and bandwidth. Studied from the textbook and four papers, with code."],
+      related: ["papers"],
+    },
+    {
+      id: "qnn", group: "knowledge", size: 1,
+      title: "Quantum neural networks",
+      kind: "Quantum ML", when: "Oct 2026",
+      body: ["Ansätze, the parameter-shift rule and QNN classifiers, each derived and checked numerically in PennyLane."],
+      related: ["qcnn", "papers"],
+    },
+    {
+      id: "qaoa", group: "knowledge", size: 1,
+      title: "QAOA and symmetry",
+      kind: "Quantum algorithms", when: "Oct 2026",
+      body: ["Reading QAOA papers and checking their symmetry arguments in NumPy."],
+      related: ["papers"],
+    },
+    {
+      id: "pennylane", group: "knowledge", size: 2,
+      title: "PennyLane",
+      kind: "Quantum software", when: "2026",
+      body: ["My main quantum framework: qml.qchem, lightning.qubit and lightning.gpu, adjoint and parameter-shift gradients."],
+      related: ["vqe", "qcnn", "qhack"],
+    },
+    {
+      id: "qiskit", group: "knowledge", size: 1,
+      title: "Qiskit",
+      kind: "Quantum software", when: "2026",
+      body: ["Used to cross-check the H₂ VQE: the same energies to within 1e-12 Ha."],
+      related: ["vqe"],
+    },
+    {
+      id: "pytorch", group: "knowledge", size: 2,
+      title: "PyTorch",
+      kind: "Machine learning", when: "2023–",
+      body: ["Vision Transformers, LSTMs and hybrid quantum–classical training loops."],
+      related: ["wildfire", "qcnn", "clifford"],
+    },
+    {
+      id: "rl", group: "knowledge", size: 1,
+      title: "Reinforcement learning",
+      kind: "Machine learning", when: "2026–",
+      body: ["The method behind my first PhD project."],
+      related: ["clifford"],
+    },
+    {
+      id: "vit", group: "knowledge", size: 1,
+      title: "Vision Transformers and LSTMs",
+      kind: "Machine learning", when: "2024–2025",
+      body: ["One reads images, one reads time series; the wildfire model fused the two."],
+      related: ["wildfire"],
+    },
+    {
+      id: "langgraph", group: "knowledge", size: 1,
+      title: "LangGraph and LangChain",
+      kind: "Agentic AI", when: "2025–2026",
+      body: ["Tool-calling agent workflows with retrieval and a human review step."],
+      related: ["agent"],
+    },
+    {
+      id: "hpc", group: "knowledge", size: 1,
+      title: "HPC on Alliance Canada",
+      kind: "Scientific computing", when: "2026",
+      body: ["Slurm batch jobs and NVIDIA H100 slices on the Fir cluster, with cuQuantum."],
+      related: ["vqe"],
+    },
+    {
+      id: "fullstack", group: "knowledge", size: 1,
+      title: "Java, Spring Boot, React",
+      kind: "Software engineering", when: "2022–",
+      body: ["Backends, databases with migrations, TypeScript frontends and container tests."],
+      related: ["flight", "geotab"],
+    },
+
+    // ── Story ────────────────────────────────────────────────
+    {
+      id: "bsc", group: "story", size: 2,
+      title: "BSc, Honours Computer Science",
+      kind: "Western University", when: "2019–2024",
+      body: ["Where it started. GPA 3.9/4.0."],
+      related: ["geotab", "ivey"],
+    },
+    {
+      id: "geotab", group: "story", size: 1,
+      title: "Software Engineer Intern, Geotab",
+      kind: "Toronto", when: "2022",
+      body: ["Built a Django tool for managing Google Cloud storage buckets from the database."],
+      related: ["bsc", "fullstack"],
+    },
+    {
+      id: "ivey", group: "story", size: 1,
+      title: "Research Assistant, Ivey Business School",
+      kind: "London, Ontario", when: "2023",
+      body: ["Combined handwriting OCR with mathematical morphology to pull data out of noisy scanned PDFs."],
+      links: [["Code", "https://github.com/YanwenWang1125/ImageRecogn_OCR"]],
+      related: ["bsc"],
+    },
+    {
+      id: "msc", group: "story", size: 2,
+      title: "MSc, Artificial Intelligence",
+      kind: "Western University", when: "2024–2025",
+      body: ["Advanced machine learning, neural networks and unstructured data, and a wildfire model for my thesis work. GPA 3.9/4.0."],
+      related: ["wildfire", "courseml"],
+    },
+    {
+      id: "sfu", group: "story", size: 1,
+      title: "AI Solution Intern, SFU Health Care Center",
+      kind: "Agentic AI", when: "2025–2026",
+      body: ["A year building an LLM front desk with a team of three."],
+      related: ["agent"],
+    },
+    {
+      id: "phd", group: "story", size: 2,
+      title: "The first quantum lesson",
+      kind: "Starting the PhD", when: "Sep 2026",
+      body: ["In September 2026 I began the PhD and opened a quantum textbook for the first time. A month later I had kernels, QCNNs and three molecules behind me, and a research direction decided with my supervisor."],
+      related: ["ftqc", "kernels"],
+    },
+    {
+      id: "qhack", group: "story", size: 1,
+      title: "QHack workshops",
+      kind: "PennyLane", when: "Oct 2026",
+      body: ["Seven workshops: phase estimation, hardware resource estimates and Hamiltonian simulation."],
+      related: ["pennylane"],
+    },
+    {
+      id: "ta", group: "story", size: 1,
+      title: "Teaching assistant, CS3357",
+      kind: "Western University", when: "2026",
+      body: ["Marking, clicker questions and exams for an undergraduate computer science course."],
+      related: ["phd"],
+    },
+
+    // ── More projects ────────────────────────────────────────
+    {
+      id: "eqeqaoa", group: "research", size: 2,
+      title: "EQE-QAOA on IBM hardware",
+      kind: "IBM Path to Advantage · PINQ²", when: "Oct 2026",
+      body: [
+        "I reproduced the symmetry-reduced QAOA of EQE-QAOA exactly (to 1e-15), found smaller invariant subspaces by adding the global bit-flip symmetry, and prepared the kickoff for validating it on IBM hardware with PINQ².",
+      ],
+      related: ["papers", "qaoa", "pinq"],
+    },
+    {
+      id: "qcs", group: "project", size: 2,
+      title: "Searching for small quantum classifiers",
+      kind: "Quantum ML", when: "Oct 2026",
+      body: [
+        "Every 4-qubit classifier circuit with up to four layers, 256 in all, trained with three seeds each. Then the question: under a fixed budget of circuit evaluations, can a classical model point the search at circuits with the same accuracy and fewer two-qubit gates?",
+        "Fixed templates, random search and hill climbing are the baselines a learned search has to beat.",
+      ],
+      related: ["qnn", "pennylane", "rewrite"],
+    },
+    {
+      id: "aicon", group: "project", size: 2,
+      title: "A new website for Q-AICON Lab",
+      kind: "Web design", when: "Oct 2026",
+      body: [
+        "Designed and built our lab's website: research directions, projects, members, news and publications, with interactive pages, a static build and GitHub Pages deployment. Two full visual concepts under the headline “Intelligence. Entanglement. Connectivity.”",
+      ],
+      links: [["Website previews", "https://github.com/YanwenWang1125/teamweb-preview"]],
+      related: ["explainers", "fullstack"],
+    },
+    {
+      id: "explainers", group: "project", size: 2,
+      title: "Interactive quantum explainers",
+      kind: "Teaching on the web", when: "Oct 2026",
+      body: [
+        "Web pages that let you play with the ideas: animated qubits and Bloch spheres, and a stabiliser demo where you inject an error and watch the checks light up.",
+      ],
+      related: ["qec", "aicon", "ta"],
+    },
+    {
+      id: "proposal", group: "project", size: 1,
+      title: "NSERC Alliance – Mitacs proposal",
+      kind: "Grant writing", when: "2026",
+      body: [
+        "Wrote and reviewed the industry-partnered proposal behind the flight-school scheduling project with Diamond Flight Centre: background, research plan, training plan and impact.",
+      ],
+      related: ["flight"],
+    },
+    {
+      id: "litreview", group: "knowledge", size: 2,
+      title: "Literature review: ML for QEC",
+      kind: "Survey", when: "Oct 2026",
+      body: [
+        "A survey of machine learning for quantum error correction, from neural decoders to circuit synthesis, written to choose my PhD direction. It led to the rewrite-search project.",
+      ],
+      related: ["qec", "rewrite", "reading"],
+    },
+    {
+      id: "reading", group: "knowledge", size: 1,
+      title: "Paper reading",
+      kind: "Ongoing", when: "2026–",
+      body: [
+        "Close readings with notes and code: quantum kernels, QNNs, QCNNs, QAOA, QEC, circuit synthesis, benchmarking, neural operators and federated learning.",
+      ],
+      related: ["papers", "litreview"],
+    },
+    {
+      id: "talk", group: "story", size: 1,
+      title: "Group meeting talks",
+      kind: "AICON Lab", when: "Oct 2026",
+      body: [
+        "Presenting progress to the lab: quantum error correction meets machine learning, and the first rewrite-search results.",
+      ],
+      related: ["rewrite", "litreview"],
+    },
+    {
+      id: "courses", group: "story", size: 1,
+      title: "PhD courses",
+      kind: "CS9548 · CS9833", when: "Fall 2026",
+      body: ["Graduate coursework alongside research, including a paper review for CS9833."],
+      related: ["phd"],
+    },
+
+    // ── More things I built ──────────────────────────────────
+    {
+      id: "realtor", group: "project", size: 2,
+      title: "RealtorOS",
+      kind: "AI CRM for realtors", when: "2025",
+      body: [
+        "An AI CRM for real estate agents: client records, follow-up tasks, email drafts and automated workflows.",
+        "Built with FastAPI, Next.js, PostgreSQL and Docker, and deployed on Azure containers, with migrations, an email service and third-party integrations to debug along the way.",
+      ],
+      links: [["Code", "https://github.com/YanwenWang1125/RealtorOS"]],
+      related: ["fullstack", "langgraph"],
+    },
+    {
+      id: "rubricheck", group: "project", size: 2,
+      title: "RubriCheck",
+      kind: "AI writing feedback", when: "2025",
+      body: [
+        "Upload a rubric and an essay; RubriCheck extracts the criteria and returns a grade and revision advice for each one, every point backed by a quote from the text.",
+        "It chains document processing, OCR, structured output and LLM evaluation, built for transparent, traceable grading.",
+      ],
+      links: [["Code", "https://github.com/YanwenWang1125/RubriCheck"]],
+      related: ["tutor", "langgraph"],
+    },
+    {
+      id: "clinic", group: "project", size: 1,
+      title: "Clinic documentation AI",
+      kind: "Healthcare workflows", when: "2025–2026",
+      body: ["Designs for an AI note-taking flow in clinics: speech to text, SOAP note drafts, doctor review and integration with existing systems."],
+      related: ["agent"],
+    },
+    {
+      id: "lolbot", group: "project", size: 1,
+      title: "LOLBOT",
+      kind: "Discord game voice assistant", when: "2025",
+      body: ["A Discord bot that pulls League of Legends match data from the Riot API, writes an AI analysis and reads it out with text-to-speech, running in a container."],
+      links: [["Code", "https://github.com/YanwenWang1125/LOLBOT"]],
+      related: ["gaming"],
+    },
+    {
+      id: "tutor", group: "story", size: 2,
+      title: "Tutoring",
+      kind: "Programming, maths and science", when: "Ongoing",
+      body: [
+        "Python, Java and AP Computer Science A, plus pre-calculus, maths contests, chemistry and science. I write the handouts, exercises and projects myself, and I am preparing a course for the CCC Senior programming contest.",
+      ],
+      related: ["ta", "explainers"],
+    },
+
+    // ── Code: public GitHub repositories ─────────────────────
+    {
+      id: "familyphoto", group: "code", size: 2,
+      title: "Family Photo Hub",
+      kind: "Python · AI photo library", when: "2025",
+      body: ["A private, family-only photo hub for under $100 a year: uploads from any device, AI tagging, face clustering, timelines, and conversational search such as “show all the beach pictures”."],
+      links: [["On GitHub", "https://github.com/YanwenWang1125/Family-Photo"]],
+      related: ["fullstack"],
+    },
+    {
+      id: "chess", group: "code", size: 1,
+      title: "Unity 2D chess",
+      kind: "C# · Unity", when: "2025",
+      body: ["A simple two-dimensional chess game made in Unity."],
+      links: [["On GitHub", "https://github.com/YanwenWang1125/Chess"]],
+      related: ["gaming"],
+    },
+    {
+      id: "cardio", group: "code", size: 1,
+      title: "Cardiovascular risk prediction",
+      kind: "Python · ML", when: "2025",
+      body: ["A systematic comparison of logistic regression, SVM, XGBoost, random forests, MLPs and CatBoost for early detection of cardiovascular disease, with SHAP to explain the predictions."],
+      links: [["On GitHub", "https://github.com/YanwenWang1125/Cardiovascular-Risk-Prediction"]],
+      related: ["courseml"],
+    },
+    {
+      id: "hololens", group: "code", size: 2,
+      title: "HoloLens 2 aneurysm visualisation",
+      kind: "C# · Unity · AR", when: "2024",
+      body: ["A capstone with Robarts Research Institute: 3D holograms of neurovascular aneurysms on HoloLens 2, shared across devices with Azure Spatial Anchors, so surgeons can explain a scan to patients without flat 2D images."],
+      links: [["On GitHub", "https://github.com/YanwenWang1125/hololens-2-project"]],
+      related: ["bsc"],
+    },
+    {
+      id: "rental", group: "code", size: 1,
+      title: "Housing rental prediction",
+      kind: "Python · ML", when: "2024",
+      body: ["A notebook that predicts rental prices from listing features."],
+      links: [["On GitHub", "https://github.com/YanwenWang1125/HousingRentalPredict"]],
+      related: ["courseml"],
+    },
+    {
+      id: "devblog", group: "code", size: 1,
+      title: "Developer portfolio blog",
+      kind: "Next.js · Cosmic CMS", when: "2024",
+      body: ["An earlier personal site: a developer portfolio built with Next.js, Tailwind and a headless CMS."],
+      links: [["On GitHub", "https://github.com/YanwenWang1125/leofanta.blog"]],
+      related: ["fullstack"],
+    },
+    {
+      id: "blackbox", group: "code", size: 1,
+      title: "Black-box testing",
+      kind: "Java · CS4472", when: "2023",
+      body: ["Software testing coursework with a team of four: designing black-box test suites from specifications."],
+      links: [["On GitHub", "https://github.com/YanwenWang1125/BlackBoxTesting"]],
+      related: ["bsc"],
+    },
+    {
+      id: "chat", group: "code", size: 1,
+      title: "TCP and UDP chat",
+      kind: "Python · Networking", when: "2022",
+      body: ["A command-line chat application over TCP and UDP sockets, with multiple clients and clean shutdowns."],
+      links: [["On GitHub", "https://github.com/YanwenWang1125/TCP-and-UDP-application"]],
+      related: ["ta"],
+    },
+    {
+      id: "crypto", group: "code", size: 1,
+      title: "Cryptocurrency Buzz",
+      kind: "Java · Group project", when: "2022",
+      body: ["A desktop app that tracks and analyses cryptocurrency prices, built by a team of students."],
+      links: [["On GitHub", "https://github.com/YanwenWang1125/Crypto_Analyzer"]],
+      related: ["bsc"],
+    },
+    {
+      id: "blogcloud", group: "code", size: 1,
+      title: "Cloud blog",
+      kind: "JavaScript", when: "2022",
+      body: ["A blog web app deployed to the cloud."],
+      links: [["On GitHub", "https://github.com/YanwenWang1125/blog_cloud"]],
+      related: ["fullstack"],
+    },
+    {
+      id: "easynode", group: "code", size: 1,
+      title: "EasyNode web",
+      kind: "HTML · First repo", when: "2019",
+      body: ["My first repository on GitHub, from my first term at Western."],
+      links: [["On GitHub", "https://github.com/YanwenWang1125/EasyNode_Development_Web"]],
+      related: ["bsc"],
+    },
+
+    // ── Life ─────────────────────────────────────────────────
+    {
+      id: "animation", group: "life", size: 2,
+      title: "Science animations",
+      kind: "Explaining with pictures", when: "Ongoing",
+      body: ["Turning abstract ideas, like a qubit or a stabiliser check, into animations and pages you can play with."],
+      related: ["explainers"],
+    },
+    {
+      id: "gaming", group: "life", size: 1,
+      title: "Gaming",
+      kind: "Interest", when: "Always",
+      body: ["Sometimes a game turns into a project; LOLBOT started that way."],
+      related: ["lolbot", "chess"],
+    },
+    {
+      id: "badminton", group: "life", size: 1,
+      title: "Badminton and sport",
+      kind: "Interest", when: "Always",
+      body: ["The best way to step away from a circuit that will not converge."],
+    },
+    {
+      id: "cooking", group: "life", size: 1,
+      title: "Cooking",
+      kind: "Interest", when: "Always",
+      body: ["Experiments with a faster feedback loop."],
+    },
+    {
+      id: "books", group: "life", size: 1,
+      title: "Reading",
+      kind: "Interest", when: "Always",
+      body: ["Books outside the papers."],
+    },
+  ],
+};

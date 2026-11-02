@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yanwen Wang</title>
+  <meta name="description" content="Yanwen Wang, PhD student at Western University, using machine learning to make quantum computers fault tolerant. An interactive map of research, projects, knowledge and story.">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=boska@400,401,500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="sky" tabindex="0" aria-label="Star map. Use the left and right arrow keys to move between stars and Enter to open one."></canvas>
+  <div id="tip" class="tip" hidden></div>
+
+  <header class="top">
+    <div class="who">
+      <h1>Yanwen Wang</h1>
+      <p>PhD student at Western University. I use machine learning to make quantum computers fault tolerant.</p>
+    </div>
+    <nav class="filters" aria-label="Show or hide groups of stars">
+      <!-- filled by sky.js -->
+    </nav>
+    <a class="btn" href="mailto:yanwenwang1125@gmail.com">Email me</a>
+  </header>
+
+  <footer class="bottom">
+    <button class="index-toggle" id="indexToggle" aria-expanded="false" aria-controls="index">All stars</button>
+    <p class="place"><span>London, Ontario · 43.0° N, 81.2° W</span> <span id="clock"></span></p>
+  </footer>
+
+  <nav id="index" class="index" aria-label="Every star on the map" hidden></nav>
+
+  <aside id="panel" class="panel" aria-live="polite" aria-hidden="true">
+    <button class="close" id="close" aria-label="Close">×</button>
+    <div id="panelBody"></div>
+  </aside>
+
+  <noscript>
+    <p class="noscript">This map needs JavaScript. Write to <a href="mailto:yanwenwang1125@gmail.com">yanwenwang1125@gmail.com</a> or see <a href="https://github.com/YanwenWang1125">github.com/YanwenWang1125</a>.</p>
+  </noscript>
+
+  <script src="data.js"></script>
+  <script src="sky.js"></script>
+</body>
+</html>
