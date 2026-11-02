@@ -99,7 +99,7 @@
       <div class="sheet-rings" aria-hidden="true"><i></i><i></i></div>
       <div class="sheet-head">
         <button class="round" data-flip="-1" ${monthIndex > 0 ? "" : "disabled"} aria-label="Previous month">‹</button>
-        <h3 aria-live="polite">${MONTHS[m.getMonth()]} <span>${m.getFullYear()}</span></h3>
+        <h3 aria-live="polite"><span data-month="${m.getMonth()}">${MONTHS[m.getMonth()]}</span> <span>${m.getFullYear()}</span></h3>
         <button class="round" data-flip="1" ${monthIndex < months.length - 1 ? "" : "disabled"} aria-label="Next month">›</button>
       </div>
       <p class="sheet-sub">${logged} logged ${logged === 1 ? "day" : "days"} this month</p>
@@ -111,6 +111,7 @@
 
   function drawPage() {
     page.innerHTML = pageHTML();
+    page.querySelectorAll("[data-month]").forEach((el) => window.letter && window.letter(el, `m${el.dataset.month}`));
     page.querySelectorAll("[data-day]").forEach((b) => b.addEventListener("click", () => show(b.dataset.day)));
     page.querySelectorAll("[data-flip]").forEach((b) => b.addEventListener("click", () => flip(+b.dataset.flip)));
   }

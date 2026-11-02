@@ -7,7 +7,7 @@
   --muted: #a3abbd;
   --accent: #f2c46d;
   --accent-ink: #1a1306;
-  --display: "Unbounded", "Space Grotesk", system-ui, sans-serif;
+  --display: "Space Grotesk", system-ui, sans-serif;
   --text: "Space Grotesk", system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
   --gutter: clamp(16px, 2.2vw, 32px);
   --ease: cubic-bezier(.2, .7, .2, 1);
@@ -15,6 +15,10 @@
 }
 
 * { box-sizing: border-box; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* titles lettered in Brillant, drawn as vector paths (see type.js) */
+svg.type { display: block; width: auto; max-width: 100%; fill: currentColor; overflow: visible; }
+.lettered { line-height: 1; }
 html, body { height: 100%; }
 body {
   margin: 0;
@@ -57,16 +61,17 @@ button, input, textarea { font: inherit; color: inherit; }
 .top > * { pointer-events: auto; }
 .who { flex: 1 0 auto; min-width: 0; }
 .who h1 {
-  margin: 0;
+  margin: 0 0 0 -0.04em;
   font-family: var(--display);
   font-weight: 300;
-  font-size: clamp(2rem, 1.2rem + 2.6vw, 3.75rem);
+  font-size: clamp(2.6rem, 1.4rem + 3.6vw, 5.4rem);
   line-height: 1;
   letter-spacing: -0.03em;
   white-space: nowrap;
 }
+.who h1 svg.type { filter: drop-shadow(0 0 18px rgba(242, 196, 109, .25)); }
 .who p {
-  margin: 14px 0 0;
+  margin: 6px 0 0;
   max-width: 36ch;
   font-size: clamp(1rem, .95rem + .2vw, 1.125rem);
 }
@@ -308,6 +313,7 @@ button, input, textarea { font: inherit; color: inherit; }
   line-height: 1.1;
   letter-spacing: -0.03em;
 }
+.panel h2.lettered { font-size: clamp(2.4rem, 2rem + 1.4vw, 3.2rem); }
 .panel figure { margin: 0 0 24px; }
 .panel figure img {
   display: block;
@@ -387,7 +393,7 @@ button, input, textarea { font: inherit; color: inherit; }
   margin: 0;
   font-family: var(--display);
   font-weight: 300;
-  font-size: clamp(2rem, 1.2rem + 2.6vw, 3.75rem);
+  font-size: clamp(2.6rem, 1.4rem + 3.6vw, 5rem);
   line-height: 1;
   letter-spacing: -0.03em;
 }
@@ -445,7 +451,9 @@ button, input, textarea { font: inherit; color: inherit; }
   letter-spacing: -0.03em;
   text-align: center;
 }
-.sheet-head h3 span { color: var(--muted); font-weight: 300; }
+.sheet-head h3 { display: flex; align-items: center; justify-content: center; gap: .35em; min-width: 0; flex-wrap: nowrap; white-space: nowrap; font-size: clamp(1.5rem, 1.1rem + 1.1vw, 2.3rem); }
+.sheet-head h3 .lettered { display: inline-block; }
+.sheet-head h3 > span:last-child { font-size: .42em; color: var(--muted); font-weight: 400; letter-spacing: .02em; }
 .sheet-sub { margin: 6px 0 18px; text-align: center; color: var(--muted); font-size: 14px; }
 .cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
 .cal-dow { padding-bottom: 4px; font-size: 13px; color: var(--muted); text-align: center; }
@@ -578,6 +586,8 @@ body.log-open .top, body.log-open .bottom { visibility: hidden; }
   .top .btn { position: fixed; right: var(--gutter); bottom: var(--gutter); margin: 0; }
   .connect { top: auto; bottom: calc(var(--gutter) + 56px); }
   .place { display: none; }
+  .wide-only { display: none; }
+  .pill-btn, .top .btn { padding: 0 15px; }
   .panel {
     top: auto;
     width: 100vw;

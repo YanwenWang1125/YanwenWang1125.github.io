@@ -9,8 +9,8 @@
   <meta name="theme-color" content="#04060c">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
   <canvas id="sky" tabindex="0" aria-label="Star map. Use the left and right arrow keys to move between stars and Enter to open one."></canvas>
@@ -18,13 +18,13 @@
 
   <header class="top">
     <div class="who">
-      <h1>Yanwen Wang</h1>
+      <h1 data-type="name">Yanwen Wang</h1>
       <p>PhD student at Western University. I use machine learning to make quantum computers fault tolerant.</p>
     </div>
     <nav class="filters" aria-label="Show or hide groups of stars">
       <!-- filled by sky.js -->
     </nav>
-    <button class="btn" id="connectToggle" aria-expanded="false" aria-controls="connect">Connect me</button>
+    <button class="btn" id="connectToggle" aria-expanded="false" aria-controls="connect">Connect<span class="wide-only"> me</span></button>
   </header>
 
   <div id="connect" class="connect" role="dialog" aria-labelledby="connectTitle" hidden>
@@ -69,7 +69,7 @@
     <div class="log-inner">
       <header class="log-head">
         <div>
-          <h2 id="logTitle">Daily log</h2>
+          <h2 id="logTitle" data-type="log">Daily log</h2>
           <p>Every day of my first PhD term, 17 September to 2 November 2026. Each day is a star: the busier the day, the brighter it shines. Flip the pages to move between months.</p>
         </div>
         <button class="close log-close" aria-label="Close the daily log">×</button>
@@ -86,9 +86,10 @@
     <p class="noscript">This map needs JavaScript. Write to <a href="mailto:yanwenwang1125@gmail.com">yanwenwang1125@gmail.com</a> or see <a href="https://github.com/YanwenWang1125">github.com/YanwenWang1125</a>.</p>
   </noscript>
 
-  <script src="data.js?v=4"></script>
-  <script src="log.js?v=4"></script>
-  <script src="sky.js?v=4"></script>
-  <script src="calendar.js?v=4"></script>
+  <script src="type.js?v=5"></script>
+  <script src="data.js?v=5"></script>
+  <script src="log.js?v=5"></script>
+  <script src="sky.js?v=5"></script>
+  <script src="calendar.js?v=5"></script>
 </body>
 </html>

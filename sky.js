@@ -56,11 +56,11 @@
     const R = radius() * view.zoom;
     const a = s.angle + view.yaw + orbitT * ORBIT_SPEED[s.orbit] - lag;
     // each star breathes in and out a little and bobs above and below its orbit
-    const bob = reduce ? 0 : Math.sin(t * 0.7 + s.phase);
-    const r = ORBIT_R[s.orbit] * s.rj * R * (1 + 0.018 * Math.sin(t * 0.45 + s.phase * 2));
+    const bob = reduce ? 0 : Math.sin(t * (0.55 + (s.phase % 1) * 0.35) + s.phase);
+    const r = ORBIT_R[s.orbit] * s.rj * R * (1 + (reduce ? 0 : 0.035 * Math.sin(t * 0.45 + s.phase * 2)));
     const x = r * Math.cos(a);
     const y = r * Math.sin(a);
-    const z = (s.z + 0.028 * bob) * R;
+    const z = (s.z + 0.07 * bob) * R;
     const tilt = view.tilt + par.y * 0.07;
     const ct = Math.cos(tilt), st = Math.sin(tilt);
     const depth = y * st + z * ct; // + toward the viewer
@@ -331,7 +331,7 @@
   }
 
   function label(text, x, y, colour, alpha, big) {
-    ctx.font = big ? `400 ${W < 760 ? 20 : 24}px Unbounded, sans-serif` : `500 13px "Space Grotesk", system-ui, sans-serif`;
+    ctx.font = big ? `400 ${W < 760 ? 20 : 24}px "Space Grotesk", sans-serif` : `500 13px "Space Grotesk", system-ui, sans-serif`;
     const w = ctx.measureText(text).width;
     const box = { l: x - w / 2 - 4, r: x + w / 2 + 4, t: y - 9, b: y + 9 };
     if (placed.some((q) => box.l < q.r && box.r > q.l && box.t < q.b && box.b > q.t)) return;
@@ -412,8 +412,9 @@
       yawTo = null;
       const dx = e.clientX - last.x, dy = e.clientY - last.y;
       moved += Math.abs(dx) + Math.abs(dy);
-      view.vyaw = dx * 0.005;
-      view.yaw += dx * 0.005;
+      // dragging left turns the system clockwise, as if pulling its near edge
+      view.vyaw = -dx * 0.005;
+      view.yaw -= dx * 0.005;
       view.tilt = clamp(view.tilt - dy * 0.004, 0.35, 1.4);
       last = { x: e.clientX, y: e.clientY };
       canvas.classList.toggle("dragging", moved > 4);
@@ -488,6 +489,7 @@
       ${relatedHTML(s)}
       ${s.image && CREDITS[s.image] ? `<p class="credit">${CREDITS[s.image]}</p>` : ""}
     `;
+    if (s === me && window.letter) window.letter(panelBody.querySelector("h2"), "name");
     panelBody.querySelectorAll("[data-star]").forEach((b) =>
       b.addEventListener("click", () => open(byId.get(b.dataset.star))));
     panel.classList.remove("open");
@@ -570,7 +572,7 @@
   // ── Index of every star ────────────────────────────────────
   const index = document.getElementById("index");
   const indexToggle = document.getElementById("indexToggle");
-  indexToggle.textContent = `All ${stars.length + 1} stars`;
+  indexToggle.innerHTML = `<span class="wide-only">All </span>${stars.length + 1} stars`;
   index.innerHTML = `<h2>The centre</h2><ul><li><button data-star="me">Yanwen Wang</button></li></ul>` +
     Object.entries(groups).map(([g, info]) =>
       `<h2>${info.name}</h2><ul>${stars.filter((s) => s.group === g)
