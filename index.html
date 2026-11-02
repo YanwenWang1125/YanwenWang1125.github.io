@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
   <title>Yanwen Wang</title>
-  <meta name="description" content="Yanwen Wang, PhD student at Western University, using machine learning to make quantum computers fault tolerant. An interactive map of research, projects, knowledge and story.">
-  <link rel="preconnect" href="https://api.fontshare.com">
-  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=boska@400,401,500&display=swap" rel="stylesheet">
+  <meta name="description" content="Yanwen Wang, PhD student at Western University, using machine learning to make quantum computers fault tolerant. An interactive map of research, projects, knowledge and story, with a daily log.">
+  <meta name="theme-color" content="#04060c">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
   <canvas id="sky" tabindex="0" aria-label="Star map. Use the left and right arrow keys to move between stars and Enter to open one."></canvas>
@@ -25,11 +24,37 @@
     <nav class="filters" aria-label="Show or hide groups of stars">
       <!-- filled by sky.js -->
     </nav>
-    <a class="btn" href="mailto:yanwenwang1125@gmail.com">Email me</a>
+    <button class="btn" id="connectToggle" aria-expanded="false" aria-controls="connect">Connect me</button>
   </header>
 
+  <div id="connect" class="connect" role="dialog" aria-labelledby="connectTitle" hidden>
+    <h2 id="connectTitle">Connect with me</h2>
+    <p>Quantum error correction, machine learning, teaching, or something you are building: I'd like to hear about it.</p>
+    <div class="mail">
+      <a href="mailto:yanwenwang1125@gmail.com">yanwenwang1125@gmail.com</a>
+      <button id="copyMail" class="copy">Copy</button>
+    </div>
+    <form class="message" id="messageForm">
+      <h3>Leave me a message</h3>
+      <div class="row">
+        <label>Your name<input name="name" autocomplete="name" required></label>
+        <label>Your email<input name="email" type="email" autocomplete="email" spellcheck="false" aria-describedby="mailHint"></label>
+      </div>
+      <label>Message<textarea name="message" required></textarea></label>
+      <p class="hint" id="mailHint">Sending opens your email app with the message filled in. Add your email if you'd like a reply somewhere else.</p>
+      <div class="connect-foot">
+        <button class="btn" type="submit">Send message</button>
+        <a href="https://github.com/YanwenWang1125" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <p class="sent" id="sent" hidden>Your email app should be open now. Thank you!</p>
+    </form>
+  </div>
+
   <footer class="bottom">
-    <button class="index-toggle" id="indexToggle" aria-expanded="false" aria-controls="index">All stars</button>
+    <div class="bottom-actions">
+      <button class="pill-btn" id="indexToggle" aria-expanded="false" aria-controls="index">All stars</button>
+      <button class="pill-btn log-btn" id="logToggle" aria-expanded="false" aria-controls="log"><span class="spark" aria-hidden="true"></span>Daily log</button>
+    </div>
     <p class="place"><span>London, Ontario · 43.0° N, 81.2° W</span> <span id="clock"></span></p>
   </footer>
 
@@ -40,11 +65,30 @@
     <div id="panelBody"></div>
   </aside>
 
+  <section id="log" class="log" aria-labelledby="logTitle" hidden>
+    <div class="log-inner">
+      <header class="log-head">
+        <div>
+          <h2 id="logTitle">Daily log</h2>
+          <p>Every day of my first PhD term, 17 September to 2 November 2026. Each day is a star: the busier the day, the brighter it shines. Flip the pages to move between months.</p>
+        </div>
+        <button class="close log-close" aria-label="Close the daily log">×</button>
+      </header>
+      <div class="log-tags" id="logTags" aria-label="Show one kind of entry"></div>
+      <div class="log-body">
+        <div class="log-cal" id="logCal"></div>
+        <article class="log-day" id="logDay" aria-live="polite"></article>
+      </div>
+    </div>
+  </section>
+
   <noscript>
     <p class="noscript">This map needs JavaScript. Write to <a href="mailto:yanwenwang1125@gmail.com">yanwenwang1125@gmail.com</a> or see <a href="https://github.com/YanwenWang1125">github.com/YanwenWang1125</a>.</p>
   </noscript>
 
-  <script src="data.js"></script>
-  <script src="sky.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="log.js?v=4"></script>
+  <script src="sky.js?v=4"></script>
+  <script src="calendar.js?v=4"></script>
 </body>
 </html>

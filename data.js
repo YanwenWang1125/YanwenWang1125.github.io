@@ -13,6 +13,12 @@ window.SKY = {
       "I came to quantum through machine learning and software: a BSc in Computer Science, an MSc in Artificial Intelligence, and AI products built for clinics, realtors and classrooms. I also teach, and I like turning a hard idea into something people can run, test and use.",
       "Outside research: reading, gaming, cooking, badminton, and making animations that explain science.",
     ],
+    whoami: [
+      ["I make ideas into things that run.", "A game voice assistant, a grading tool, clinic workflows, quantum animations: when a question interests me, I want to know whether it can become a tool someone else can use."],
+      ["I need to understand it in my own words.", "Plain language, one step at a time, starting from intuition. In research this has become a habit: what does the experiment really show, is the comparison fair, does the conclusion say too much?"],
+      ["I think about the person on the other end.", "Teaching runs through everything I do. I care whether a student, a reader or someone with no quantum background can follow."],
+      ["I set a high bar, and I'm learning to choose.", "My curiosity is wide and I start things quickly. What I'm practising now is trusting what I have already built, and giving the few directions that matter enough time."],
+    ],
     facts: [
       ["Now", "PhD, Computer Science, Western, 2026–"],
       ["Research", "Machine learning for fault-tolerant quantum computing"],

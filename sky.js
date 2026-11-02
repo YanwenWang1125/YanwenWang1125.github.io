@@ -48,18 +48,21 @@
     });
   });
   const ORBIT_R = [0, 0.22, 0.37, 0.52, 0.67, 0.83, 1];
-  const ORBIT_SPEED = [0, 0.012, 0.009, 0.007, 0.0055, 0.0045, 0.0035];
+  const ORBIT_SPEED = [0, 0.05, 0.038, 0.029, 0.022, 0.017, 0.013];
 
   function radius() { return W < 760 ? Math.min(W * 0.6, H * 0.5) : Math.min(W * 0.46, H * 0.78); }
 
-  function project(s, t) {
+  function project(s, t, lag = 0) {
     const R = radius() * view.zoom;
-    const a = s.angle + view.yaw + orbitT * ORBIT_SPEED[s.orbit];
-    const r = ORBIT_R[s.orbit] * s.rj * R;
+    const a = s.angle + view.yaw + orbitT * ORBIT_SPEED[s.orbit] - lag;
+    // each star breathes in and out a little and bobs above and below its orbit
+    const bob = reduce ? 0 : Math.sin(t * 0.7 + s.phase);
+    const r = ORBIT_R[s.orbit] * s.rj * R * (1 + 0.018 * Math.sin(t * 0.45 + s.phase * 2));
     const x = r * Math.cos(a);
     const y = r * Math.sin(a);
-    const z = s.z * R;
-    const ct = Math.cos(view.tilt), st = Math.sin(view.tilt);
+    const z = (s.z + 0.028 * bob) * R;
+    const tilt = view.tilt + par.y * 0.07;
+    const ct = Math.cos(tilt), st = Math.sin(tilt);
     const depth = y * st + z * ct; // + toward the viewer
     const scale = 1 + depth / (R * 3.2);
     return {
@@ -69,7 +72,7 @@
       scale,
     };
   }
-  const centreX = () => W / 2 + shift;
+  const centreX = () => W / 2 + shift + par.x * 14;
   const centreY = () => H * (W < 760 ? 0.6 : 0.54) + shiftY;
 
   // ── Background: a milky way drawn once ──────────────────────
@@ -142,14 +145,24 @@
 
   // ── Drawing ────────────────────────────────────────────────
   let shooting = null, nextShoot = 4;
-  let orbitT = 0, lastTime = 0, yawTo = null;
+  let orbitT = 0, lastTime = 0, yawTo = null, speed = 1;
+  // pointer parallax: the system leans a little toward the cursor
+  const par = { x: 0, y: 0 }, parTo = { x: 0, y: 0 };
+  window.addEventListener("pointermove", (e) => {
+    if (e.pointerType !== "mouse") return;
+    parTo.x = (e.clientX / W - 0.5) * 2;
+    parTo.y = (e.clientY / H - 0.5) * 2;
+  });
 
   function draw(t) {
     const time = t / 1000;
     if (!W || !H) { resize(); requestAnimationFrame(draw); return; }
-    // the orbits stand still while a star is open or under the pointer
+    // the orbits slow almost to a stop under the pointer and stop while a star is open
     const dt = Math.min(0.1, time - lastTime); lastTime = time;
-    if (!reduce && !selected && !hover) orbitT += dt;
+    speed += ((selected ? 0 : hover ? 0.08 : 1) - speed) * 0.06;
+    if (!reduce) orbitT += dt * speed;
+    par.x += (parTo.x - par.x) * 0.04;
+    par.y += (parTo.y - par.y) * 0.04;
     // ease view
     view.zoom += (target.zoom - view.zoom) * 0.12;
     shift += (target.shift - shift) * 0.1;
@@ -162,13 +175,14 @@
     selectT = Math.min(1, selectT + 0.03);
 
     // background with parallax
-    const px = -(view.yaw % (Math.PI * 2)) * 18 - W * 0.2 + shift * 0.2;
-    const py = -(view.tilt - 1.05) * 60 - H * 0.2;
+    const drift = reduce ? 0 : Math.sin(time * 0.021) * W * 0.06;
+    const px = -(view.yaw % (Math.PI * 2)) * 18 - W * 0.2 + shift * 0.2 + drift - par.x * 22;
+    const py = -(view.tilt - 1.05) * 60 - H * 0.2 + (reduce ? 0 : Math.cos(time * 0.017) * H * 0.04) - par.y * 16;
     ctx.drawImage(bg.canvas, 0, 0, bg.canvas.width, bg.canvas.height, px % 1 === 0 ? px : px, py, bg.w, bg.h);
 
     // twinkling stars
     for (const f of flares) {
-      const a = reduce ? 0.6 : 0.35 + 0.35 * Math.sin(time * f.f + f.p);
+      const a = reduce ? 0.6 : 0.5 + 0.45 * Math.sin(time * f.f + f.p);
       ctx.globalAlpha = a;
       ctx.fillStyle = "#f4f6ff";
       ctx.beginPath();
@@ -179,12 +193,13 @@
 
     drawShooting(time);
 
-    // orbits
+    // orbits: barely there, brighter only for the group under the pointer or open
     const R = radius() * view.zoom;
-    const ct = Math.cos(view.tilt);
+    const ct = Math.cos(view.tilt + par.y * 0.07);
+    const focus = (selected && selected.group) || (hover && hover.group);
     Object.values(groups).forEach((info) => {
       const g = Object.keys(groups).find((k) => groups[k] === info);
-      ctx.strokeStyle = hexA(info.colour, 0.16 * fade[g] + 0.04);
+      ctx.strokeStyle = hexA(info.colour, (g === focus ? 0.16 : 0.035) * fade[g]);
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.ellipse(centreX(), centreY(), ORBIT_R[info.orbit] * R, ORBIT_R[info.orbit] * R * ct, 0, 0, Math.PI * 2);
@@ -193,6 +208,7 @@
 
     // project stars
     const pts = stars.map((s) => ({ s, ...project(s, time) }));
+    drawTrails(time);
     pts.sort((a, b) => a.depth - b.depth);
     current = pts;
 
@@ -253,6 +269,24 @@
     }
   }
 
+  // a short comet tail behind each star, along its orbit
+  function drawTrails(time) {
+    if (reduce) return;
+    ctx.lineCap = "round";
+    for (const s of stars) {
+      const a = fade[s.group];
+      if (a < 0.05) continue;
+      let prev = project(s, time);
+      for (let i = 1; i <= 7; i++) {
+        const p = project(s, time, i * 0.026);
+        ctx.strokeStyle = hexA(s.colour, a * 0.22 * (1 - i / 8) * Math.min(1, speed + 0.2));
+        ctx.lineWidth = (0.6 + s.size * 0.5) * (1 - i / 9);
+        ctx.beginPath(); ctx.moveTo(prev.x, prev.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+        prev = p;
+      }
+    }
+  }
+
   function drawStar(p, time, related) {
     const s = p.s;
     const a = fade[s.group];
@@ -297,7 +331,7 @@
   }
 
   function label(text, x, y, colour, alpha, big) {
-    ctx.font = big ? `400 ${W < 760 ? 20 : 24}px Boska, Georgia, serif` : `500 13px Geist, system-ui, sans-serif`;
+    ctx.font = big ? `400 ${W < 760 ? 20 : 24}px Unbounded, sans-serif` : `500 13px "Space Grotesk", system-ui, sans-serif`;
     const w = ctx.measureText(text).width;
     const box = { l: x - w / 2 - 4, r: x + w / 2 + 4, t: y - 9, b: y + 9 };
     if (placed.some((q) => box.l < q.r && box.r > q.l && box.t < q.b && box.b > q.t)) return;
@@ -317,7 +351,7 @@
     if (reduce) return;
     if (!shooting && time > nextShoot) {
       shooting = { x: Math.random() * W * 0.8 + W * 0.1, y: Math.random() * H * 0.4, t0: time, a: 0.5 + Math.random() * 0.4 };
-      nextShoot = time + 7 + Math.random() * 8;
+      nextShoot = time + 3 + Math.random() * 5;
     }
     if (!shooting) return;
     const k = (time - shooting.t0) / 0.9;
@@ -424,7 +458,7 @@
     else if (e.key === "-") target.zoom = clamp(target.zoom / 1.15, 0.6, 2.4);
   });
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") { closePanel(); toggleIndex(false); }
+    if (e.key === "Escape") { closePanel(); toggleIndex(false); toggleConnect(false); }
   });
 
   // ── Panel ──────────────────────────────────────────────────
@@ -446,8 +480,9 @@
     panelBody.innerHTML = `
       <p class="meta" style="--c:${colour}"><span class="dot"></span>${esc(group)} · ${esc(s.kind)} · ${esc(s.when)}</p>
       <h2>${esc(s.title)}</h2>
-      ${s.image ? `<figure class="${plot ? "plot" : ""}"><img src="${s.image}" alt="${esc(s.imageAlt || "")}" style="${s.imagePos ? `object-position:${s.imagePos}` : ""}"></figure>` : ""}
+      ${s.image ? `<figure class="${plot ? "plot" : ""}"><img src="${s.image}" width="960" height="600" decoding="async" alt="${esc(s.imageAlt || "")}" style="${s.imagePos ? `object-position:${s.imagePos}` : ""}"></figure>` : ""}
       <div>${s.body.map((t) => `<p>${esc(t)}</p>`).join("")}</div>
+      ${s.whoami ? `<section class="whoami"><h3>Who I am</h3><ul>${s.whoami.map(([h, t]) => `<li><strong>${esc(h)}</strong><p>${esc(t)}</p></li>`).join("")}</ul></section>` : ""}
       ${s.facts ? `<dl>${s.facts.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>` : ""}
       ${s.links ? `<div class="links">${s.links.map(([k, v]) => `<a href="${v}" ${v.startsWith("http") ? 'target="_blank" rel="noopener"' : ""}>${esc(k)}</a>`).join("")}</div>` : ""}
       ${relatedHTML(s)}
@@ -484,6 +519,37 @@
     canvas.focus({ preventScroll: true });
   }
   document.getElementById("close").addEventListener("click", closePanel);
+  // the daily log links back to stars on the map
+  window.openStar = (id) => { const s = byId.get(id); if (s) open(s); };
+
+  // ── Connect me: email, copy, and a message that opens the visitor's email app ──
+  const connect = document.getElementById("connect");
+  const connectToggle = document.getElementById("connectToggle");
+  function toggleConnect(force) {
+    const on = force ?? connect.hidden;
+    connect.hidden = !on;
+    connectToggle.setAttribute("aria-expanded", String(on));
+    if (on) connect.querySelector("input").focus({ preventScroll: true });
+  }
+  connectToggle.addEventListener("click", () => toggleConnect());
+  document.addEventListener("pointerdown", (e) => {
+    if (!connect.hidden && !connect.contains(e.target) && e.target !== connectToggle) toggleConnect(false);
+  });
+  document.getElementById("copyMail").addEventListener("click", async (e) => {
+    const b = e.currentTarget;
+    try { await navigator.clipboard.writeText("yanwenwang1125@gmail.com"); b.textContent = "Copied"; }
+    catch { b.textContent = "Select to copy"; }
+    setTimeout(() => { b.textContent = "Copy"; }, 1800);
+  });
+  document.getElementById("messageForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const name = f.get("name").trim(), from = f.get("email").trim(), msg = f.get("message").trim();
+    const body = `${msg}\n\n— ${name}${from ? ` (${from})` : ""}`;
+    const subject = `Message from ${name} via your website`;
+    location.href = `mailto:yanwenwang1125@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    document.getElementById("sent").hidden = false;
+  });
 
   // ── Filters ────────────────────────────────────────────────
   const filters = document.querySelector(".filters");
