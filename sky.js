@@ -572,7 +572,7 @@
   // ── Index of every star ────────────────────────────────────
   const index = document.getElementById("index");
   const indexToggle = document.getElementById("indexToggle");
-  indexToggle.innerHTML = `<span class="wide-only">All </span>${stars.length + 1} stars`;
+  indexToggle.innerHTML = `<span><span class="wide-only">All&nbsp;</span>${stars.length + 1} stars</span>`;
   index.innerHTML = `<h2>The centre</h2><ul><li><button data-star="me">Yanwen Wang</button></li></ul>` +
     Object.entries(groups).map(([g, info]) =>
       `<h2>${info.name}</h2><ul>${stars.filter((s) => s.group === g)
