@@ -1107,6 +1107,30 @@ window.LOG = {
     {
      "tag": "Other",
      "text": "Personal website: chose a starry-sky theme and prepared to deploy it on GitHub."
+    },
+    {
+     "tag": "Research",
+     "text": "M0 finished on Fir: both reruns matched R6 line for line, so the search is deterministic; 800,138 logged candidates. The two Stim distance searches take about 60% of the time and the MILP 25–26%; rejected candidates take 74–76%, so ML pre-filtering (M2/M3) is worth doing. Moving the cheap FT check before the distance searches should save about 35% (about 1.5×) with no ML."
+    },
+    {
+     "tag": "Research",
+     "text": "M1 dataset: 800,138 rows, 656,820 distinct circuits, both consistency checks passed; four staged labels and 190 integer features; three splits (b96→b384, b384→b96, early→late generations), with training circuits removed from the test sets."
+    },
+    {
+     "tag": "Research",
+     "text": "C′ baseline: FT check first; a local smoke test gave the same archive line for line; submitted the beam 96 × 40 run on Fir to compare timing with M0. M1 and C′ ran in parallel."
+    },
+    {
+     "tag": "TA",
+     "text": "CS3357 Quiz 2 (Chapter 3): 24 questions from the slides, a scope review, a two-question version, slides and PDF, and a version with revision labels."
+    },
+    {
+     "tag": "Web",
+     "text": "Personal website built and live on GitHub Pages:",
+     "sub": [
+      "An interactive star-map homepage, group filters that wrap on mid-size screens, a daily-log calendar, Connect me and Who I am sections, and a livelier sky.",
+      "Compiled the daily log from 9/17 to 11/2 in Chinese and English, designed the font setup, and set up a scheduled task that updates the log and calendar each day. Four commits pushed."
+     ]
     }
    ],
    "empty": false
@@ -1163,7 +1187,7 @@ window.LOG = {
       "10/30: exact distance checks corrected earlier conclusions.",
       "10/31: a 12-ancilla circuit with LER level with Liou.",
       "11/1: 11 ancillas cost LER; no 10-ancilla circuit found.",
-      "11/2: started M0."
+      "11/2: M0 finished (reproducible search, cost breakdown over 800k candidates), M1 dataset built, C′ baseline submitted."
      ]
     }
    ]
