@@ -486,10 +486,12 @@
       ${s.whoami ? `<section class="whoami"><h3>Who I am</h3><ul>${s.whoami.map(([h, t]) => `<li><strong>${esc(h)}</strong><p>${esc(t)}</p></li>`).join("")}</ul></section>` : ""}
       ${s.facts ? `<dl>${s.facts.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>` : ""}
       ${s.links ? `<div class="links">${s.links.map(([k, v]) => `<a href="${v}" ${v.startsWith("http") ? 'target="_blank" rel="noopener"' : ""}>${esc(k)}</a>`).join("")}</div>` : ""}
+      ${window.projectFor && window.projectFor(s.id) ? `<button class="ghost story-link" data-project="${window.projectFor(s.id)}">Read the full story</button>` : ""}
       ${relatedHTML(s)}
       ${s.image && CREDITS[s.image] ? `<p class="credit">${CREDITS[s.image]}</p>` : ""}
     `;
     if (s === me && window.letter) window.letter(panelBody.querySelector("h2"), "name");
+    panelBody.querySelectorAll("[data-project]").forEach((b) => b.addEventListener("click", () => { closePanel(); window.openProject(b.dataset.project); }));
     panelBody.querySelectorAll("[data-star]").forEach((b) =>
       b.addEventListener("click", () => open(byId.get(b.dataset.star))));
     panel.classList.remove("open");
@@ -523,6 +525,11 @@
   document.getElementById("close").addEventListener("click", closePanel);
   // the daily log links back to stars on the map
   window.openStar = (id) => { const s = byId.get(id); if (s) open(s); };
+  // the story under my name: each linked phrase opens its star
+  document.querySelectorAll(".who [data-star]").forEach((a) => a.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.openStar(a.dataset.star);
+  }));
 
   // ── Connect me: email, copy, and a message that opens the visitor's email app ──
   const connect = document.getElementById("connect");
@@ -534,8 +541,9 @@
     if (on) connect.querySelector("input").focus({ preventScroll: true });
   }
   connectToggle.addEventListener("click", () => toggleConnect());
+  document.querySelectorAll("[data-connect]").forEach((b) => b.addEventListener("click", () => toggleConnect()));
   document.addEventListener("pointerdown", (e) => {
-    if (!connect.hidden && !connect.contains(e.target) && e.target !== connectToggle) toggleConnect(false);
+    if (!connect.hidden && !connect.contains(e.target) && !e.target.closest("#connectToggle, [data-connect]")) toggleConnect(false);
   });
   document.getElementById("copyMail").addEventListener("click", async (e) => {
     const b = e.currentTarget;
@@ -572,7 +580,7 @@
   // ── Index of every star ────────────────────────────────────
   const index = document.getElementById("index");
   const indexToggle = document.getElementById("indexToggle");
-  indexToggle.innerHTML = `<span><span class="wide-only">All&nbsp;</span>${stars.length + 1} stars</span>`;
+  indexToggle.innerHTML = `<span class="wide-only">All ${stars.length + 1} stars</span><span class="narrow-only">Stars</span>`;
   index.innerHTML = `<h2>The centre</h2><ul><li><button data-star="me">Yanwen Wang</button></li></ul>` +
     Object.entries(groups).map(([g, info]) =>
       `<h2>${info.name}</h2><ul>${stars.filter((s) => s.group === g)

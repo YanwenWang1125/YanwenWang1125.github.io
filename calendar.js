@@ -39,6 +39,16 @@
     [/Physics 11|Tutoring/, "tutor"],
     [/CS3357|[Mm]idterm|Quiz|autograder/, "ta"],
   ];
+  // Turning points of the term, in order; each opens its day
+  const BEATS = [
+    ["2026-09-17", "Day one", "First quantum notes"],
+    ["2026-09-25", "Chapter 3 done", "Quantum kernels"],
+    ["2026-10-09", "0 of 75", "A generic ansatz never reaches chemical accuracy"],
+    ["2026-10-14", "5.6× on a GPU", "VQE gradients on an H100"],
+    ["2026-10-16", "Direction set", "ML for quantum"],
+    ["2026-10-28", "Topic chosen", "Fault-tolerant rewrites"],
+    ["2026-10-31", "12 ancillas", "Three fewer than the best published circuit"],
+  ];
   const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const WEEKDAY = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const HEAD = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -184,7 +194,7 @@
     if (matchMedia("(max-width: 900px)").matches) view.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
   }
 
-  function render() {
+  let render = function () {
     if (!selected) return renderOverview();
     const day = LOG.days[selected];
     const wk = LOG.weeks[day.week];
@@ -282,6 +292,17 @@
     selected = linkedDay[1];
     monthIndex = months.findIndex((m) => m.getMonth() === dateOf(selected).getMonth());
   }
+  const beats = document.getElementById("logBeats");
+  function drawBeats() {
+    beats.innerHTML = BEATS.map(([k, title, text]) => {
+      const d = dateOf(k);
+      return `<li><button data-beat="${k}" aria-pressed="${k === selected}"><span class="beat-date">${d.getDate()} ${MONTHS[d.getMonth()].slice(0, 3)}</span><strong>${esc(title)}</strong><span class="beat-text">${esc(text)}</span></button></li>`;
+    }).join("");
+    beats.querySelectorAll("[data-beat]").forEach((b) => b.addEventListener("click", () => show(b.dataset.beat)));
+  }
+  const _render = render;
+  render = function () { _render(); drawBeats(); };
+
   buildTags(); drawPage(); render();
   if (location.hash.startsWith("#log")) open();
 })();

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link rel="stylesheet" href="styles.css?v=8">
 </head>
 <body>
   <canvas id="sky" tabindex="0" aria-label="Star map. Use the left and right arrow keys to move between stars and Enter to open one."></canvas>
@@ -18,8 +18,14 @@
 
   <header class="top">
     <div class="who">
-      <h1 data-type="name">Yanwen Wang</h1>
-      <p>PhD student at Western University. I use machine learning to make quantum computers fault tolerant.</p>
+      <h1 data-type="name" data-draw>Yanwen Wang</h1>
+      <p class="story">
+        <a class="beat" href="#star/bsc" data-star="bsc" style="--c:#ff9e7a">Code since 2019</a>,
+        <a class="beat" href="#star/msc" data-star="msc" style="--c:#ff9e7a">machine learning since my master's</a>,
+        and since September 2026 a <a class="beat" href="#star/phd" data-star="phd" style="--c:#ff9e7a">PhD at Western</a>,
+        teaching machines to <a class="beat" href="#star/rewrite" data-star="rewrite" style="--c:#f2c46d">catch the errors inside quantum computers</a>.
+      </p>
+      <p class="story-hint">Every star around me is something I learned, built or lived.</p>
     </div>
     <nav class="filters" aria-label="Show or hide groups of stars">
       <!-- filled by sky.js -->
@@ -51,10 +57,13 @@
   </div>
 
   <footer class="bottom">
-    <div class="bottom-actions">
+    <nav class="bottom-actions" aria-label="Sections">
       <button class="pill-btn" id="indexToggle" aria-expanded="false" aria-controls="index">All stars</button>
-      <button class="pill-btn log-btn" id="logToggle" aria-expanded="false" aria-controls="log"><span class="spark" aria-hidden="true"></span>Daily log</button>
-    </div>
+      <button class="pill-btn" data-open="projects" aria-expanded="false" aria-controls="projects">Projects</button>
+      <button class="pill-btn" data-open="timeline" aria-expanded="false" aria-controls="timeline">Timeline</button>
+      <button class="pill-btn log-btn" id="logToggle" aria-expanded="false" aria-controls="log"><span class="spark" aria-hidden="true"></span><span class="wide-only">Daily log</span><span class="narrow-only">Log</span></button>
+      <button class="pill-btn narrow-only" data-connect aria-controls="connect">Connect</button>
+    </nav>
     <p class="place"><span>London, Ontario · 43.0° N, 81.2° W</span> <span id="clock"></span></p>
   </footer>
 
@@ -70,10 +79,12 @@
       <header class="log-head">
         <div>
           <h2 id="logTitle" data-type="log">Daily log</h2>
-          <p>Every day of my first PhD term, 17 September to 2 November 2026. Each day is a star: the busier the day, the brighter it shines. Flip the pages to move between months.</p>
+          <p class="story">On 17 September 2026 I started a PhD knowing almost no quantum computing. Seven weeks later I was searching for error-correction circuits that need fewer qubits than the best published design. This is every day in between.</p>
+          <p class="story-hint">The busier the day, the brighter its star. Flip the pages, or follow the story below.</p>
         </div>
         <button class="close log-close" aria-label="Close the daily log">×</button>
       </header>
+      <ol class="beats" id="logBeats" aria-label="Turning points"></ol>
       <div class="log-tags" id="logTags" aria-label="Show one kind of entry"></div>
       <div class="log-body">
         <div class="log-cal" id="logCal"></div>
@@ -82,14 +93,46 @@
     </div>
   </section>
 
+  <section id="projects" class="log projects" aria-labelledby="pjTitle" hidden>
+    <div class="log-inner">
+      <header class="log-head">
+        <div>
+          <h2 id="pjTitle" data-type="projects">Projects</h2>
+          <p class="story">The long version of the stars on the map: the research I do, the jobs I've had, the things I've built and how I learn. Each one says what the problem was, what I did and what came out of it.</p>
+        </div>
+        <button class="close log-close" aria-label="Close projects">×</button>
+      </header>
+      <div class="pj-body">
+        <nav class="pj-list" id="pjList" aria-label="All projects"></nav>
+        <article class="pj-article" id="pjArticle" aria-live="polite"></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="timeline" class="log timeline" aria-labelledby="tlTitle" hidden>
+    <div class="log-inner">
+      <header class="log-head">
+        <div>
+          <h2 id="tlTitle" data-type="timeline">Timeline</h2>
+          <p class="story">A first repository in 2019, two internships, a master's in AI, a year building AI for a health centre, and now a PhD on quantum error correction. Here is how one thing led to the next.</p>
+        </div>
+        <button class="close log-close" aria-label="Close the timeline">×</button>
+      </header>
+      <div class="log-tags" id="tlKinds" aria-label="Show one kind of event"></div>
+      <div class="tl-body" id="tlBody"></div>
+    </div>
+  </section>
+
   <noscript>
     <p class="noscript">This map needs JavaScript. Write to <a href="mailto:yanwenwang1125@gmail.com">yanwenwang1125@gmail.com</a> or see <a href="https://github.com/YanwenWang1125">github.com/YanwenWang1125</a>.</p>
   </noscript>
 
-  <script src="type.js?v=6"></script>
-  <script src="data.js?v=6"></script>
-  <script src="log.js?v=6"></script>
-  <script src="sky.js?v=6"></script>
-  <script src="calendar.js?v=6"></script>
+  <script src="type.js?v=8"></script>
+  <script src="data.js?v=8"></script>
+  <script src="log.js?v=8"></script>
+  <script src="sky.js?v=8"></script>
+  <script src="calendar.js?v=8"></script>
+  <script src="timeline.js?v=8"></script>
+  <script src="projects.js?v=8"></script>
 </body>
 </html>
