@@ -276,6 +276,13 @@ window.SKY = {
       body: ["Backends, databases with migrations, TypeScript frontends and container tests."],
       related: ["flight", "geotab"],
     },
+    {
+      id: "devops", group: "knowledge", size: 1,
+      title: "Docker, Kubernetes and DevOps",
+      kind: "Software engineering", when: "2024–",
+      body: ["Containers, Kubernetes and the pipelines that build, deploy and run services, learned at Geotab and used again on Azure and in my own projects."],
+      related: ["geotab", "realtor", "flight"],
+    },
 
     // ── Story ────────────────────────────────────────────────
     {
@@ -289,8 +296,8 @@ window.SKY = {
       id: "geotab", group: "story", size: 1,
       title: "Software Engineer Intern, Geotab",
       kind: "Toronto", when: "2022 and 2024",
-      body: ["Two internships: January to August 2022, and again February to September 2024. The first built a Django tool for managing Google Cloud storage buckets from the database."],
-      related: ["bsc", "fullstack"],
+      body: ["Two internships. January to August 2022: a Django tool for managing Google Cloud storage buckets from the database. February to September 2024: software development and DevOps with Docker and Kubernetes."],
+      related: ["bsc", "fullstack", "devops"],
     },
     {
       id: "ivey", group: "story", size: 1,

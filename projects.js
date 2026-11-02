@@ -115,12 +115,14 @@
     },
     {
       id: "geotab", group: "Work", star: "geotab",
-      title: "Cloud storage tooling at Geotab",
-      role: "Software Engineer Intern", when: "Jan – Aug 2022 and Feb – Sep 2024", where: "Geotab, Toronto",
-      stack: ["Python", "Django", "Google Cloud Platform", "SQL"],
+      title: "Software and DevOps at Geotab",
+      role: "Software Engineer Intern, twice", when: "Jan – Aug 2022 and Feb – Sep 2024", where: "Geotab, Toronto",
+      stack: ["Python", "Django", "Google Cloud Platform", "SQL", "Docker", "Kubernetes", "DevOps"],
       lead: "My first software job, and I came back for a second internship: two stints on a team that runs a large fleet-telematics platform.",
       sections: [
-        ["What I did", ["Built a Django interface that creates, reads, updates and deletes Google Cloud Storage buckets directly from database records, so the team could manage storage without hand-written scripts."]],
+        ["2022: cloud storage tooling", ["Built a Django interface that creates, reads, updates and deletes Google Cloud Storage buckets directly from database records, so the team could manage storage without hand-written scripts."]],
+        ["2024: software development and DevOps", ["Back for eight months on software development and the systems that ship it: containerising services with Docker, running them on Kubernetes, and working on the DevOps side of building, deploying and operating them."]],
+        ["What I learned", ["How production software is packaged, deployed and kept running, which I have used ever since, from container tests in the flight-school system to Azure deployments for RealtorOS."]],
       ],
     },
     {

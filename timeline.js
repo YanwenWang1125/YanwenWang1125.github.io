@@ -14,7 +14,7 @@
     ["2023-04", "2023-08", "Work", "Research Assistant, Ivey Business School", "My first taste of research: OCR and mathematical morphology for noisy scanned documents.", "ivey"],
     ["2024-01", "", "Project", "HoloLens 2 aneurysm visualisation", "A capstone with Robarts Research Institute: 3D holograms surgeons can share with patients.", "hololens"],
     ["2024-02", "", "Study", "Finished the BSc", "Honours Computer Science, GPA 3.9/4.0.", "bsc"],
-    ["2024-02", "2024-09", "Work", "Intern, Geotab", "Back at Geotab for a second internship.", "geotab"],
+    ["2024-02", "2024-09", "Work", "Software Engineer Intern, Geotab", "Back at Geotab: software development and DevOps with Docker and Kubernetes.", "geotab"],
     ["2024-09", "", "Study", "Started an MSc in Artificial Intelligence", "Advanced machine learning, neural networks and unstructured data at Western.", "msc"],
     ["2024-09", "2025-09", "Research", "Wildfire prediction across Canada", "A Vision Transformer on fire-danger maps fused with an LSTM on weather: AUC-ROC 0.91.", "wildfire"],
     ["2025-09", "", "Study", "Finished the MSc", "Artificial Intelligence, GPA 3.9/4.0.", "msc"],
