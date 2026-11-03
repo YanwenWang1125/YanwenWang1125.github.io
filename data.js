@@ -27,6 +27,7 @@ window.SKY = {
     links: [
       ["Email", "mailto:yanwenwang1125@gmail.com"],
       ["GitHub", "https://github.com/YanwenWang1125"],
+      ["LinkedIn", "https://www.linkedin.com/in/wang-yanwen-21a199271/"],
     ],
   },
 

@@ -264,14 +264,14 @@
     glow.addColorStop(1, "rgba(242,196,109,0)");
     ctx.fillStyle = glow;
     ctx.beginPath(); ctx.arc(x, y, base * 7, 0, Math.PI * 2); ctx.fill();
-    // spikes
-    ctx.strokeStyle = "rgba(255,240,210,0.5)";
-    ctx.lineWidth = 1;
-    const sp = base * 4.2;
-    ctx.beginPath();
-    ctx.moveTo(x - sp, y); ctx.lineTo(x + sp, y);
-    ctx.moveTo(x, y - sp); ctx.lineTo(x, y + sp);
-    ctx.stroke();
+    // a wide, faint corona that breathes slowly, in place of hard spikes
+    const breath = reduce ? 1 : 1 + 0.08 * Math.sin(time * 0.6);
+    const cr = base * 14 * breath;
+    const corona = ctx.createRadialGradient(x, y, base * 2, x, y, cr);
+    corona.addColorStop(0, "rgba(255,228,170,0.10)");
+    corona.addColorStop(1, "rgba(242,196,109,0)");
+    ctx.fillStyle = corona;
+    ctx.beginPath(); ctx.arc(x, y, cr, 0, Math.PI * 2); ctx.fill();
     ctx.fillStyle = "#fff8ea";
     ctx.beginPath(); ctx.arc(x, y, base, 0, Math.PI * 2); ctx.fill();
     if (hover === me || selected === me) {
@@ -320,13 +320,13 @@
     ctx.fillStyle = glow;
     ctx.beginPath(); ctx.arc(p.x, p.y, gr, 0, Math.PI * 2); ctx.fill();
     if (s.size === 3) {
-      ctx.strokeStyle = hexA(s.colour, 0.45);
-      ctx.lineWidth = 1;
-      const sp = core * 4.5 * tw;
-      ctx.beginPath();
-      ctx.moveTo(p.x - sp, p.y); ctx.lineTo(p.x + sp, p.y);
-      ctx.moveTo(p.x, p.y - sp); ctx.lineTo(p.x, p.y + sp);
-      ctx.stroke();
+      // the big stars carry a wider, faint halo, like the sun's corona
+      const hr = core * 13 * tw;
+      const halo = ctx.createRadialGradient(p.x, p.y, core * 2, p.x, p.y, hr);
+      halo.addColorStop(0, hexA(s.colour, 0.16));
+      halo.addColorStop(1, hexA(s.colour, 0));
+      ctx.fillStyle = halo;
+      ctx.beginPath(); ctx.arc(p.x, p.y, hr, 0, Math.PI * 2); ctx.fill();
     }
     ctx.fillStyle = "#ffffff";
     ctx.beginPath(); ctx.arc(p.x, p.y, core, 0, Math.PI * 2); ctx.fill();
