@@ -293,7 +293,7 @@ window.SKY = {
       related: ["geotab", "ivey"],
     },
     {
-      id: "geotab", group: "story", size: 1,
+      id: "geotab", group: "story", size: 2,
       title: "Software Engineer Intern, Geotab",
       kind: "Toronto", when: "2022 and 2024",
       body: ["Two internships. January to August 2022: a Django tool for managing Google Cloud storage buckets from the database. February to September 2024: software development and DevOps with Docker and Kubernetes."],
@@ -315,7 +315,7 @@ window.SKY = {
       related: ["wildfire", "courseml"],
     },
     {
-      id: "sfu", group: "story", size: 1,
+      id: "sfu", group: "story", size: 3,
       title: "AI Solution Intern, SFU Health Care Center",
       kind: "Agentic AI", when: "2025–2026",
       body: ["A year building an LLM front desk with a team of three."],
