@@ -35,9 +35,13 @@
 
   // ── Place each star on its orbit ────────────────────────────
   const rand = mulberry(20261102);
-  // the more a star matters, the closer it sits to the sun and the slower it travels:
-  // inner orbits are slower than outer ones, and big stars slower than small ones on the same orbit
-  const IMPORTANCE = { 3: { dr: -0.035, pace: 0.55 }, 2: { dr: -0.01, pace: 0.8 }, 1: { dr: 0.02, pace: 1.1 } };
+  // the more a star matters, the closer it sits to the sun, the slower it travels and the brighter it shines:
+  // inner orbits are slower and brighter than outer ones, and big stars than small ones on the same orbit
+  const IMPORTANCE = {
+    3: { dr: -0.035, pace: 0.55, lum: 1 },
+    2: { dr: -0.01, pace: 0.8, lum: 0.8 },
+    1: { dr: 0.02, pace: 1.1, lum: 0.6 },
+  };
   Object.entries(groups).forEach(([g, info]) => {
     const list = stars.filter((s) => s.group === g);
     const offset = rand() * Math.PI * 2;
@@ -48,6 +52,7 @@
       const imp = IMPORTANCE[s.size] || IMPORTANCE[1];
       s.dr = imp.dr + (rand() - 0.5) * 0.016;
       s.speed = (0.008 + 0.0065 * info.orbit) * imp.pace * (0.9 + rand() * 0.2);
+      s.lum = imp.lum * (1 - 0.03 * (info.orbit - 1));
       s.z = (rand() - 0.5) * 0.06;
       s.phase = rand() * Math.PI * 2;
     });
@@ -284,7 +289,7 @@
       let prev = project(s, time);
       for (let i = 1; i <= 7; i++) {
         const p = project(s, time, i * 0.6);
-        ctx.strokeStyle = hexA(s.colour, a * 0.22 * (1 - i / 8) * Math.min(1, speed + 0.2));
+        ctx.strokeStyle = hexA(s.colour, a * s.lum * 0.22 * (1 - i / 8) * Math.min(1, speed + 0.2));
         ctx.lineWidth = (0.6 + s.size * 0.5) * (1 - i / 9);
         ctx.beginPath(); ctx.moveTo(prev.x, prev.y); ctx.lineTo(p.x, p.y); ctx.stroke();
         prev = p;
@@ -301,11 +306,13 @@
     const tw = reduce ? 1 : 0.85 + 0.15 * Math.sin(time * 2 + s.phase);
     const core = (1.3 + s.size * 1.15) * p.scale * Math.sqrt(view.zoom);
     const alpha = a * dim * Math.max(0.35, Math.min(1, 0.75 + p.depth / (radius() * view.zoom * 2)));
+    // lesser stars glow less, until you point at one; labels keep full strength so they stay readable
+    const shine = isSel || isHov || isRel ? 1 : s.lum;
 
-    ctx.globalAlpha = alpha;
+    ctx.globalAlpha = alpha * shine;
     const gr = core * (isHov || isSel ? 9 : 6) * tw;
     const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, gr);
-    glow.addColorStop(0, hexA(s.colour, 0.55));
+    glow.addColorStop(0, hexA(s.colour, 0.35 + 0.1 * s.size));
     glow.addColorStop(1, hexA(s.colour, 0));
     ctx.fillStyle = glow;
     ctx.beginPath(); ctx.arc(p.x, p.y, gr, 0, Math.PI * 2); ctx.fill();
