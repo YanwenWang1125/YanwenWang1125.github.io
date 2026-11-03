@@ -1131,6 +1131,35 @@ window.LOG = {
       "An interactive star-map homepage, group filters that wrap on mid-size screens, a daily-log calendar, Connect me and Who I am sections, and a livelier sky.",
       "Compiled the daily log from 9/17 to 11/2 in Chinese and English, designed the font setup, and set up a scheduled task that updates the log and calendar each day. Four commits pushed."
      ]
+    },
+    {
+     "tag": "Research",
+     "text": "C′ result: the archive matched R6 and M0 line for line (7,176 circuits, Pareto 12 ancillas). CPU time fell from 240,424 to 137,244 s (1.75×) and wall time from 4,079 to 2,523 s (1.62×), with no ML. After C′, rejected candidates take only 51% of the time, so the M2 criterion was reset to \"save ≥ 25% over C′ at keep recall ≥ 99%\" and written into the plan before submitting."
+    },
+    {
+     "tag": "Research",
+     "text": "M2 pre-filter: failed the criterion. Gradient boosting reached 94.9% / 95.3% test recall on run_A / run_B; a threshold set at 99% on validation dropped to 94–96% on test. With the best threshold in hindsight it would save 28% / 44%, but only 13.5% on the generation split, so scores drift across generations. The \"skip anything touching m31\" rule discards about 90% of good candidates. Recorded the negative result, skipped M3, moved to M4."
+    },
+    {
+     "tag": "Research",
+     "text": "M5 exhaustive 10-ancilla search: all 1,465,344 candidates in scope v1 failed the FT_2 check, none passed; two positive controls passed. So there is no 10-ancilla circuit in scope v1 that meets our acceptance test."
+    },
+    {
+     "tag": "Research",
+     "text": "M4 step 1, hindsight labels: in b384 only 8 of 3,273 beam-visited 12-ancilla circuits (0.24%) lead to 11 ancillas; in b96 none do. Lineage: all four 11-ancilla circuits in b384 share one route that b96 accepted at generation 9 but did not keep in the beam. b96 stops at 12 because of beam selection, not the move set."
+    },
+    {
+     "tag": "Research",
+     "text": "M4 steps 2–3: wrote the criteria into the plan first, then added value-guided, diverse and exploring selection to the beam search (default behaviour unchanged). The value model trained on 2,810 states (211 positive): AUROC 0.86 on generations 26–30, 16.7% positives in the top 10% against a 4.0% base rate. Smoke tests passed; the comparison run (three seeds each for three selection rules, beam 96 × 40) is running on Fir."
+    },
+    {
+     "tag": "Web",
+     "text": "Personal website, continued:",
+     "sub": [
+      "Titles in the Brillant typeface, fixed the drag direction, livelier stars.",
+      "Added Projects and Timeline sections and rewrote the two intros to tell the story.",
+      "Timeline keeps only key moments, including the 2024 Geotab internship (software development, Docker, Kubernetes, DevOps). Five commits pushed."
+     ]
     }
    ],
    "empty": false
