@@ -38,9 +38,10 @@
   // the more a star matters, the closer it sits to the sun, the slower it travels and the brighter it shines:
   // inner orbits are slower and brighter than outer ones, and big stars than small ones on the same orbit
   const IMPORTANCE = {
-    3: { dr: -0.035, pace: 0.55, lum: 1 },
-    2: { dr: -0.01, pace: 0.8, lum: 0.92 },
-    1: { dr: 0.02, pace: 1.1, lum: 0.8 },
+    // tail: how many seconds of flight the comet tail shows, longer for the small, fast stars
+    3: { dr: -0.035, pace: 0.55, lum: 1, tail: 4 },
+    2: { dr: -0.01, pace: 0.8, lum: 0.92, tail: 5.5 },
+    1: { dr: 0.02, pace: 1.1, lum: 0.8, tail: 7.5 },
   };
   Object.entries(groups).forEach(([g, info]) => {
     const list = stars.filter((s) => s.group === g);
@@ -53,6 +54,7 @@
       s.dr = imp.dr + (rand() - 0.5) * 0.016;
       s.speed = (0.008 + 0.0065 * info.orbit) * imp.pace * (0.9 + rand() * 0.2);
       s.lum = imp.lum * (1 - 0.015 * (info.orbit - 1));
+      s.tail = imp.tail;
       s.z = (rand() - 0.5) * 0.06;
       s.phase = rand() * Math.PI * 2;
     });
@@ -287,10 +289,11 @@
       const a = fade[s.group];
       if (a < 0.05) continue;
       let prev = project(s, time);
-      for (let i = 1; i <= 7; i++) {
-        const p = project(s, time, i * 0.6);
-        ctx.strokeStyle = hexA(s.colour, a * s.lum * 0.22 * (1 - i / 8) * Math.min(1, speed + 0.2));
-        ctx.lineWidth = (0.6 + s.size * 0.5) * (1 - i / 9);
+      const N = 10;
+      for (let i = 1; i <= N; i++) {
+        const p = project(s, time, (i / N) * s.tail);
+        ctx.strokeStyle = hexA(s.colour, a * 0.38 * (1 - i / (N + 1)) * Math.min(1, speed + 0.2));
+        ctx.lineWidth = (0.6 + s.size * 0.5) * (1 - i / (N + 2));
         ctx.beginPath(); ctx.moveTo(prev.x, prev.y); ctx.lineTo(p.x, p.y); ctx.stroke();
         prev = p;
       }
