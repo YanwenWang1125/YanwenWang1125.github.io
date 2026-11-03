@@ -35,6 +35,9 @@
 
   // ── Place each star on its orbit ────────────────────────────
   const rand = mulberry(20261102);
+  // the more a star matters, the closer it sits to the sun and the slower it travels:
+  // inner orbits are slower than outer ones, and big stars slower than small ones on the same orbit
+  const IMPORTANCE = { 3: { dr: -0.035, pace: 0.55 }, 2: { dr: -0.01, pace: 0.8 }, 1: { dr: 0.02, pace: 1.1 } };
   Object.entries(groups).forEach(([g, info]) => {
     const list = stars.filter((s) => s.group === g);
     const offset = rand() * Math.PI * 2;
@@ -42,22 +45,24 @@
       s.orbit = info.orbit;
       s.colour = info.colour;
       s.angle = offset + (i / list.length) * Math.PI * 2 + (rand() - 0.5) * 0.35;
-      s.rj = 1 + (rand() - 0.5) * 0.08;
+      const imp = IMPORTANCE[s.size] || IMPORTANCE[1];
+      s.dr = imp.dr + (rand() - 0.5) * 0.016;
+      s.speed = (0.008 + 0.0065 * info.orbit) * imp.pace * (0.9 + rand() * 0.2);
       s.z = (rand() - 0.5) * 0.06;
       s.phase = rand() * Math.PI * 2;
     });
   });
   const ORBIT_R = [0, 0.22, 0.37, 0.52, 0.67, 0.83, 1];
-  const ORBIT_SPEED = [0, 0.05, 0.038, 0.029, 0.022, 0.017, 0.013];
 
   function radius() { return W < 760 ? Math.min(W * 0.6, H * 0.5) : Math.min(W * 0.46, H * 0.78); }
 
   function project(s, t, lag = 0) {
     const R = radius() * view.zoom;
-    const a = s.angle + view.yaw + orbitT * ORBIT_SPEED[s.orbit] - lag;
+    // lag looks back in time, so a fast star leaves a longer tail than a slow one
+    const a = s.angle + view.yaw + (orbitT - lag) * s.speed;
     // each star breathes in and out a little and bobs above and below its orbit
     const bob = reduce ? 0 : Math.sin(t * (0.55 + (s.phase % 1) * 0.35) + s.phase);
-    const r = ORBIT_R[s.orbit] * s.rj * R * (1 + (reduce ? 0 : 0.035 * Math.sin(t * 0.45 + s.phase * 2)));
+    const r = (ORBIT_R[s.orbit] + s.dr) * R * (1 + (reduce ? 0 : 0.035 * Math.sin(t * 0.45 + s.phase * 2)));
     const x = r * Math.cos(a);
     const y = r * Math.sin(a);
     const z = (s.z + 0.07 * bob) * R;
@@ -193,13 +198,13 @@
 
     drawShooting(time);
 
-    // orbits: barely there, brighter only for the group under the pointer or open
+    // orbits: faint, brighter for the group under the pointer or open
     const R = radius() * view.zoom;
     const ct = Math.cos(view.tilt + par.y * 0.07);
     const focus = (selected && selected.group) || (hover && hover.group);
     Object.values(groups).forEach((info) => {
       const g = Object.keys(groups).find((k) => groups[k] === info);
-      ctx.strokeStyle = hexA(info.colour, (g === focus ? 0.16 : 0.035) * fade[g]);
+      ctx.strokeStyle = hexA(info.colour, (g === focus ? 0.26 : 0.085) * fade[g]);
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.ellipse(centreX(), centreY(), ORBIT_R[info.orbit] * R, ORBIT_R[info.orbit] * R * ct, 0, 0, Math.PI * 2);
@@ -278,7 +283,7 @@
       if (a < 0.05) continue;
       let prev = project(s, time);
       for (let i = 1; i <= 7; i++) {
-        const p = project(s, time, i * 0.026);
+        const p = project(s, time, i * 0.6);
         ctx.strokeStyle = hexA(s.colour, a * 0.22 * (1 - i / 8) * Math.min(1, speed + 0.2));
         ctx.lineWidth = (0.6 + s.size * 0.5) * (1 - i / 9);
         ctx.beginPath(); ctx.moveTo(prev.x, prev.y); ctx.lineTo(p.x, p.y); ctx.stroke();
@@ -468,7 +473,7 @@
     tip.hidden = true;
     if (s !== me) {
       // turn the system so the open star comes to the front, left of centre
-      const now = s.angle + view.yaw + orbitT * ORBIT_SPEED[s.orbit];
+      const now = s.angle + view.yaw + orbitT * s.speed;
       let d = (Math.PI * 0.62 - now) % (Math.PI * 2);
       if (d > Math.PI) d -= Math.PI * 2;
       if (d < -Math.PI) d += Math.PI * 2;
