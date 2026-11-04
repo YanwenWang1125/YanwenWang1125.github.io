@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-02",
+ "last": "2026-11-03",
  "weeks": [
   {
    "label": "Week 1",
@@ -100,10 +100,11 @@ window.LOG = {
   },
   {
    "label": "Week 8",
-   "range": "11/2",
+   "range": "11/2–11/3",
    "theme": "",
    "days": [
-    "2026-11-02"
+    "2026-11-02",
+    "2026-11-03"
    ]
   }
  ],
@@ -1160,6 +1161,110 @@ window.LOG = {
       "Added Projects and Timeline sections and rewrote the two intros to tell the story.",
       "Timeline keeps only key moments, including the 2024 Geotab internship (software development, Docker, Kubernetes, DevOps). Five commits pushed."
      ]
+    },
+    {
+     "tag": "Research",
+     "text": "Before an 8–9 hour unattended stretch, set out the next steps and queued the overnight runs."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-03": {
+   "date": "2026-11-03",
+   "label": "",
+   "week": 7,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "M4 comparison (beam 96 × 40) failed its criterion: value-guided selection reached 11 ancillas on 2 of 3 seeds, but the simple diversity rule did too on one seed, and every 11-ancilla circuit it found was already known. Random beams did worst. In the beam-384 reference run, value guidance found 20 circuits at 11 ancillas, 5× the baseline, 10 of them new, all proven over 5 rounds; the best new one has LER 9–11% above Liou, with intervals overlapping."
+    },
+    {
+     "tag": "Research",
+     "text": "M4 multi-seed comparison (seeds 2–6) passed: value guidance found 18–20 circuits at 11 ancillas per seed against 0–8 for the diversity rule and 4 for the baseline, so it joins P5. The four 11-ancilla circuits with the lowest DEM count came from the diversity rule."
+    },
+    {
+     "tag": "Research",
+     "text": "X3: all 1,465,344 10-ancilla candidates in scope v1 have distance below 5, each with a Stim counterexample, which closes the 10-ancilla line. X1: compound swaps gave 216 new 11-ancilla circuits, all proven over 5 rounds, with no ML; compound swaps go into P5."
+    },
+    {
+     "tag": "Research",
+     "text": "LER against Liou (3,000 errors per point):",
+     "sub": [
+      "P2a: both 12-ancilla circuits pass (2f2e3ce4 directly, 1600fa88 after topping up to 10,000 errors).",
+      "P2b: of six 11-ancilla circuits, four are worse and two are undecided. The circuits with the lowest DEM count have the worst LER, so DEM cannot stand in for LER across circuit families.",
+      "P3: the more idle noise, the better our circuits do relative to Liou; 1600fa88 is worse with zero idle noise, so \"3 fewer qubits at no LER cost\" has to be stated per noise setting. With the DemLookup3 decoder both 12-ancilla circuits pass.",
+      "The 10-ancilla circuit 9066091b (distance ≥ 5 proven, not FT_2): about 6% above Liou under DemLookup3 (undecided) and 15–16% above under DemLookup (worse)."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "New acceptance definition: a circuit qualifies when MILP proves distance ≥ d in both bases over 5 rounds; FT_2 is recorded but not required, since Liou's circuit does not meet it either. Designed and submitted X4, a distance-only search on [[17,1,5]]."
+    },
+    {
+     "tag": "Research",
+     "text": "D5b, a second code [[19,1,5]]: built the code and Liou's baseline circuits. A beam 96 × 30 search found 16- and 17-ancilla circuits at 66 CNOTs and depth 10, against 18 for Liou's; 5-round proofs and LER under two decoders submitted."
+    },
+    {
+     "tag": "Research",
+     "text": "Distance 7 on [[31,1,7]]:",
+     "sub": [
+      "Built the code with self-checks, a 39-ancilla starting circuit, the d=7 acceptance path, an exact decoder for up to 3 errors (DemLookup3) and a single-round FT_3 check.",
+      "Cost diagnosis: about 3,100 neighbours per circuit at about 100 s each to accept; 2-round and 5-round Stim gave identical verdicts on 450 candidates, with 5 rounds 15× slower. A full-neighbourhood beam search would exceed a 48 h job 17–110×, so it does not scale as is.",
+      "One merge on the start circuit gives 38 ancillas with distance ≥ 7 proven over 2 rounds. The start circuit itself passed the 5-round proof in both bases (6.7 h and 7.4 h)."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "M6, choosing neighbours with ML at d=7:",
+     "sub": [
+      "Wrote the design: accept only the states that enter the beam, under a per-generation budget, with seven groups (random, two heuristics, a hook-bound rule, hook bound with one-step lookahead, the ML model, and the model without hook features) and the win rule written down first.",
+      "Trial run: random selection reached 37 ancillas; the merge-first heuristic dropped one ancilla per generation to 34 in 5 generations.",
+      "The hook bound nearly predicts acceptance at first, but deeper in the search it lets many bad circuits through (24 of 64 in the trial were caught only by MILP), so \"bound + Stim\" cannot replace MILP.",
+      "Added a keep-beam switch (three regressions identical), froze the ML model (AUROC 0.906 on held-out trial data) and the lookahead rule, and smoke-tested both. The full run is set at B = 32, V = 256, G = 60, 7 groups × 5 seeds."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "P5, the full comparison of three beam-selection rules, is running on Fir with LER under DemLookup3 as the main metric; one group was resubmitted with a 72 h limit and results are due 11/5."
+    },
+    {
+     "tag": "Research",
+     "text": "Project setup: split FT_Rewrite_Search into its own GitHub repository with a README; organised a coordinator session and numbered worker sessions (E1, E2, …), moved every job to Fir, and handed the coordinator over to a fresh session through a written handover note."
+    },
+    {
+     "tag": "Research",
+     "text": "Wrote a paper assessment: d=5 plus the second code makes a solid methods paper (systematic search with rigorous verification), d=7 makes it stronger, and ML becomes the headline only if it wins at d=7. The method, verification and LER sections can be written now."
+    },
+    {
+     "tag": "Diamond",
+     "text": "NSERC Alliance–Mitacs proposal:",
+     "sub": [
+      "Merged the official merit criteria and two writing skills into one review skill, with the merit criteria taking priority.",
+      "Revised Background (framed around cancellations and lost time from all causes, using the partner's own data), Partnership, Research plan (pilot covering winter and summer, 4–6 months), Impact and Training plan, and cut it to 7 pages.",
+      "Made a clean version, did another round against the merit review, designed the methods section (model and solver, the scope of the RL part with two controls, shadow-mode paired comparison), listed the open items, and translated it paragraph by paragraph.",
+      "Studied existing flight-school scheduling systems and wrote up what to borrow and improve; folded that into Phase 1."
+     ]
+    },
+    {
+     "tag": "Diamond",
+     "text": "Scheduling system code, built by cloud sessions for backend, frontend and code review, coordinated from a local session:",
+     "sub": [
+      "Phase 1 modules: authentication and audit, resource management, the scheduling engine, weather-aware scheduling and alerts, cancellation penalties with waiting list and backfill, and learning progress, each with end-to-end tests against the real backend.",
+      "Added rule severities, standby auto-accept, student flight and instructor duty limits, and brief time separate from aircraft time.",
+      "Five code-review rounds with fixes R1–R63, handoff documents, about 100 commits pushed."
+     ]
+    },
+    {
+     "tag": "Courses",
+     "text": "CS9833 paper review: a per-slide presentation script and revised slides."
+    },
+    {
+     "tag": "Web",
+     "text": "Personal website: clearer orbits; stars move at their own pace, important ones closer to the sun, slower and brighter; small stars brighter with comet tails; soft halos on the sun and big stars; a LinkedIn button. Five commits pushed."
+    },
+    {
+     "tag": "Other",
+     "text": "Found the notes from the 10/30 project meeting; looked into Claude Code's memory use."
     }
    ],
    "empty": false
