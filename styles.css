@@ -480,9 +480,8 @@ button, input, textarea { font: inherit; color: inherit; }
 .cal-cell .num { position: absolute; top: 6px; left: 8px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .cal-cell.out .num { color: #3c4459; }
 .cal-cell.on .num { color: var(--ink); }
-/* today: its number in the accent colour; a dashed outline while it has no entry yet */
+/* today: its number in the accent colour, so you can find your place */
 .cal-cell.today .num { color: var(--accent); font-weight: 600; }
-.cal-cell.out.today { outline: 1px dashed rgba(242, 196, 109, .5); outline-offset: -1px; }
 .cal-cell .star {
   width: var(--s); height: var(--s);
   border-radius: 50%;

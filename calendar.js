@@ -96,7 +96,7 @@
       const other = d.getMonth() !== m.getMonth();
       const inRange = d >= first && d <= last;
       const now = k === today ? ` today" aria-current="date` : "";
-      if (!inRange) { cells += `<span class="cal-cell out${other ? " other" : ""}${now}"${now ? ` aria-label="Today, not written yet"` : ""}><span class="num">${d.getDate()}</span></span>`; continue; }
+      if (!inRange) { cells += `<span class="cal-cell out${other ? " other" : ""}${now}"${now ? ` aria-label="Today"` : ""}><span class="num">${d.getDate()}</span></span>`; continue; }
       const n = count(entry);
       const size = n ? 5 + Math.round((n / max) * 14) : 3;
       const dots = tagsOf(entry).map((t) => `<i style="--c:${TAGS[t] || "#8f97ab"}" class="${tagFilter && t !== tagFilter ? "off" : ""}"></i>`).join("");
@@ -269,8 +269,8 @@
     toggle.setAttribute("aria-expanded", "true");
     BEHIND.forEach((el) => el && (el.inert = true));
     history.replaceState(null, "", `#log/${selected}`);
-    // land on this week of the calendar rather than the top of the page
-    const spot = page.querySelector(".cal-cell.today") || page.querySelector(".cal-cell.on");
+    // land on the open day's week of the calendar rather than the top of the page
+    const spot = page.querySelector(".cal-cell.on") || page.querySelector(".cal-cell.today");
     if (spot) spot.scrollIntoView({ block: "center" });
     requestAnimationFrame(() => root.classList.add("in"));
     root.querySelector(".log-close").focus({ preventScroll: true });
@@ -292,13 +292,15 @@
 
   function esc(t) { return String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
 
-  // the log opens on today, or on the latest day written so far if today isn't in it yet;
+  // each day is written up the day after, so the log opens on yesterday,
+  // or on the latest day written before it if yesterday has no entry yet;
   // a link like #log/2026-10-30 opens that day instead
   function locate() {
     const linked = location.hash.match(/^#log\/(\d{4}-\d{2}-\d{2})$/);
-    const today = keyOf(new Date());
-    const written = Object.keys(LOG.days).filter((k) => k <= today && !LOG.days[k].empty).sort();
-    selected = linked && LOG.days[linked[1]] ? linked[1] : LOG.days[today] ? today : written[written.length - 1] || LOG.last;
+    const y = new Date(); y.setDate(y.getDate() - 1);
+    const yesterday = keyOf(y);
+    const written = Object.keys(LOG.days).filter((k) => k <= yesterday && !LOG.days[k].empty).sort();
+    selected = linked && LOG.days[linked[1]] ? linked[1] : written[written.length - 1] || LOG.last;
     monthIndex = months.findIndex((m) => m.getMonth() === dateOf(selected).getMonth());
   }
   locate();
