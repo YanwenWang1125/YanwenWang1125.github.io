@@ -90,15 +90,17 @@
     end.setDate(end.getDate() + (7 - ((end.getDay() + 6) % 7) - 1));
     const logged = Object.keys(LOG.days).filter((k) => dateOf(k).getMonth() === m.getMonth() && !LOG.days[k].empty).length;
     let cells = "";
+    const today = keyOf(new Date());
     for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
       const k = keyOf(d), entry = LOG.days[k];
       const other = d.getMonth() !== m.getMonth();
       const inRange = d >= first && d <= last;
-      if (!inRange) { cells += `<span class="cal-cell out${other ? " other" : ""}"><span class="num">${d.getDate()}</span></span>`; continue; }
+      const now = k === today ? ` today" aria-current="date` : "";
+      if (!inRange) { cells += `<span class="cal-cell out${other ? " other" : ""}${now}"${now ? ` aria-label="Today, not written yet"` : ""}><span class="num">${d.getDate()}</span></span>`; continue; }
       const n = count(entry);
       const size = n ? 5 + Math.round((n / max) * 14) : 3;
       const dots = tagsOf(entry).map((t) => `<i style="--c:${TAGS[t] || "#8f97ab"}" class="${tagFilter && t !== tagFilter ? "off" : ""}"></i>`).join("");
-      cells += `<button class="cal-cell${n ? "" : " quiet"}${other ? " other" : ""}${k === selected ? " on" : ""}" data-day="${k}" aria-pressed="${k === selected}"
+      cells += `<button class="cal-cell${n ? "" : " quiet"}${other ? " other" : ""}${k === selected ? " on" : ""}${now}" data-day="${k}" aria-pressed="${k === selected}"
         aria-label="${nice(k)}, ${n ? `${n} ${n === 1 ? "entry" : "entries"}` : "no entries"}">
         <span class="num">${d.getDate()}</span>
         <span class="star" style="--s:${size}px"></span>
@@ -261,11 +263,15 @@
   function open() {
     if (!root.hidden) return;
     lastFocus = document.activeElement;
+    locate(); drawPage(); render();
     root.hidden = false;
     document.body.classList.add("log-open");
     toggle.setAttribute("aria-expanded", "true");
     BEHIND.forEach((el) => el && (el.inert = true));
-    if (!location.hash.startsWith("#log")) history.replaceState(null, "", "#log");
+    history.replaceState(null, "", `#log/${selected}`);
+    // land on this week of the calendar rather than the top of the page
+    const spot = page.querySelector(".cal-cell.today") || page.querySelector(".cal-cell.on");
+    if (spot) spot.scrollIntoView({ block: "center" });
     requestAnimationFrame(() => root.classList.add("in"));
     root.querySelector(".log-close").focus({ preventScroll: true });
   }
@@ -286,12 +292,16 @@
 
   function esc(t) { return String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
 
-  // a link like #log/2026-10-30 opens that day on its month
-  const linkedDay = location.hash.match(/^#log\/(\d{4}-\d{2}-\d{2})$/);
-  if (linkedDay && LOG.days[linkedDay[1]]) {
-    selected = linkedDay[1];
+  // the log opens on today, or on the latest day written so far if today isn't in it yet;
+  // a link like #log/2026-10-30 opens that day instead
+  function locate() {
+    const linked = location.hash.match(/^#log\/(\d{4}-\d{2}-\d{2})$/);
+    const today = keyOf(new Date());
+    const written = Object.keys(LOG.days).filter((k) => k <= today && !LOG.days[k].empty).sort();
+    selected = linked && LOG.days[linked[1]] ? linked[1] : LOG.days[today] ? today : written[written.length - 1] || LOG.last;
     monthIndex = months.findIndex((m) => m.getMonth() === dateOf(selected).getMonth());
   }
+  locate();
   const beats = document.getElementById("logBeats");
   function drawBeats() {
     beats.innerHTML = BEATS.map(([k, title, text]) => {
