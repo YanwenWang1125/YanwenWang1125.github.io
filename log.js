@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-03",
+ "last": "2026-11-04",
  "weeks": [
   {
    "label": "Week 1",
@@ -100,11 +100,12 @@ window.LOG = {
   },
   {
    "label": "Week 8",
-   "range": "11/2–11/3",
+   "range": "11/2–11/4",
    "theme": "",
    "days": [
     "2026-11-02",
-    "2026-11-03"
+    "2026-11-03",
+    "2026-11-04"
    ]
   }
  ],
@@ -1265,6 +1266,73 @@ window.LOG = {
     {
      "tag": "Other",
      "text": "Found the notes from the 10/30 project meeting; looked into Claude Code's memory use."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-04": {
+   "date": "2026-11-04",
+   "label": "",
+   "week": 7,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "X4, a distance-only search on [[17,1,5]] (beam 384 × 30, 14 h): the Pareto front is a single point (11, 54, 12), with no 10-ancilla circuit; 33,955 circuits at 11 ancillas, none FT_2. The 20 with the lowest DEM count all passed the 5-round proof. Two of them passed the LER test under both decoders, at 0.780–0.825 of Liou's LER (DemLookup3) and 0.868–0.902 (DemLookup), so \"11 ancillas at no LER cost\" holds. Extended the search to 60 generations."
+    },
+    {
+     "tag": "Research",
+     "text": "Distance 7: the 38-ancilla circuit (start circuit plus one merge) passed the 5-round proof in both bases (7.6 h and 8.4 h), the first d=7 circuit under the new definition with one ancilla fewer than the start; cost (38, 120, 16), not FT_3. On 19 circuits the 2-round and 5-round verdicts all agreed, with no false accepts."
+    },
+    {
+     "tag": "Research",
+     "text": "M6: submitted the full run (7 groups × 5 seeds, B = 32, V = 256, G = 60) after copying the rules into the log; wrote and smoke-tested the 5-round spot-check script. Fir fairshare fell to 0.116 and the run queued for about 9 h. Checked moving it to Nibi (regressions and smoke tests identical, but Nibi is about 1.5× slower and our share there is small) and kept it on Fir."
+    },
+    {
+     "tag": "Research",
+     "text": "P5 closed: value-guided selection reached 11 ancillas on 0 of 5 seeds, so it does not win. Of 11 runs only two diversity-rule seeds reached 11 ancillas, at 0.963 and 0.964 of Liou's LER."
+    },
+    {
+     "tag": "Research",
+     "text": "P6b: two more 10-ancilla circuits are worse than Liou under both decoders (1.09–1.19× under DemLookup3, 1.26–1.33× under DemLookup). All three 10-ancilla circuits tried failed, so no \"10 ancillas at no LER cost\" claim."
+    },
+    {
+     "tag": "Research",
+     "text": "The idle-noise sweep (140 points) finished and was written up; LER runs for the distance-only [[19,1,5]] search started, with all 21 eligibility checks passing."
+    },
+    {
+     "tag": "Research",
+     "text": "Clusters:",
+     "sub": [
+      "Set up Nibi with the same environment as Fir, split sessions into a cluster coordinator, per-cluster coordinators and workers, and started a separate Nibi log.",
+      "A cross-cluster check point matched Fir (ratio 0.996 [0.947, 1.047]), so two LER jobs went to Nibi.",
+      "A rough LER timing for the d=7 start circuit: about 8.2e-6 (Z) and 8.7e-6 (X) at p = 2.5e-4, 6–9 core-hours per point for 3,000 errors.",
+      "Reviewed compute use against progress; the lab server and Trillium are next."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "Summarised recent results, the method, strengths and limits in plain language and assessed whether they make a paper; got the full text of Du et al. (2024) on parallel flagged fault-tolerant error correction; read Singh et al. (2026) on QML for complex systems."
+    },
+    {
+     "tag": "Research",
+     "text": "Prepared Friday's meeting with Prof. Fang: a demo outline and answers to last week's questions, made into slides."
+    },
+    {
+     "tag": "Research",
+     "text": "EQE-QAOA, a collaborator's project:",
+     "sub": [
+      "Read two of their P=2 hardware runs on ibm_quebec (3 qubits, 76 CZ): AR 0.927 / 0.931, P(opt) 0.897 / 0.907.",
+      "A local noise simulation with that day's calibration predicted AR 0.925 and P(opt) 0.896, within 0.005 of hardware; the original 4-qubit QAOA is predicted better (AR 0.985).",
+      "Simulated the paper's K6–K20, C6 and C10 cases locally: EQE beats the original QAOA on none, ties on K6, and needs 9–280× more CZ on cycle graphs. Results in a notebook with plots."
+     ]
+    },
+    {
+     "tag": "Diamond",
+     "text": "Pulled the scheduling system to the local machine and checked it matches the cloud branches. A local run failed on memory because an audio driver process leaked 18 GB; stopped it and disabled its autostart. Added local start/stop scripts and ran the backend from a terminal with the database in DBeaver. Stopped all cloud sessions."
+    },
+    {
+     "tag": "Courses",
+     "text": "CS9833 paper review: a plain-language speaking script and revised slides."
     }
    ],
    "empty": false
