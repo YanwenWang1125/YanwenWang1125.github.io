@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-04",
+ "last": "2026-11-05",
  "weeks": [
   {
    "label": "Week 1",
@@ -100,12 +100,13 @@ window.LOG = {
   },
   {
    "label": "Week 8",
-   "range": "11/2–11/4",
+   "range": "11/2–11/5",
    "theme": "",
    "days": [
     "2026-11-02",
     "2026-11-03",
-    "2026-11-04"
+    "2026-11-04",
+    "2026-11-05"
    ]
   }
  ],
@@ -1333,6 +1334,98 @@ window.LOG = {
     {
      "tag": "Courses",
      "text": "CS9833 paper review: a plain-language speaking script and revised slides."
+    },
+    {
+     "tag": "Research",
+     "text": "Fir's SSH connection dropped twice in the evening with no effect on running jobs; ran small warm-up jobs on Nibi; looked at how allocations are shared within the group and whether GPUs would help."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-05": {
+   "date": "2026-11-05",
+   "label": "",
+   "week": 7,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "Formal LER of the d=7 start circuit (4 points, 3,000 errors each): 7.90e-6 (Z) and 8.82e-6 (X) at p = 2.5e-4; 1.015e-4 and 1.058e-4 at 5e-4."
+    },
+    {
+     "tag": "Research",
+     "text": "[[19,1,5]] (D5b):",
+     "sub": [
+      "Of the four FT_2 circuits, the two at 16 ancillas pass under DemLookup3 and are undecided under DemLookup; the two at 17 ancillas are worse under DemLookup.",
+      "In the distance-only search, all 192,051 circuits at the lowest tier (12 ancillas) passed the 5-round proof, so the Pareto point (12, 60, 8) has proven distance.",
+      "Final verdict with all 44 points in: D5b holds, and the 14-ancilla circuit b4f4dc62 also passes under both decoders (0.833–0.889 of Liou's LER under DemLookup3)."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "X4 under other noise models (32 points): both 11-ancilla circuits pass under DemLookup in all three settings (0.850–0.980 of Liou); under DemLookup3 they pass with zero idle noise (0.841–0.891) and are undecided in the other two. Submitted LER runs for the P5 circuits and for the 14-ancilla [[19,1,5]] circuits under other noise (two batches, 36 points)."
+    },
+    {
+     "tag": "Research",
+     "text": "Moved the full M6 run to Trillium, three tasks per node on 12 nodes, with the Fir copy held. By mid-afternoon all 35 runs were past generation 16, the slowest extrapolating to about 15 h."
+    },
+    {
+     "tag": "Research",
+     "text": "Made the M6 5-round spot check on demand: it picks circuits batch by batch from earlier results. Against the old version on 300 synthetic cases it gave identical verdicts with 23% fewer proofs."
+    },
+    {
+     "tag": "Research",
+     "text": "Paper plan: two papers in parallel, one on automated search with rigorous verification (11 instead of 15 ancillas on the 17-qubit code, 14 instead of 18 on the 19-qubit code) and one on ML-guided search."
+    },
+    {
+     "tag": "Research",
+     "text": "Novelty check of the literature: no one has published the same results, but superdense circuits (Gidney–Jones 2023; Google arXiv:2412.14256) and Shutty (arXiv:2609.21376) weaken the \"cheaper than published\" claim, so both became new baselines. Downloaded their circuits and wrote a loader."
+    },
+    {
+     "tag": "Research",
+     "text": "New baselines on Rorqual: superdense [[19,1,5]] proven distance ≥ 5 in both bases in about 5 minutes; Shutty [[31,1,7]] proven ≥ 7 for both phases and both bases (MILP 2.6–5.2 h). Their LER runs went to Nibi."
+    },
+    {
+     "tag": "Research",
+     "text": "Submitted two beam-384 searches on [[19,1,5]] (D5c, D5d) on Rorqual."
+    },
+    {
+     "tag": "Research",
+     "text": "The 60-generation X4 run had queued on Fir for about 30 h, so it moves to Trillium in two 24 h segments; wrote exact-resume code for the beam search and an equivalence test, both checked and staged."
+    },
+    {
+     "tag": "Research",
+     "text": "Clusters:",
+     "sub": [
+      "Set up Trillium, Rorqual and Narval. Rorqual is about 1.45× slower than Fir, so experiments with MILP time limits run entirely there with limits × 1.5; Narval is about 1.84× slower and takes LER work only; built Stim from source there.",
+      "Connected the lab server (Ubuntu, 32 cores, three RTX 3090s). Its LER control point matched Fir (R = 1.004 [0.955, 1.056] under DemLookup3, 0.992 under DemLookup), so it now takes LER jobs. Started lowp on it overnight: 16 points at p = 1e-4, paused automatically during the day, due 11/8."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "Workflow:",
+     "sub": [
+      "Added worker sessions per cluster and a fixed result-checking script whose output goes with every report.",
+      "New experiments each get their own log file, shared files are never overwritten from backups, and every computation on a cluster goes through sbatch, never the login node.",
+      "Requests were much larger than actual use, so I wrote a usage tool (1.5× measured memory and time) and a pre-submit check, and cut one queued job's memory to 2G.",
+      "Built a cluster dashboard: shares, running and past jobs, requested against used resources over time, and a CPU-utilisation column, refreshed every two hours.",
+      "Pushed five snapshots to the FT_Rewrite_Search repository, including the slides for Friday's meeting."
+     ]
+    },
+    {
+     "tag": "TA",
+     "text": "CS3357: applied student accommodations in the OWL gradebook (Quiz 1 and Midterm exempt, with their weight moving to the final) and the iClicker attendance accommodations, and sent Prof. Fang a short summary with screenshots and a backup spreadsheet."
+    },
+    {
+     "tag": "Web",
+     "text": "QAICON: removed two projects (with a backup), replaced AI-generated project covers with photos and diagrams, added three projects (vehicle health diagnosis with LLMs, CRS triage, multi-UAV semantic video), and made the galleries auto-play with dots instead of a play button. Five commits pushed."
+    },
+    {
+     "tag": "Web",
+     "text": "Personal website: the daily log now opens on yesterday, the latest day that can be written up. Two commits pushed."
+    },
+    {
+     "tag": "Diamond",
+     "text": "NSERC Alliance–Mitacs proposal: matched the budget to the application form and updated the revision notes, the Chinese version and the open-items list."
     }
    ],
    "empty": false
