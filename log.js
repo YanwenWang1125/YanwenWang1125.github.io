@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-05",
+ "last": "2026-11-06",
  "weeks": [
   {
    "label": "Week 1",
@@ -100,13 +100,14 @@ window.LOG = {
   },
   {
    "label": "Week 8",
-   "range": "11/2–11/5",
+   "range": "11/2–11/6",
    "theme": "",
    "days": [
     "2026-11-02",
     "2026-11-03",
     "2026-11-04",
-    "2026-11-05"
+    "2026-11-05",
+    "2026-11-06"
    ]
   }
  ],
@@ -1426,6 +1427,97 @@ window.LOG = {
     {
      "tag": "Diamond",
      "text": "NSERC Alliance–Mitacs proposal: matched the budget to the application form and updated the revision notes, the Chinese version and the open-items list."
+    },
+    {
+     "tag": "Research",
+     "text": "Superdense [[19,1,5]] LER (4 points, 3,000 errors each): 2.39e-6 (Z) and 2.49e-6 (X) at p = 2.5e-4; 2.57e-5 and 2.48e-5 at 5e-4. Our 14-ancilla circuit is worse under both decoders (45–59% higher under DemLookup3, 5–15% under DemLookup), so on [[19,1,5]] the paper claims fewer ancillas than Liou's Fig. 22 at no worse LER and states the trade-off against superdense."
+    },
+    {
+     "tag": "Research",
+     "text": "Built a resource table (ancillas, CNOTs, depth) for all main circuits under one counting rule. A depth check found the two X4 circuits use 13 CNOT layers in the Z half of the simulated circuit against 12 in the cost; added a note."
+    },
+    {
+     "tag": "Research",
+     "text": "Fir dropped three times in the evening; the dashboard's share-history source failed to load and went to a sub-session for a fix."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-06": {
+   "date": "2026-11-06",
+   "label": "",
+   "week": 7,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "M6 finished on Trillium: all 35 runs reached 60 generations within 24 h. Best ancilla counts in the final beam: R 30–33, H 25–29, H2 27–28, Hk 26–27, HkL 25–26, M 26–27, Mnoub 26–29. The 105 result files were copied back and checked."
+    },
+    {
+     "tag": "Research",
+     "text": "M6 5-round spot checks moved to Nibi. Of the first 70 proofs, 42 ran out of memory at 36G and were resubmitted at 40G. The memory goes to HiGHS's branch-and-bound tree; submitted four 120G diagnostic jobs on Nibi and a longer 200G diagnostic on the lab server running through the weekend."
+    },
+    {
+     "tag": "Research",
+     "text": "The resume-equivalence test for the beam search passed all 6 checks on Trillium; the first 24 h segment of the 60-generation X4 run started there, with generation 1 matching Fir (908 candidates, 460 accepted)."
+    },
+    {
+     "tag": "Research",
+     "text": "D5d finished in 13.5 h; all 40 circuits at 16 and 17 ancillas passed the 5-round proof in both bases (longest 233 s). Four of them went to LER on Nibi."
+    },
+    {
+     "tag": "Research",
+     "text": "D5c cannot reach 30 generations within the 7-day limit (extrapolated 190–215 h). Wrote a time-limited resumable version; its equivalence test passed and the two-segment rerun D5c′ started on Rorqual."
+    },
+    {
+     "tag": "Research",
+     "text": "Noise verdicts on [[19,1,5]]: the 14-ancilla circuit b4f4dc62 passes under all three other noise models, so the paper can say \"14 ancillas, LER no worse than Fig. 22, across noise models\" (N1 and Liou settings judged with DemLookup only). b4981e23 is undecided under DemLookup with zero idle noise. The P5 circuits hold only in setting B and with zero idle noise."
+    },
+    {
+     "tag": "Research",
+     "text": "Shutty [[31,1,7]] LER (8 points): 2.57e-6 to 3.01e-6 at p = 2.5e-4 and 3.07e-5 to 3.52e-5 at 5e-4 across both phases. Our d=7 start circuit has 2.8–3.3× its LER."
+    },
+    {
+     "tag": "Research",
+     "text": "New experiments:",
+     "sub": [
+      "rounds10: LER at 10 rounds for four d=5 circuits and two baselines. The DEM is 2.2–2.4× larger and decoding 17–30× slower than at 5 rounds; 24 points running on Nibi.",
+      "rescurve: extra points on the resource–LER curve. All 15 [[17,1,5]] candidates passed the 5-round proof; 48 LER points running on Narval.",
+      "alphasyn: checked four related papers (PropHunt, AlphaSyndrome, Jeon, Strikis) against the originals and downloaded AlphaSyndrome's public colour-code circuits. Rebuilt 4 circuits on [[17,1,5]] and [[19,1,5]]; all have 5-round circuit distance 3. 16 LER points running on Narval."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "P6 lower bound: merged the 74 files from the cloud branch into main and rechecked them on Rorqual with the original code; propositions 1–3, the corollary and Lemma H all reproduced."
+    },
+    {
+     "tag": "Research",
+     "text": "Started writing paper 1 as a search framework with six parts (describe the circuit, propose changes, check candidates, choose the route, final certification, evaluate use) plus transfer, compute-cost and budget analyses. Title: \"Fewer ancillas with certified circuit distance: a search framework for flag-based syndrome extraction\". Wrote the abstract, the appendix and checked the references."
+    },
+    {
+     "tag": "Research",
+     "text": "Meeting material: a progress report answering last meeting's questions, this week's results, two paper proposals with related work and our resources (five clusters and 400 minutes of IBM hardware time), with figures and references; a Chinese version; a draft email to Prof. Fang."
+    },
+    {
+     "tag": "Research",
+     "text": "Clusters and sessions:",
+     "sub": [
+      "Dispatch rules v2: swapping work between Nibi and Rorqual requires a speed check first.",
+      "Fir had an outage in the morning, came back at 12:13, dropped again at 13:00 and was reconnected at 15:48. Trillium's HPSS archive still fails to authenticate; drafted a support email.",
+      "Archived 15 dashboard-run sessions and the old coordinator, added a \"what is running\" section to each cluster log, and set a handoff procedure for new sessions.",
+      "Cut cross-session confirmation messages to save usage; the dashboard now refreshes every 12 h."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "Lab server weekend work: lowp continues, plus the M6 memory diagnostic and p2gnn, which compares a graph network with a tree model at predicting accept7 (AUROC) on the three RTX 3090s; installed PyTorch 2.5.1 in a new environment."
+    },
+    {
+     "tag": "TA",
+     "text": "CS3357 Assignment 2: fixed the assignment page after reports that Tests 4 (cache miss) and 7 (large-file streaming) failed on cache filenames with non-default ports, re-uploaded it, and moved the deadline to 11/13 in both the HTML and the PDF."
+    },
+    {
+     "tag": "Diamond",
+     "text": "NSERC Alliance–Mitacs proposal: regenerated the latest version with the budget included and wrote a budget justification (docx and pdf) following the given template."
     }
    ],
    "empty": false
