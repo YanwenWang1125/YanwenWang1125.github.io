@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-06",
+ "last": "2026-11-07",
  "weeks": [
   {
    "label": "Week 1",
@@ -100,14 +100,15 @@ window.LOG = {
   },
   {
    "label": "Week 8",
-   "range": "11/2–11/6",
+   "range": "11/2–11/7",
    "theme": "",
    "days": [
     "2026-11-02",
     "2026-11-03",
     "2026-11-04",
     "2026-11-05",
-    "2026-11-06"
+    "2026-11-06",
+    "2026-11-07"
    ]
   }
  ],
@@ -1518,6 +1519,60 @@ window.LOG = {
     {
      "tag": "Diamond",
      "text": "NSERC Alliance–Mitacs proposal: regenerated the latest version with the budget included and wrote a budget justification (docx and pdf) following the given template."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-07": {
+   "date": "2026-11-07",
+   "label": "",
+   "week": 7,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "The 60-generation X4 run finished on Trillium: the first 24 h segment stopped at generation 54 and the second segment resumed from 55 and completed at 05:00."
+    },
+    {
+     "tag": "Research",
+     "text": "M6 5-round proofs on Nibi: 30 of the first 70 are proved and 40 ran out of memory even at 40G; none failed. The memory diagnostics used 59–70G for the default setting and exceeded 120G for the pool setting. New rule: all M6 proofs use 128G and 72 h, with one retry at 256G; the remaining 40 were resubmitted."
+    },
+    {
+     "tag": "Research",
+     "text": "B-tier speed check: the same d=7 proof took 7.5 h on Nibi and 10.3 h on Rorqual (Fir 7.6 h). The 37% gap is over the 10% rule, so work is not swapped between Nibi and Rorqual."
+    },
+    {
+     "tag": "Research",
+     "text": "Transfer to rotated surface codes:",
+     "sub": [
+      "The search went from (6, 16, 6) to (4, 12, 4) at d=3 and from (20, 56, 6) to (12, 40, 4) at d=5, using only stabilizer ancillas and no flags. 5-round proofs give distance 3 and 5 in both bases. Runs from a bad hook order also reached zero flags and were proved.",
+      "The Steane search needs at least one flag.",
+      "LER on Narval (32 points): the found circuits have 0.97–1.18× the LER of the standard order at d=3 and 1.05–1.16× at d=5.",
+      "Scaling: a full d=7 search is extrapolated at about 125 h and 62 GiB; the Reed–Muller searches only finished generation 1 in 3 h and were resubmitted with 64 CPUs and 24 h."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "Resource–LER curve: on [[19,1,5]] and [[17,1,5]], circuits with 1–3 fewer ancillas than the baselines have 8–28% lower LER at every point (48 points, all upper bounds below 1)."
+    },
+    {
+     "tag": "Research",
+     "text": "AlphaSyndrome circuits (16 points): they have circuit distance 3. Under DemLookup the two octagonal versions pass against Fig. 20 and the two hexagonal versions are worse than Fig. 22 (ratio up to 1.31). Written up as a trade-off; the paper's fewer-ancilla claim stands."
+    },
+    {
+     "tag": "Research",
+     "text": "10-round check (24 points on Nibi): all 8 verdicts match the 5-round ones, so the conclusions hold at 10 rounds. Added a point-by-point 5 vs 10 round table with per-round error rates."
+    },
+    {
+     "tag": "Research",
+     "text": "D5d LER: none of the 4 [[19,1,5]] circuits that satisfy FT_2 passes under both decoders, so the paper cannot claim FT_2 at no worse LER than Fig. 22."
+    },
+    {
+     "tag": "Research",
+     "text": "Started a BP+OSD recheck of paper 1's main LER results: wrote the driver, measured speed, and submitted 60 check shards and 24 LER points on Narval."
+    },
+    {
+     "tag": "Research",
+     "text": "Lab server: installed PyTorch 2.5.1 for p2gnn, but the three GPUs need a reboot after a driver error; the reboot is postponed so lowp and the M6 diagnostic keep running. Built the training data on CPU (369,664 rows from 35 runs)."
     }
    ],
    "empty": false
