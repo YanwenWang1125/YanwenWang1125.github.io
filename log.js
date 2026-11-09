@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-07",
+ "last": "2026-11-08",
  "weeks": [
   {
    "label": "Week 1",
@@ -100,7 +100,7 @@ window.LOG = {
   },
   {
    "label": "Week 8",
-   "range": "11/2–11/7",
+   "range": "11/2–11/8",
    "theme": "",
    "days": [
     "2026-11-02",
@@ -108,7 +108,8 @@ window.LOG = {
     "2026-11-04",
     "2026-11-05",
     "2026-11-06",
-    "2026-11-07"
+    "2026-11-07",
+    "2026-11-08"
    ]
   }
  ],
@@ -1573,6 +1574,44 @@ window.LOG = {
     {
      "tag": "Research",
      "text": "Lab server: installed PyTorch 2.5.1 for p2gnn, but the three GPUs need a reboot after a driver error; the reboot is postponed so lowp and the M6 diagnostic keep running. Built the training data on CPU (369,664 rows from 35 runs)."
+    },
+    {
+     "tag": "Research",
+     "text": "Late check on the long runs: D5c reached generation 25 of 30, the rm15 restarts reached generation 10 and will stop at the 24 h limit around generation 11–12, and all 40 M6 proofs at 128G are running on Nibi."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-08": {
+   "date": "2026-11-08",
+   "label": "",
+   "week": 7,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "BP+OSD recheck finished on Narval (60 check shards, 24 LER points with 3,000 errors each):",
+     "sub": [
+      "The two 11-ancilla X4 circuits have 0.92–1.01× the LER of Fig. 20 under plain BP+OSD (largest upper bound 1.06), so their conclusion holds with a standard decoder.",
+      "The 14-ancilla [[19,1,5]] circuit b4981e23 is worse than Fig. 22 under BP+OSD at p = 2.5e-4 in the X basis (ratio 1.20 [1.14, 1.26]).",
+      "BP+OSD decodes every single DEM error correctly but fails 0.9–2.9% of the pairs, and makes 1.9–4.1× as many errors as DemLookup.",
+      "Decided to write this up as is, without a further check using a stronger decoder."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "Paper 1: added the BP+OSD results to the abstract, introduction, results and limitations; the [[19,1,5]] \"no worse than Fig. 22\" claim is now stated for lookup-table decoding only."
+    },
+    {
+     "tag": "Research",
+     "text": "M6 5-round proofs on Nibi: one of the 40 proofs ran out of memory at 128G after 12 h and was resubmitted once at 256G; the other 39 are still running."
+    },
+    {
+     "tag": "Web",
+     "text": "QAICON: added the PINQ² Path to Advantage news item and a Trustworthy FL research topic, updated the tagline and home intro, and gave the news item a \"More details\" box that opens on click. Seven commits."
+    },
+    {
+     "tag": "Diamond",
+     "text": "Updated the Chinese version of the NSERC Alliance–Mitacs proposal."
     }
    ],
    "empty": false
