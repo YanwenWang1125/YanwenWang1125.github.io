@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-08",
+ "last": "2026-11-09",
  "weeks": [
   {
    "label": "Week 1",
@@ -110,6 +110,14 @@ window.LOG = {
     "2026-11-06",
     "2026-11-07",
     "2026-11-08"
+   ]
+  },
+  {
+   "label": "Week 9",
+   "range": "11/9–11/15",
+   "theme": "",
+   "days": [
+    "2026-11-09"
    ]
   }
  ],
@@ -1612,6 +1620,72 @@ window.LOG = {
     {
      "tag": "Diamond",
      "text": "Updated the Chinese version of the NSERC Alliance–Mitacs proposal."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-09": {
+   "date": "2026-11-09",
+   "label": "",
+   "week": 8,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "EQE-QAOA on hardware: pulled the 7 ibm_quebec jobs (11/5) from a lab-mate's 20→10 branch. AR 0.30–0.35 against 0.308 for uniform random, so the output is noise; the compiled P1 circuit already has 1,622 two-qubit gates. Wrote up why QEC and error mitigation cannot help at this gate count."
+    },
+    {
+     "tag": "Research",
+     "text": "EQE-QAOA noise simulation with live ibm_quebec calibration: the full 20-qubit QAOA keeps AR 0.59–0.65 at P1–P3, the branch's EQE drops to 0.38–0.44. P4–P6 of the full QAOA were lost to a reboot and rerun on Rorqual. Decided to work on EQE first, starting small with group sizes (1,3,3)."
+    },
+    {
+     "tag": "Research",
+     "text": "eqe_ladder level 2:",
+     "sub": [
+      "Step 0: a general structured synthesis for any group sizes, exactly verified on 6 configurations (residual ≤ 2e-15).",
+      "Step 1: on (1,3,3), structured EQE uses 0.58–0.77× the two-qubit gates of full QAOA and matches or beats its noisy AR.",
+      "Step 2: v2 synthesis (prefix parities, split even groups, phase polynomials). With one extra qubit, (4,5,5,6) drops from 722 to 158 CX at P1 (122 per layer, fewer than the 150 of full QAOA).",
+      "20→10 comparison: 11-qubit v2 with invalid labels discarded reaches AR 0.590–0.671 and beats the 20-qubit QAOA by 0.03–0.05 from P3 on, at the cost of 12–37% of shots."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "D5c: both [[19,1,5]] beam-384 searches finished 30 generations with identical results, Pareto point (12,60,8). All 120 lowest-DEM circuits with 12–17 ancillas proved at 5 rounds; picked 6 and submitted 24 LER points on Narval."
+    },
+    {
+     "tag": "Research",
+     "text": "D2 on the Reed–Muller [[15,1,3]] code: the (12,76,13) circuit is proved at distance 3, and its LER is 0.62–0.69× the baseline's."
+    },
+    {
+     "tag": "Research",
+     "text": "M6 first batch: 69 of 69 5-round proofs proved; the last one is still running at 256G."
+    },
+    {
+     "tag": "Research",
+     "text": "lowp on the lab server: all 16 points at p = 1e-4 finished; the two 11-ancilla circuits have 0.75–0.84× the LER of Liou."
+    },
+    {
+     "tag": "Research",
+     "text": "Reconnected all clusters, reviewed the weekend runs and handoff notes after switching the worker sessions to Sonnet, checked CPU/GPU allocations, and pushed a snapshot of the FT repo."
+    },
+    {
+     "tag": "Research",
+     "text": "p2gnn on the lab server: GPUs work after the reboot; training ran in the evening and is set to resume at midnight. 26 of 30 GNN runs are done."
+    },
+    {
+     "tag": "TA",
+     "text": "CS3357: set double time on Quiz 2 for two students' accommodations in OWL."
+    },
+    {
+     "tag": "Web",
+     "text": "Rewrote this site's GitHub README: who I am, what I'm working on, what I'm like."
+    },
+    {
+     "tag": "Web",
+     "text": "The old AICON site now redirects to Q-AICON; renamed Communication to Networks on the Research page."
+    },
+    {
+     "tag": "Diamond",
+     "text": "Explained the objectives of the three work-package tasks from the proposal, and wrote sentence-by-sentence notes on the Background section."
     }
    ],
    "empty": false
