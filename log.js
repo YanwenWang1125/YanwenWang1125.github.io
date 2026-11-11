@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-09",
+ "last": "2026-11-10",
  "weeks": [
   {
    "label": "Week 1",
@@ -117,7 +117,8 @@ window.LOG = {
    "range": "11/9–11/15",
    "theme": "",
    "days": [
-    "2026-11-09"
+    "2026-11-09",
+    "2026-11-10"
    ]
   }
  ],
@@ -1686,6 +1687,68 @@ window.LOG = {
     {
      "tag": "Diamond",
      "text": "Explained the objectives of the three work-package tasks from the proposal, and wrote sentence-by-sentence notes on the Background section."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-10": {
+   "date": "2026-11-10",
+   "label": "",
+   "week": 8,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "EQE-QAOA error bars: paired comparisons over 6 historical ibm_quebec calibrations (11/4–11/9).",
+     "sub": [
+      "20→10 (4,5,5,6): 11-qubit v2 uses 0.66–0.83× the two-qubit gates of the 20-qubit QAOA. With invalid labels discarded it ties at P1–P2 and is 0.027–0.042 higher at P3–P6 on all 6 days, at the cost of 13–38% of shots; without discarding it is 0.08–0.20 lower. Step 3 passed (with post-selection).",
+      "Levels 2 (1,3,3) and 3 (3,3,3): v2 uses 0.36–0.49× the gates, ties at P1 and wins from P2 on all 6 days without post-selection. The large (3,3,3) P5–P6 gaps came partly from a bad local optimum; with smoothly interpolated angles the gap is +0.075 and +0.083.",
+      "Level 4 (2,3,3,4), 12 nodes: with post-selection v2 wins from P2 on, about +0.05 at P4–P6, discarding only 4–12% of shots."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "EQE-QAOA on hardware (ibm_quebec):",
+     "sub": [
+      "Levels 2 and 3 in one job (24 circuits, 4,000 shots each, 28 s of QPU time): v2 lands within 0.002–0.021 of the prediction; full QAOA falls far below it, down to AR 0.601 at (3,3,3) P6. v2 wins from P2 by +0.03 to +0.29.",
+      "Level 4 in one job (12 circuits): with post-selection v2 wins P2–P6 by +0.04 to +0.11, but falls 0.05–0.07 below the prediction at P3–P6. Diagnosis: adding about 0.002 extra error per CZ makes both circuits match hardware, so real two-qubit errors are about 2–3× the calibration values, most likely from crosstalk. The 20-node stage is on hold.",
+      "Wrote a 4-page PDF report with the setup, results and diagnosis."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "EQE-QAOA literature check: the original paper (arXiv:2604.18285) has no gate-level construction, gate counts, noisy simulation, hardware runs or idle-label error detection, so these can count as our contribution. Also moved the EQE experiment logs to one file per experiment, as in the FT project."
+    },
+    {
+     "tag": "Research",
+     "text": "p2gnn verdict: all 35 training runs and the evaluation finished overnight. The graph network with hand features is 0.0016 below the tree model in AUROC on average and better on 0 of 5 folds, so paper 2 stays with the tree model. Paused GPU work on the lab server for now."
+    },
+    {
+     "tag": "Research",
+     "text": "D5c LER verdict: none of the four [[19,1,5]] circuits with ≤ 13 ancillas passes under both DemLookup and DemLookup3 (the 12-ancilla ones are 7–22% worse under DemLookup); the two 14-ancilla circuits pass under both."
+    },
+    {
+     "tag": "Research",
+     "text": "Reed–Muller [[15,1,3]] upgrade: 16 LER points on Narval. The (12,76,13) circuit has 0.62–0.70× the baseline LER under DemLookup and 0.65–0.75× under BP+OSD, all upper bounds below 1."
+    },
+    {
+     "tag": "Research",
+     "text": "Added periodic progress logging (HiGHS log and memory) to the long M6 5-round proofs; the third test on Nibi passed and batch 2 was cleared. One proof is still running at 256G after 2 days."
+    },
+    {
+     "tag": "Research",
+     "text": "[[11,1,5]] small test on the lab CPU: the simple 3-flags-per-generator circuit has circuit distance 4 at 2 rounds in both bases, so it stops there; set aside, paper 1 does not need it."
+    },
+    {
+     "tag": "Courses",
+     "text": "CS9833 critical brief on the MAD-CTI paper: section plan and argument (small gains, mismatched baselines, prompts tuned on the same 650 test texts)."
+    },
+    {
+     "tag": "Diamond",
+     "text": "NSERC proposal, second version: rewrote the WP1 summary and Tasks 1.1–1.3, the WP2 title (Learning-Based Prediction and Adaptive Scheduling), tasks and summary, and Tasks 3.1–3.3; fixed broken sentences in the Background; checked consistency across the document and reordered the revision summary to follow the text."
+    },
+    {
+     "tag": "Web",
+     "text": "QAICON: a home-page photo carousel led by the 2026 group photo, with click-to-enlarge; the People page now shows every lab photo in a scrollable strip. Three commits."
     }
    ],
    "empty": false
