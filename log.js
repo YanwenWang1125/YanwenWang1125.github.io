@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-10",
+ "last": "2026-11-11",
  "weeks": [
   {
    "label": "Week 1",
@@ -118,7 +118,8 @@ window.LOG = {
    "theme": "",
    "days": [
     "2026-11-09",
-    "2026-11-10"
+    "2026-11-10",
+    "2026-11-11"
    ]
   }
  ],
@@ -1749,6 +1750,67 @@ window.LOG = {
     {
      "tag": "Web",
      "text": "QAICON: a home-page photo carousel led by the 2026 group photo, with click-to-enlarge; the People page now shows every lab photo in a scrollable strip. Three commits."
+    },
+    {
+     "tag": "Research",
+     "text": "lowp verdict: at p = 1e-4 none of the 6 circuits is worse under either decoder; one is undetermined under DemLookup (upper bound 1.12). Local slopes from 1e-4 to 2.5e-4 are 3.28–3.43 (DemLookup3) and 2.82–2.91 (DemLookup)."
+    },
+    {
+     "tag": "Research",
+     "text": "Approved three FT extensions: routing onto heavy-hex, full resource accounting, and a superdense starting point."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-11": {
+   "date": "2026-11-11",
+   "label": "",
+   "week": 8,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "EQE-QAOA corrected prediction: with 0.002 extra error per CZ (from the 11/10 hardware diagnosis), the 20-node (4,5,5,6) v2 and the 20-qubit QAOA tie within ±0.011, and v2 discards 21–51% of shots. The earlier +0.03–0.04 advantage from P3 on is gone. Running only 1–2 layers with dynamical decoupling does not open a gap either."
+    },
+    {
+     "tag": "Research",
+     "text": "eqe20_rescue, seven approaches tried one by one, no QPU use:",
+     "sub": [
+      "A, 20-node problems with group sizes 3 and 7: v2 needs only 9 qubits, has no invalid labels, and uses 0.38–0.58× the gates. Under the corrected model it wins at P3–P6 on all three groupings, by 0.08–0.11 on (7,3,3,7) (AR 0.702 vs 0.611 at P3) and 0.04–0.07 on the others, with lower bounds above 0. P1–P2 tie.",
+      "B (more qubits), C (dropping small phase terms), D (40-seed compilation), E (readout correction, +0.002–0.008 for both), F (zero-noise extrapolation, both rise to about 0.65 at P2 and still tie) and G (re-encoding to catch bit flips) do not change the relative gap.",
+      "Recommendation: test (7,3,3,7) on hardware, pending approval. Wrote a 2-page PDF report."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "hhex closed: routing 5 circuits, including both Liou baselines, onto heavy-hex with Qiskit's Sabre drops the 5-round circuit distance from 5 to 3 in all 10 circuit-basis proofs. A single fault on a SWAP-derived CNOT hits two qubits, which flags do not catch. Added to the paper's limitations section."
+    },
+    {
+     "tag": "Research",
+     "text": "nndesign, circuits designed for nearest-neighbour hardware: a router that keeps data qubits fixed fails on all 105 placements (ancillas deadlock in one-wide corridors), so that branch stopped. For a hand-built starting point on the PINQ² device graph, the first placement search found nothing; after diagnosing why, placement search v2 is running on Narval (the heuristic found no placement over 40 seeds, the MILP version is running)."
+    },
+    {
+     "tag": "Research",
+     "text": "area accounting finished on Fir: all 75,359 (12,60,8) circuits counted; 24 have CNOT depth 8 per half-round (16 per round), the rest 9 (17). Full-round TQE area 841.6–891.2, half-round 420.8–470.4. The paper tables were updated to match."
+    },
+    {
+     "tag": "Research",
+     "text": "Dropped the superdense starting point: step 0 cannot represent superdense circuits."
+    },
+    {
+     "tag": "Research",
+     "text": "M6: batch 1 summary verified, 70 of 70 circuit-basis proofs proved and 0 false passes. Batch 2 (68 proofs) submitted on Nibi; 13 ran out of memory at 72G and were resubmitted at 128G."
+    },
+    {
+     "tag": "Diamond",
+     "text": "NSERC proposal, second version: revised the Position paragraph, the Research plan opening, the WP1–WP3 openings and Tasks 1.1–3.3 (each with activities, method and experimental design), the objectives and impact paragraphs, and added a 24-month timeline table and a document laying out the logic of the Background and Research plan. After the group meeting, rewrote the tasks and WP openings following Prof. Fang's structure and wording."
+    },
+    {
+     "tag": "Courses",
+     "text": "CS9833: produced the PDF of the critical brief on the MAD-CTI paper."
+    },
+    {
+     "tag": "Tutoring",
+     "text": "Reviewed the forms and terms of a part-time tutoring contract."
     }
    ],
    "empty": false
