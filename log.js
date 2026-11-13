@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-11",
+ "last": "2026-11-12",
  "weeks": [
   {
    "label": "Week 1",
@@ -119,7 +119,8 @@ window.LOG = {
    "days": [
     "2026-11-09",
     "2026-11-10",
-    "2026-11-11"
+    "2026-11-11",
+    "2026-11-12"
    ]
   }
  ],
@@ -1811,6 +1812,50 @@ window.LOG = {
     {
      "tag": "Tutoring",
      "text": "Reviewed the forms and terms of a part-time tutoring contract."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-12": {
+   "date": "2026-11-12",
+   "label": "",
+   "week": 8,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "First paper restructured around the framework rather than the two codes: reworked the argument from the core questions (what problem, why it matters, what the main claim is), reordered the sections and handed the new order to the paper session. Decided to try other routes besides shared flags, and read four papers on hand-designed syndrome-extraction circuits (Cheng, Gidney, Kishony, Shutty)."
+    },
+    {
+     "tag": "Research",
+     "text": "nndesign, hand-built start on heavy-hex: the one-batch MILP hit its 24 h limit with no answer; a proof shows one batch needs at least 79 physical qubits. Measuring the 9 faces in two batches worked: on the 127-qubit FakeQuebec graph, with no SWAPs and every CNOT on a hardware edge, a [[19,1,5]] round with 5-round circuit distance 5 in both bases (92 qubits, 492 CNOTs, 74 CNOT layers per round). A stronger MILP for one batch is running."
+    },
+    {
+     "tag": "Research",
+     "text": "noflag: proved that flag-free circuits with one ancilla per stabilizer on [[19,1,5]] and [[17,1,5]] have 5-round distance at most 4, whatever the CNOT order. The weight-4 boundary stabilizers are the bottleneck. 156 injected counterexamples on 6 circuits all hold, and a cluster rerun matches. This route is closed."
+    },
+    {
+     "tag": "Research",
+     "text": "tropi: re-checked 16 circuits × 2 bases with a second exact tool (tropidist). After fixing the job script, all 32 agree; it also shows the two rm15 circuits have Z-basis distance exactly 4 (previously 3 or 4)."
+    },
+    {
+     "tag": "Research",
+     "text": "alphalowp: at p = 1e-4 all 4 AlphaSyndrome circuits are worse than the reference, R 1.25–2.01, every lower bound above 1.20. The crossover where R = 1 is at 1.6–5.0e-4."
+    },
+    {
+     "tag": "Research",
+     "text": "Shor [[9,1,3]]: the search found a flag-free circuit with 2 ancillas, 12 CNOTs and depth 6 (baseline 3, 16, 9), proved distance 3 in both bases. LER for 16 points submitted, each running until both decoders reach 3000 errors."
+    },
+    {
+     "tag": "Research",
+     "text": "M6 d=7: 131 single-basis proofs, all proved; M does not win (loses on seeds 4, 6, 7). LER for the 14 selected circuits (56 points) submitted, with a comparison against Shutty's two phases."
+    },
+    {
+     "tag": "Diamond",
+     "text": "NSERC proposal, second version, following Prof. Fang's logic: rewrote the WP1 opening and Tasks 1.1–1.3 (disruption analysis, a stochastic optimization formulation with scenarios, efficient algorithms), the WP2 opening and Tasks 2.1–2.3 (data preparation, cancellation-risk prediction, integrating predictions with reinforcement learning), the WP3 opening and Task 3.1; gave every task and WP a title that states what it does."
+    },
+    {
+     "tag": "Other",
+     "text": "Looked up IEEE student membership and IEEE Quantum."
     }
    ],
    "empty": false
