@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-12",
+ "last": "2026-11-13",
  "weeks": [
   {
    "label": "Week 1",
@@ -120,7 +120,8 @@ window.LOG = {
     "2026-11-09",
     "2026-11-10",
     "2026-11-11",
-    "2026-11-12"
+    "2026-11-12",
+    "2026-11-13"
    ]
   }
  ],
@@ -1856,6 +1857,61 @@ window.LOG = {
     {
      "tag": "Other",
      "text": "Looked up IEEE student membership and IEEE Quantum."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-13": {
+   "date": "2026-11-13",
+   "label": "",
+   "week": 8,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "Group meeting prep: wrote an outline covering the four questions from the 10/30 meeting, why the optimization objective and the formalization are separate questions, reading the objective as circuit area (ancilla count × circuit length, Liou's area metric), the formal problem (search space, resources, circuit distance as a hard constraint, a non-inferiority test on LER, three ways to write the objective) and results since 10/30. Built English slides on the Western template, with plain short titles, and wrote a speaker script for each slide."
+    },
+    {
+     "tag": "Research",
+     "text": "After the meeting: Prof. Fang found our rewrite rules weak and suggested building on existing rewrite systems. Concluded the open problem is how to pose the question, not more experiments, and started a framework for narrowing it down. Downloaded five papers on circuit rewriting and optimization (Quartz, QUESO, GUOQ, Delfosse et al., Rodatz et al.)."
+    },
+    {
+     "tag": "Research",
+     "text": "segreuse, route 1 (measure in segments, reuse ancillas within a half-round): assessed, criteria fixed, checks passed, and both [[17,1,5]] searches finished after a merge-assertion bug was fixed and the runs resumed. All 151 + 142 found circuits proved distance 5 in both bases. Z-half CNOT depth by ancilla count: 3 → 44, 4 → 30, 7 → 17, 11 → 12. For comparison, Liou's serial circuit uses 4 ancillas at depth 56. LER for 5 selected circuits (20 points) started on the lab server; the reference batch is running on Narval.",
+     "sub": [
+      "Rebuilt the two hand-designed circuits of Du et al. from their figures: [[17,1,5]] has single-shot circuit distance 4; [[19,1,5]] proves distance 5 with 5 ancillas, and becomes the published point route 1 is compared against."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "lb19: proved that [[19,1,5]] cannot reach 5-round distance 5 with 10 ancillas (9 syndrome qubits plus 1 flag) in our circuit class. An exhaustive hook-model search leaves 0 of 205 designs, and an independent check agrees. In the validation, 2492 of 2500 random circuits matched stim, and the other 8 matched the exact distance (stim's heuristic overestimated). So the minimum is 11 or 12 ancillas."
+    },
+    {
+     "tag": "Research",
+     "text": "feprobe: wrote the converter and test pairs for checking fault equivalence between found circuits and their search starts with paritea; approved downloading and building paritea on the lab server."
+    },
+    {
+     "tag": "Research",
+     "text": "M6 d=7 LER verdict: all 14 circuits use 25–30 ancillas against 39 for the start; 3 are not worse than the start, 3 undetermined, 8 worse. All are 2.7–4.5× worse than Shutty's published circuit, which uses 195 CNOTs and 12 layers against our 232–240 and 32–35. The last batch-2 proof finished; M does not win."
+    },
+    {
+     "tag": "Research",
+     "text": "Shor [[9,1,3]] verdict: the 2-ancilla, 12-CNOT, depth-6 circuit is not worse than the baseline (R 0.70–0.93 under DemLookup, upper bounds ≤ 1.10 under BP+OSD). It counts as evidence that the framework carries over to another code family."
+    },
+    {
+     "tag": "Research",
+     "text": "nndesign: the one-batch MILP v3 ran 24 h without a feasible solution, recorded as undetermined. Hardware search deferred."
+    },
+    {
+     "tag": "Research",
+     "text": "EQE-QAOA: worked through why the 9-qubit encoding performs better, how we know which gates can be removed, and what the IBM transpile pipeline does."
+    },
+    {
+     "tag": "Courses",
+     "text": "CS9833 Assignment 2, CTF Challenge 2 (federated intrusion detection, non-IID clients, Byzantine poisoning, robust aggregation): wrote the solver and submission, all 12 flags computed. Attack recall drops from 0.718 (FedAvg) to 0.225 under poisoning; median and trimmed mean recover it to 0.628 and 0.644, and the top-2 suspects are exactly the two malicious clients."
+    },
+    {
+     "tag": "TA",
+     "text": "CS3357: downloaded and unpacked the Assignment 3 materials."
     }
    ],
    "empty": false
