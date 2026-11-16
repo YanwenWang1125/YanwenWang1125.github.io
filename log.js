@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-14",
+ "last": "2026-11-15",
  "weeks": [
   {
    "label": "Week 1",
@@ -122,7 +122,8 @@ window.LOG = {
     "2026-11-11",
     "2026-11-12",
     "2026-11-13",
-    "2026-11-14"
+    "2026-11-14",
+    "2026-11-15"
    ]
   }
  ],
@@ -1921,8 +1922,55 @@ window.LOG = {
    "date": "2026-11-14",
    "label": "",
    "week": 8,
-   "items": [],
-   "empty": true
+   "items": [
+    {
+     "tag": "Research",
+     "text": "segreuse, [[19,1,5]]: both search seeds finished, and all 240 + 240 found circuits proved 5-round distance 5 in both bases (3 to 14 ancillas, 20 per count). Z-half CNOT depth by ancilla count: 3 → 45, 4 → 25, 5 → 24, 7 → 16, 11 → 14, 12 → 8. Liou's serial circuit uses 3 ancillas at depth 66. The 12-ancilla circuit without reuse is 2 layers shallower than the best known start; the minimum stays at 11 or 12 ancillas."
+    },
+    {
+     "tag": "Research",
+     "text": "segreuse LER: picked 2 circuits each at 3, 5, 8 and 11 ancillas for [[19,1,5]] (32 points). A storage fault on Fir moved the batch to Rorqual, where all 32 points finished. The 20 [[17,1,5]] points on the lab server finished, and an extra batch for the two 3-ancilla [[17,1,5]] circuits (added after seeing the results, outside the pre-registered criteria) ran 8 points. Two reference points on Narval hit a node failure and were rerun."
+    },
+    {
+     "tag": "Research",
+     "text": "lb19f2: can [[19,1,5]] reach distance 5 with 11 ancillas (9 syndrome qubits plus 2 flags)? Estimated the search at about 10¹³ nodes, fixed 7 criteria and wrote a C version. All checks passed: the 10-ancilla negative control has 0 survivors, the known [[17,1,5]] circuit is found, and C and Python agree on the 2,236,416 shards. The cross-check job could not finish: single subtrees reach 1.4 × 10¹¹ nodes with billions of surviving designs, so a full enumeration would cost about 1.6 × 10⁶ core-hours, far over the 10⁴ limit. Saved its partial results, cancelled it, and started a 1000-shard pilot on a 192-core Trillium node."
+    },
+    {
+     "tag": "Research",
+     "text": "Approved downloading paritea for the fault-equivalence check."
+    },
+    {
+     "tag": "Other",
+     "text": "For Prof. Fang: built the chair's report slides for the IEEE London Section 2026 AGM (goals for 2027, current and past officers) with a 10-minute speaker script per slide, and prepared an annual review document from a template (recent publications from Google Scholar, 2026 courses, capstone supervision, thesis reviews). Drafted a LinkedIn post about the IEEE section website."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-15": {
+   "date": "2026-11-15",
+   "label": "",
+   "week": 8,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "segreuse LER verdict: the last reference point finished and the judge ran on all 15 circuits (an independent recomputation agrees on all 226 decisions). All 15 are on the front; none beats a published point. Four groups use no more resources than a published circuit and are not worse in LER under DemLookup:",
+     "sub": [
+      "[[17,1,5]], 4 ancillas at depth 30 vs Liou serial (4, 56): ratio 0.31–0.35;",
+      "[[17,1,5]], 3 ancillas at depth 44 vs Liou serial: 0.69–0.77 (extra batch);",
+      "[[19,1,5]], 3 ancillas at depth 41 vs Liou serial (3, 66): 0.57–0.64;",
+      "[[19,1,5]], 5 ancillas, 24 layers vs Du et al. (5, 39): 0.39–0.46."
+     ]
+    },
+    {
+     "tag": "Other",
+     "text": "For Prof. Fang: finished the formatted annual review document and a new version of the AGM slides."
+    },
+    {
+     "tag": "Other",
+     "text": "Organized personal records."
+    }
+   ],
+   "empty": false
   }
  },
  "summary": [
