@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-15",
+ "last": "2026-11-16",
  "weeks": [
   {
    "label": "Week 1",
@@ -124,6 +124,14 @@ window.LOG = {
     "2026-11-13",
     "2026-11-14",
     "2026-11-15"
+   ]
+  },
+  {
+   "label": "Week 10",
+   "range": "11/16–11/22",
+   "theme": "",
+   "days": [
+    "2026-11-16"
    ]
   }
  ],
@@ -1968,6 +1976,58 @@ window.LOG = {
     {
      "tag": "Other",
      "text": "Organized personal records."
+    },
+    {
+     "tag": "Research",
+     "text": "lb19f2: the cross-check job hit its 12 h limit; 19 partial shards were saved. The 1000-shard Trillium pilot finished after 23 h 50 min on a 192-core node."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-16": {
+   "date": "2026-11-16",
+   "label": "",
+   "week": 9,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "lb19f2 pilot results: 988 of 1000 shards finished, and 742 of them (75%) contain designs that survive the hook model, about 1.2 × 10¹³ in total. Median subtree 2.2 × 10¹⁰ nodes, 4,576 core-hours used. A full run would cost about 5.4 × 10⁶ core-hours, so it was not submitted."
+    },
+    {
+     "tag": "Research",
+     "text": "Converted 20 surviving designs to circuits on Fir: 14 pass 5-round MILP proofs in both bases, 6 have distance below 5. The first one uses 11 ancillas (9 syndrome qubits plus 2 flags), 64 CNOTs, depth 14; the cheapest uses 60 CNOTs at depth 12, against (12, 60, 9) for the previous best 12-ancilla circuit. Together with the 11/13 lower bound this gives a minimum of exactly 11 ancillas for [[19,1,5]] at distance 5."
+    },
+    {
+     "tag": "Research",
+     "text": "Reran the same code on Rorqual: all 20 designs and verdicts match Fir. Wrote the result into the paper's lower-bounds section and the problem formalization notes."
+    },
+    {
+     "tag": "Research",
+     "text": "Committed snapshots of FT_Rewrite_Search, EQE-QAOA (eqe_ladder study, noise simulations), and the Quantum Learning notes; moved FT_Rewrite_Search out of the shared projects repo and made the repos private."
+    },
+    {
+     "tag": "Other",
+     "text": "Moved to a new PC: migrated session history and projects through OneDrive, registered the new machine with the clusters, installed the GPU build of PyTorch, set up GitHub, and turned off Edge background processes."
+    },
+    {
+     "tag": "TA",
+     "text": "CS3357: wrote an English multiple-choice participation quiz from the Chapter 5 and 6 lecture videos (36 slides), plus a PDF with each answer on the following page."
+    },
+    {
+     "tag": "Learning",
+     "text": "Prepared basic quantum computing questions for a talk, including whether AI and classical computing assisting quantum computers is the direction the field is going."
+    },
+    {
+     "tag": "Courses",
+     "text": "Picked one individual project for both CS9833 and CS9548: zero-day network intrusion detection, comparing generative, kernel and deep novelty detectors under leave-one-attack-family-out evaluation at TPR@1%FPR. Wrote proposal outlines for both courses."
+    },
+    {
+     "tag": "Courses",
+     "text": "CS9548 A2: reviewed the code and report, fixed the issues found (six CV accuracies in the report were rounded differently from the notebook output), and submitted."
+    },
+    {
+     "tag": "Other",
+     "text": "For Prof. Fang: designed several layouts for the teaching evaluation charts, picked one, and produced the final annual review document and PDF."
     }
    ],
    "empty": false
