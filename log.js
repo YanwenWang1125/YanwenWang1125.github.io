@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-16",
+ "last": "2026-11-17",
  "weeks": [
   {
    "label": "Week 1",
@@ -131,7 +131,8 @@ window.LOG = {
    "range": "11/16–11/22",
    "theme": "",
    "days": [
-    "2026-11-16"
+    "2026-11-16",
+    "2026-11-17"
    ]
   }
  ],
@@ -2028,6 +2029,54 @@ window.LOG = {
     {
      "tag": "Other",
      "text": "For Prof. Fang: designed several layouts for the teaching evaluation charts, picked one, and produced the final annual review document and PDF."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-17": {
+   "date": "2026-11-17",
+   "label": "",
+   "week": 9,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "Read the two pointers Prof. Fang gave after the last group meeting: arXiv:2609.13108 (Fischer et al., expanding the post-selected logical noise order by order in the physical error rate) and the QEC Challenge (a public qLDPC leaderboard with tiered evidence). His feedback was that the problem, the rewrite rules and the objective were all unclear, and that we should review how mature systems define rewrite rules."
+    },
+    {
+     "tag": "Research",
+     "text": "Wrote a targeted review of rewrite rules and objectives: one table covering Quartz, QUESO, GUOQ, PyZX, fault-equivalent ZX rules (Rodatz 2025, Rüsch 2025), Jeon 2026 and PropHunt (rule form, notion of equivalence, verification cost, where the rules come from, search strategy, objective, scale), checked against the PyZX paper in full.",
+     "sub": [
+      "With our R5 data, the leading term M₃p³ of the expansion covers only about half of the measured LER at p = 1e-3, depends on the decoder, and costs more per circuit than simulating LER directly, so it is kept as an explanatory quantity, not a search objective.",
+      "Our rules lack a local definition of equivalence and any completeness statement, and all verification cost sits in the MILP check. Listed 11 things to borrow; the cheap ones first: write the objective as a formula, derive moves from MILP counterexamples, skip verification for fault-equivalent moves, and staged acceptance."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "Wrote a prompt for an independent rewrite-rule review by another agent, to be compared against ours."
+    },
+    {
+     "tag": "Learning",
+     "text": "Turned a video course on systematic research training into 8 detailed notes: the eight-step research loop, literature search and tracking, what and how to read, organizing notes, and finding a topic."
+    },
+    {
+     "tag": "Research",
+     "text": "Started a research-training track on our own project: an outline (explain it, judge results, pose problems, manage the AI; lessons T1–T6), lesson 1 on the eight-step loop, and a list of 9 weak points in the project and paper (the research question keeps shifting, the paper leads with the framework whose rewrite rules were criticised, no conclusion section, no positive ML result yet, acceptance criteria loosened midway, all circuits drop to distance 3 on real hardware connectivity, stale README). Research questions, hypotheses, criteria and experiment design are now my decisions; running jobs stays with the coordinator."
+    },
+    {
+     "tag": "Research",
+     "text": "Did the lesson 1 exercise: problem (ancillas are expensive; reduce them without worse LER), literature (start from hand-designed circuits), hypothesis (an algorithm, classical or ML, can take a base circuit to fewer or minimal ancillas), design (reorder gates, then merge or shorten, under strictly designed rewrite rules), data (reproduce other papers), analysis (optimal on [[17,1,5]] with a proven lower bound, a better circuit on [[19,1,5]])."
+    },
+    {
+     "tag": "Research",
+     "text": "Looked back at the past month: too broad a goal without enough constraints led to repeated changes of direction. Decided to focus on optimizing the rewrite rules, starting from Jeon's paper and collecting more established rules, with the same goal of automatic circuit optimization. Running experiments continue."
+    },
+    {
+     "tag": "Research",
+     "text": "Moved feprobe to a cluster (Rorqual) and approved downloading, building and running paritea there; the download step was dispatched."
+    },
+    {
+     "tag": "Other",
+     "text": "Organized personal records."
     }
    ],
    "empty": false
