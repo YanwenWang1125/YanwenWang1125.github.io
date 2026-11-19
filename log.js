@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-17",
+ "last": "2026-11-18",
  "weeks": [
   {
    "label": "Week 1",
@@ -132,7 +132,8 @@ window.LOG = {
    "theme": "",
    "days": [
     "2026-11-16",
-    "2026-11-17"
+    "2026-11-17",
+    "2026-11-18"
    ]
   }
  ],
@@ -2077,6 +2078,62 @@ window.LOG = {
     {
      "tag": "Other",
      "text": "Organized personal records."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-18": {
+   "date": "2026-11-18",
+   "label": "",
+   "week": 9,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "The independent 31-page rewrite-rule review came back. All 31 citations check out. It surfaced that Liou's serial scheme uses only 4 ancillas, so any \"fewer ancillas\" claim has to state its depth condition; logged as weak point 10 and written into paper 1."
+    },
+    {
+     "tag": "Learning",
+     "text": "Listed the concepts needed to read these papers (five layers, 34 concepts) and wrote a prompt for a six-episode animated explainer series in English with subtitles. Episodes 0 (\"The whole map\") and 1 (\"Layer 0: Codes\") were produced the same day with Manim, then re-voiced with a better TTS voice at 1.25× speed."
+    },
+    {
+     "tag": "Research",
+     "text": "Fixed the core question: not whether to require fault equivalence, but whether there is a better point between the two approaches.",
+     "sub": [
+      "Fault-equivalent rules carry a guarantee and are reusable, but are too narrow and block ancilla-saving moves. Our \"rewrite freely, check with MILP afterwards\" saves ancillas, but the rules have no guarantee and the check cost grows quickly with d.",
+      "The target is a cheap, locally checkable condition on our moves that guarantees the distance does not drop. Judged by three things: ancilla count at equal depth, how check cost grows with d, and LER not getting worse."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "Novelty check and a list of the math problems behind the core question. Rüsch, Kissinger and Rodatz 2025 (arXiv:2510.08477, Def. 2.10, w-fault boundedness) already give a one-way relaxation. \"Cheap\" is defined as polynomial time, with the evidence being measured growth in d slower than MILP."
+    },
+    {
+     "tag": "Research",
+     "text": "colinc (Trillium): among one-step CNOT swaps from two proven parent circuits (48 and 46 children, 32 and 20 accepted), none satisfy the \"single-fault column inclusion\" condition, at 2 or 5 rounds. The condition is too strict, so the next step is relaxing it."
+    },
+    {
+     "tag": "Research",
+     "text": "incdist (method A: exhaustively search for counterexamples only among fault sets that use at least one new DEM column): all hard checks pass, 0 disagreements with MILP and Stim, and all 168 counterexamples recheck. On accepted children the median is 0.019 s against 4.22 s and 5.41 s for MILP, a speedup of 220× and 275×. Drafted the criteria for the follow-up cost curve at d = 3, 5, 7."
+    },
+    {
+     "tag": "Research",
+     "text": "swaploc: looked at which swap positions get accepted. Swapping the CNOT pair right after ancilla preparation or right before measurement is accepted in all 32 cases across both parents. The first case is exactly Jeon's restricted commutation (eqs. 5 and 6), already proven fault-equivalent; the second is its time mirror. This covers 50% and 80% of accepted swaps; the mid-circuit swaps are what the relaxed condition has to handle."
+    },
+    {
+     "tag": "Research",
+     "text": "feprobe on Rorqual: paritea built on the third attempt (stim compiled from source). Resource probe on the [[17,1,5]] start circuit: the weight-4 equivalence check takes 2,815 s and 64.5 GB, and the full check times out at 3,600 s with about 118 GB, so \"equivalent\" is defined by the weight-4 check. All 36 semantic checks pass; the circuit is judged equivalent to its Jeon eq. (6) child and to the two positive controls, and not equivalent once a required flag is removed (first violation at weight 1, 4.6 s). The 58-row main run started in the evening, with 50 rows done by 23:05."
+    },
+    {
+     "tag": "Learning",
+     "text": "Research-training Lab 1: read DEM columns by hand in Stim. A 2-round repetition-code memory circuit has 6 detectors and 15 columns with circuit distance 3; swapping two commuting CNOTs adds no new columns."
+    },
+    {
+     "tag": "Other",
+     "text": "Quantum Computing Workshop for Prof. Fang's group: an eight-lecture, one-hour-each series for undergraduates with a math background, modelled on IBM's series with QAOA in the middle and QEC at the end. Built the site (home page, lecture 1 on qubits, lecture 2 on entanglement, and an interactive playground) and deployed it to GitHub Pages."
+    },
+    {
+     "tag": "Web",
+     "text": "Group site: LinkedIn links in Milestones and News now open the posts through embed URLs so no viewer account is shown; renamed the main bundle to drop cached copies; updated a profile link on the team page."
     }
    ],
    "empty": false
