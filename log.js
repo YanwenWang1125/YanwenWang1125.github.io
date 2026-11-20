@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-18",
+ "last": "2026-11-19",
  "weeks": [
   {
    "label": "Week 1",
@@ -133,7 +133,8 @@ window.LOG = {
    "days": [
     "2026-11-16",
     "2026-11-17",
-    "2026-11-18"
+    "2026-11-18",
+    "2026-11-19"
    ]
   }
  ],
@@ -2134,6 +2135,63 @@ window.LOG = {
     {
      "tag": "Web",
      "text": "Group site: LinkedIn links in Milestones and News now open the posts through embed URLs so no viewer account is shown; renamed the main bundle to drop cached copies; updated a profile link on the team page."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-19": {
+   "date": "2026-11-19",
+   "label": "",
+   "week": 9,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "feprobe main run (Rorqual, 58 rows) finished overnight in 4 h 12 min. All 6 original pairs (four of our searched circuits against their start circuit, plus Liou's Fig. 22 against Fig. 21) are not fault-equivalent, first violation at weight 1: the distance-preserving search leaves the start circuit's fault-equivalence class. Single-step probe: merge, delete, swap, compound and segment-move each have a non-equivalent step; the only equivalent steps change one ancilla line or none, as predicted."
+    },
+    {
+     "tag": "Research",
+     "text": "Counterexample fault sets added (33 rows, all pass). For merge and one delete, the counterexample sits on the child side, so the child gains new fault effects. For the other 10 pairs it sits on the parent side: a single X on a data line before a mid-round CNOT. Of the original 6 pairs, 3 counterexamples are on ancilla lines and 3 on data lines, so \"fewer flags\" explains only half; the rest comes from CNOT order on data lines."
+    },
+    {
+     "tag": "Research",
+     "text": "fbound: checked whether those 10 children are 5-bounded by their parent (the one-way condition from Rüsch et al., Def. 2.10). Controls pass 9/9; all 10 are not bounded, first violation at weight 1. The bounded steps are exactly the fault-equivalent ones, so on this sample one-way boundedness accepts nothing extra. A one-round condition is too strict; the condition has to look at multiple rounds."
+    },
+    {
+     "tag": "Research",
+     "text": "inccurve: check cost of method A against MILP at d = 3, 5, 7. All hard checks pass, 265 agreements with MILP, and A finished every child at d = 7.",
+     "sub": [
+      "R = 2: growth g_A = 4.6 against g_M = 40.6; speedup 30 → 98 → 861.",
+      "R = 5 sample: MILP median 7.6 s, 183 s and 37,934 s (about 10.5 h); A takes 0.072 s, 0.70 s and 6.07 s, a 6,250× speedup at d = 7.",
+      "Verdict: supports the claim that A's cost grows more slowly with d than MILP's (at R = 2). A assumes the parent's distance is already proven and answers whether one move adds a shorter counterexample. Next is applying A to merge and delete."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "Read arXiv:2611.22035 (Liao et al., magic-state cultivation on IBM hardware with lattice-surgery escape to d = 5): no direct link to rewrite rules, but more evidence that distance depends on multiple rounds and that exhaustive checks stop scaling past d = 3. Added Chan et al., arXiv:2609.17706 (hook errors in T-state cultivation) to the reference library."
+    },
+    {
+     "tag": "Learning",
+     "text": "Turned the explainer-video pipeline into a tool for fine-grained edits: one line of narration and one Manim scene at a time, with scripts for timing, voice, subtitles and assembly, so a single line can be redone. Wrote it up as a reusable workflow."
+    },
+    {
+     "tag": "Other",
+     "text": "Quantum Computing Workshop site: moved to Astro with GitHub Actions deployment; switched to the redrawn lab logo (also on the group site); set up the lab YouTube channel's avatar and banner in Western colours."
+    },
+    {
+     "tag": "Other",
+     "text": "Workshop lectures: expanded lecture 1 with the maths and gave each section its own page with a contents menu; revised lectures 1–2 against Nielsen &amp; Chuang; drafted lectures 3–8. Tried a home-page redesign and reverted it; then put notes and simulator side by side on wide screens, widened content, added card hover and expand animations, and noted that Prof. Fang is recruiting Master's and PhD students. Rewrote lecture 1 around one running puzzle, with animations of 100 measurements and of two qubits, and explained section 1.1 step by step with numbered sections and examples."
+    },
+    {
+     "tag": "Other",
+     "text": "Workshop video: studied 3Blue1Brown's narration, animation, camera work and story structure, wrote narration and camera scripts, and produced an HD video for section 1.1 \"From bits to amplitudes\" with a lab intro, embedded on the page. The voice still sounds unnatural and will be replaced."
+    },
+    {
+     "tag": "TA",
+     "text": "CS3357: filed accommodation records; made a questions-only and a solutions-only PDF of the first 8 questions of Participation Quiz 7, with the table layout fixed."
+    },
+    {
+     "tag": "Web",
+     "text": "Group site: removed an unused preview folder."
     }
    ],
    "empty": false
