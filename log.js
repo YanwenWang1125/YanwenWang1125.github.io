@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-19",
+ "last": "2026-11-20",
  "weeks": [
   {
    "label": "Week 1",
@@ -134,7 +134,8 @@ window.LOG = {
     "2026-11-16",
     "2026-11-17",
     "2026-11-18",
-    "2026-11-19"
+    "2026-11-19",
+    "2026-11-20"
    ]
   }
  ],
@@ -2192,6 +2193,63 @@ window.LOG = {
     {
      "tag": "Web",
      "text": "Group site: removed an unused preview folder."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-20": {
+   "date": "2026-11-20",
+   "label": "",
+   "week": 9,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "incmd criteria: the coordinator drafted the criteria for applying method A to merge and delete moves, including how detectors are aligned when a flag is removed (match child detectors to parent detectors by round and by flag or stabilizer; unmatched parent detectors form D_extra). Added one rule: a child column counts as old only if it equals a full parent column bit for bit, D_extra and logical bits included. Decided to do both the proof and the case-by-case cross-checks."
+    },
+    {
+     "tag": "Research",
+     "text": "incmd code and local tests: 6, 55 and 300 one-step merge/delete children at d = 3, 5, 7. Tests pass: the alignment is the identity on 66 swap cases; aligned A, all-new A and brute force agree on all 24 d = 3 cases. A D_extra test on 462 columns shows the wrong comparison (dropping D_extra rows first) marks them all old and misses every weight-2 counterexample, while the correct one finds them."
+    },
+    {
+     "tag": "Research",
+     "text": "incmd on Trillium: prep 37 s, run 6 min 53 s (1820 tasks), MILP sample 7 h 09 min. All hard checks pass; the 18 R = 5 MILP proofs agree with A 18/18.",
+     "sub": [
+      "R = 2: speedup 36 → 87 → 228 at d = 3, 5, 7; g_A = 17.5 against g_M = 46.2; 15 and 44 accepted children at d = 5, 7. Verdict: merge and delete also support the claim that A's cost grows more slowly than MILP's, so all three move types in the search now have evidence.",
+      "R = 5 sample: speedup 109, 197, 3,823.",
+      "Limits: almost all accepted children are merges (43 of 44 at d = 7); only 3 deletes were accepted. The all-new-columns control is 24× slower than aligned A at d = 7 but less than 2× at d = 3, 5, so the incremental part only explains the speed at d = 7."
+     ]
+    },
+    {
+     "tag": "TA",
+     "text": "CS3357: made the Chapter 6 participation quiz (slides and PDF) plus questions-only and solutions-only PDFs."
+    },
+    {
+     "tag": "Other",
+     "text": "Quantum Computing Workshop site: added an About us heading on the home page, separated the lecture and lab links, and noted the IBM collaboration with access to real hardware; restored the card hover lift; committed the pending section 1.6 fix, video pipeline, logo sources and YouTube banner."
+    },
+    {
+     "tag": "Other",
+     "text": "Workshop video voices: tried ElevenLabs v3 with tone tags at 1.2×, and voice conversion from my own recording (better tone, too much work). Switched to a two-voice dialogue (one male, one female) with 1–2 s thinking pauses in the style of 3Blue1Brown; fixed cut-off lines, overlong pauses and a host who did not respond to the other. Studied how 3Blue1Brown writes narration, added it to the video skill, rewrote the dialogue, tested one scene, then voiced the whole video."
+    },
+    {
+     "tag": "Other",
+     "text": "Section 1.2 \"States\" video: reused the Bloch sphere from the playground in section 1.4; added an intro, a fine-editing tool and a logo watermark; redrew the logo with a round Q; applied line-by-line review notes on pauses and layout; embedded the video in section 1.2 with switchable subtitles; made the lecture notes as wide as the video; produced a revised dialogue version and published it."
+    },
+    {
+     "tag": "Web",
+     "text": "Group site: pushed the updated lab logo, favicon and touch icon."
+    },
+    {
+     "tag": "Other",
+     "text": "Mitacs Globalink Research Award application approved; went through the conditions for accepting it (pre-departure form, confirmed start and end dates)."
+    },
+    {
+     "tag": "Other",
+     "text": "Looked up OGS: when to apply, how, and the requirements."
+    },
+    {
+     "tag": "Other",
+     "text": "Organized personal documents and records."
     }
    ],
    "empty": false
