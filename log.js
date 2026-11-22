@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-20",
+ "last": "2026-11-21",
  "weeks": [
   {
    "label": "Week 1",
@@ -135,7 +135,8 @@ window.LOG = {
     "2026-11-17",
     "2026-11-18",
     "2026-11-19",
-    "2026-11-20"
+    "2026-11-20",
+    "2026-11-21"
    ]
   }
  ],
@@ -2250,9 +2251,20 @@ window.LOG = {
     {
      "tag": "Other",
      "text": "Organized personal documents and records."
+    },
+    {
+     "tag": "Other",
+     "text": "Workshop site: checked the online site after the section 1.2 video and notes went live."
     }
    ],
    "empty": false
+  },
+  "2026-11-21": {
+   "date": "2026-11-21",
+   "label": "",
+   "week": 9,
+   "items": [],
+   "empty": true
   }
  },
  "summary": [
