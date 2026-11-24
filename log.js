@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-22",
+ "last": "2026-11-23",
  "weeks": [
   {
    "label": "Week 1",
@@ -138,6 +138,14 @@ window.LOG = {
     "2026-11-20",
     "2026-11-21",
     "2026-11-22"
+   ]
+  },
+  {
+   "label": "Week 11",
+   "range": "11/23–11/29",
+   "theme": "",
+   "days": [
+    "2026-11-23"
    ]
   }
  ],
@@ -2275,6 +2283,68 @@ window.LOG = {
     {
      "tag": "Other",
      "text": "Organized personal records for an upcoming government application."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-23": {
+   "date": "2026-11-23",
+   "label": "",
+   "week": 10,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "Wrote the core question of the project as one sentence. Committed the 11-23 snapshot: code, results and verdicts of the four incremental-distance-check experiments (colinc, incdist, inccurve, incmd), plus swaploc, fbound and feprobe runs."
+    },
+    {
+     "tag": "Research",
+     "text": "New idea, notes only: use ML to rank DFS branches by whether two more rewrite steps can save one ancilla and still pass the fault-tolerance check. Labels come from running the existing DFS two steps; the metric is how many candidates are checked before the first valid circuit on unseen start circuits."
+    },
+    {
+     "tag": "Research",
+     "text": "Rewrite rules: Jeon et al. 2026 (arXiv:2610.09749) save cat-state ancilla preparation, not flags, and the fault-equivalence rules of Rodatz et al. do not remove flags either. No rule in the literature we checked saves flags with a guarantee that distance does not drop. Turned this into an idea: if the parent circuit's distance is proven ≥ d and a one-step flag merge satisfies a condition X, the child's distance is still ≥ d. Selling point: proof and explanation."
+    },
+    {
+     "tag": "Research",
+     "text": "certmerge round 1: wrote and checked a formal proof for the candidate condition X₂; read PC-QEC (Ye, Palsberg, arXiv:2611.12985) to see whether its propagation lemmas help. Prep ran on Trillium and locally with identical results.",
+     "sub": [
+      "X₂ passes 0 of the 3, 45 and 276 one-step merges at d = 3, 5, 7 (2, 13 and 43 accepted).",
+      "Baseline K: passes 3 at d = 3 with 1 wrong; fails on the d = 5 parent itself; d = 7 not run (about 23,500 h per circuit).",
+      "Fault-equivalence baseline: all 45 (d = 5) and 275 (d = 7) pairs are not equivalent; most are separated by a single fault.",
+      "Verdict: a local condition that only looks at weight ≤ 2 faults is not enough; written up as a negative result (0 of 56 accepted merges passed)."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "certmerge2 (relaxed round): condition X₂′ requires every dangerous fault set either to have a replacement or to have no completion to a counterexample of weight ≤ d − 1; X₂″ sends columns where X₂a fails to an anchored incremental distance check. X₂a caps X₂′ at 6/13 (d = 5) and 13/43 (d = 7). Formal proofs written and checked; code next."
+    },
+    {
+     "tag": "Research",
+     "text": "Read Du et al. 2024 (IEEE TIT, low-depth flagged syndrome extraction for distance-3 CSS codes) and wrote notes. From it, a conflict-graph lower bound idea: hook pairs that must be told apart by flags form a graph whose proper colouring is the flag readout, giving F ≥ ⌈log₂ ω(G)⌉; it also predicts that two flags on the same syndrome qubit cannot be merged (21 of 21 such merges were rejected). Novelty check found no flag-count bound via colouring, but Tansuwannont–Leung 2022 define \"conflict\" and must be cited."
+    },
+    {
+     "tag": "Research",
+     "text": "Checked the four external review reports: the independent lemma check agrees with ours and its counterexample is invalid; 3 small gaps in the paper's argument to fix; no prior work has the same results as Propositions 1–5."
+    },
+    {
+     "tag": "Other",
+     "text": "Quantum Computing Workshop: added explanatory figures to every section of lectures 1–8, with animations where needed (bit flip as a Bloch-sphere flip). Remade the section 1.1 video as a two-voice dialogue, cut to 6 minutes, with a new male voice, and uploaded it in HD. Wrote the video workflow and narration rules into VIDEO_WORKFLOW.md. Fine-tuned the section 8.1 video \"The Pauli group and stabilizers\" (aligned animations, revised pauses and lines), voiced it at 480p, then rendered and committed the HD version."
+    },
+    {
+     "tag": "TA",
+     "text": "CS3357: made Attendance Quiz 8, the last one, with one multiple-choice question about the flipped course (slides and PDF)."
+    },
+    {
+     "tag": "Web",
+     "text": "Group site: changed the headline to \"Intelligence. Quantum. Networks.\""
+    },
+    {
+     "tag": "Other",
+     "text": "Mitacs Globalink: filled in the award forms, set start and end dates, downloaded the pre-departure training certificate, and pre-filled the pre-departure form."
+    },
+    {
+     "tag": "Other",
+     "text": "Installed and configured a model-routing CLI (Magpie) with Gemini and wrote a routing rule; looked into token usage."
     }
    ],
    "empty": false
