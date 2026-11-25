@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-23",
+ "last": "2026-11-24",
  "weeks": [
   {
    "label": "Week 1",
@@ -145,7 +145,8 @@ window.LOG = {
    "range": "11/23–11/29",
    "theme": "",
    "days": [
-    "2026-11-23"
+    "2026-11-23",
+    "2026-11-24"
    ]
   }
  ],
@@ -2345,6 +2346,54 @@ window.LOG = {
     {
      "tag": "Other",
      "text": "Installed and configured a model-routing CLI (Magpie) with Gemini and wrote a routing rule; looked into token usage."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-24": {
+   "date": "2026-11-24",
+   "label": "",
+   "week": 10,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "certmerge2 finished. Condition X₂″ is tier one: on the dev set it passes 13/13 and 43/43 accepted merges at d = 5, 7, with 0 wrong passes on dev and holdout. It is not cheaper than method A; it amounts to an incremental distance check plus a per-flag-pair explanation. X₂′ covers 46% and 30% on dev and 0/190 on holdout."
+    },
+    {
+     "tag": "Research",
+     "text": "sclass: the prediction of Theorem A holds (0 exceptions in 67 merges with staggered brackets); the second prediction fails on 10,638 columns, all in 41 merges where layering changed the CNOT order on another wire. Fix: add the premise that layering keeps each wire's CNOT order; then 0 exceptions in 503 merges."
+    },
+    {
+     "tag": "Research",
+     "text": "xtilde: condition X̃ (Theorem B), checked on the parent only, is tier one with 0 wrong passes and passes every accepted merge that meets (M2′) (dev 56/56, holdout 188/188). Rule-certificate coverage rises from 19/58 and 0/190 (X₂′) to 56/58 and 188/190. Its cost is the same order as method A."
+    },
+    {
+     "tag": "Research",
+     "text": "pathswap: on the Figure 1 path of paper one, traced what each of the 6 swaps does for the final merge 33→24. The dangerous-pair view explains why the merge fails and why it is safe after all 6 swaps, but progress is not monotone: swap 2 changes nothing and swap 3 goes back (10 → 17 completable pairs); the slack t stays 4."
+    },
+    {
+     "tag": "Research",
+     "text": "swapml stage 1 (data, labels, non-ML baseline): only 3.6% of swaps make progress; a structural rule has 36% precision, about 10× random, but misses half; 87% of rejected merges have at least one helpful swap and 30% become safe after one."
+    },
+    {
+     "tag": "Research",
+     "text": "incbase and tropicoord on Trillium: against two MILP baselines, method A is tier one on swaps, merges and the surface code. With detector coordinates, tropidist's time barely grows with d (g ≈ 1.05–1.16), so against it A is only a constant factor faster (1.0–3.8× at d = 7)."
+    },
+    {
+     "tag": "Research",
+     "text": "Set the goal: with distance proven, find flag circuits with fewer ancillas, no more CNOTs and no extra depth (a Pareto front). Added it and the \"why swap before merge\" question from the last group meeting to the next meeting outline. Wrote up the idea that swaps set up merges (like moves that prepare a Rubik's cube step) and asked the literature session to look for similar work."
+    },
+    {
+     "tag": "Other",
+     "text": "Quantum Computing Workshop videos: published section 8.1; revised, voiced and published 8.2 \"Stabilizer codes\" with circuit diagrams in the animation; made 8.3 \"Three codes\", 8.4 \"CSS codes\" and 8.5 \"The surface code\" (torus drawn flat as a square with glued edges), each voiced, rendered in HD and published. Uploaded the finished videos to the lab YouTube channel in a playlist."
+    },
+    {
+     "tag": "Diamond",
+     "text": "Made a two-year version of the budget justification (same yearly amount) and a list of items still to fill in."
+    },
+    {
+     "tag": "Other",
+     "text": "Looked into moving a project's chat history and data to another computer; cleaned up the project instructions."
     }
    ],
    "empty": false
