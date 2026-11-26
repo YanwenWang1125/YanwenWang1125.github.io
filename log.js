@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-24",
+ "last": "2026-11-25",
  "weeks": [
   {
    "label": "Week 1",
@@ -146,7 +146,8 @@ window.LOG = {
    "theme": "",
    "days": [
     "2026-11-23",
-    "2026-11-24"
+    "2026-11-24",
+    "2026-11-25"
    ]
   }
  ],
@@ -2394,6 +2395,75 @@ window.LOG = {
     {
      "tag": "Other",
      "text": "Looked into moving a project's chat history and data to another computer; cleaned up the project instructions."
+    },
+    {
+     "tag": "Research",
+     "text": "Decided that the main answer of the paper moves from \"the incremental distance check is faster\" to the certificates."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-25": {
+   "date": "2026-11-25",
+   "label": "",
+   "week": 10,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "swapml stage 2 (Trillium): dev-set 5-fold AP 0.665 against a base rate of 0.033. Tier two: the structural rule is enough and ML does not beat it (both 23/30, paired sign test p = 0.76; both beat random)."
+    },
+    {
+     "tag": "Research",
+     "text": "xtildep: with μ taken from the parent circuit only, the combined certificate passes 56/56 (dev) and 188/188 (holdout) accepted merges with 0 wrong passes, so the restriction to the child's new columns is dropped."
+    },
+    {
+     "tag": "Research",
+     "text": "keeporder: order-preserving layering makes every merge meet (M2′); the combined certificate then passes all accepted one-step merges, 58/58 dev and 190/190 holdout, 0 wrong."
+    },
+    {
+     "tag": "Research",
+     "text": "Three more checks finished:",
+     "sub": [
+      "f3m: the \"third flag\" test on a new parent circuit is supported (stratified exact test p = 8.1×10⁻¹²).",
+      "movecert: certificates extended to delete and swap moves using only the existing DEMs; predicted columns match in all 92 delete and 616 swap DEMs that meet the premise.",
+      "certsearch step 1 (d = 5, R = 2): searching with certificates reproduces an earlier search line by line, with the acceptance step 9.6× faster and 200/200 MILP spot checks agreeing."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "flagshare: letting an ancilla double as a flag fails in every case (one shared ancilla cannot replace two dedicated flags), so this line is closed. The reason: in our alternating X/Z circuits only X-measured qubits can catch Z-half hooks, and those ancillas do not exist yet during the Z half."
+    },
+    {
+     "tag": "Research",
+     "text": "cgraph (Fir, rerun after a one-line fix): the conflict-graph bound is tight for [[17,1,5]] (min ω = 3, at least 2 flags) but only gives at least 1 flag for [[19,1,5]]; the \"same syndrome wire cannot merge\" rule is sufficient only (explains 4 of 25). No counterexample to the lemma."
+    },
+    {
+     "tag": "Research",
+     "text": "minflag step 1: enumerated all 6¹² orderings of the 12 weight-4 wires of [[31,1,7]]; ω is always 4, so the lower bound is 2 flags per half against an upper bound of 10. Step 2 on [[19,1,5]] drafted."
+    },
+    {
+     "tag": "Research",
+     "text": "kfstart: ordering [[19,1,5]] as in Kishony–Fowler (arXiv:2603.28852) gives distance 4 without flags; the bracket rule needs 9 flags, 18 ancillas, depth 9, worse than our D5 circuits. In step 2 (Fir) the start circuit proves R = 5 in both bases and the search accepts 252,017 circuits with Pareto point [13, 60, 8]."
+    },
+    {
+     "tag": "Research",
+     "text": "qLDPC trial, step 0 (Trillium): tropidist reproduces the known distances on IBM's bivariate bicycle circuits (4/4: 6 for bb72, 8 for bb90) and is exact on our own circuits (5/5, 0.5–12 s each); MILP runs out of its 1 h limit in all 8 runs. Without flags our circuits keep distance 6 on bb72 but drop to 6 on bb90 (code distance 10) and 10 on bb144 (code distance 12). Step 1, adding flags only on hooks that lower the distance, started on Trillium."
+    },
+    {
+     "tag": "Research",
+     "text": "Reviewed the last two days of discussion and split the project into two parts: make the check that a rewritten circuit keeps its distance faster, and find rules that explain why each rewrite is made. Added this to the outline for the 11/27 group meeting. Wrote idea notes on certificates for other moves, the minimum number of flags, ideas from non-flag circuits, serial ancilla reuse as a move, and the qLDPC trial; asked the literature session how non-flag circuits save ancillas."
+    },
+    {
+     "tag": "Research",
+     "text": "Tried research-atlas, an open-source literature map tool: built a project file from our rewrite-rule survey notes (19 papers, 25 pieces of evidence), imported it in the browser, and wrote a trial report and usage guide. It flagged two numbers in our notes to recheck."
+    },
+    {
+     "tag": "Research",
+     "text": "Had an interactive timeline and mind map made of the project's history, wrote a summary of the week's progress, drafted a cleanup plan for the Research folder, and set a rule that any local process over a minute goes to the cluster."
+    },
+    {
+     "tag": "Tutoring",
+     "text": "Wrote step-by-step solutions to a set of math problems (PDF)."
     }
    ],
    "empty": false
