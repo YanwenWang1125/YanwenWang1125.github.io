@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-25",
+ "last": "2026-11-26",
  "weeks": [
   {
    "label": "Week 1",
@@ -147,7 +147,8 @@ window.LOG = {
    "days": [
     "2026-11-23",
     "2026-11-24",
-    "2026-11-25"
+    "2026-11-25",
+    "2026-11-26"
    ]
   }
  ],
@@ -2464,6 +2465,66 @@ window.LOG = {
     {
      "tag": "Tutoring",
      "text": "Wrote step-by-step solutions to a set of math problems (PDF)."
+    },
+    {
+     "tag": "Research",
+     "text": "kfstart step 2 finished on Fir: tier two. The final front point (13, 60, 8) is dominated by our D5b-d circuit (12, 60, 8); all 20 front circuits prove at 5 rounds."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-26": {
+   "date": "2026-11-26",
+   "label": "",
+   "week": 10,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "Built the slides for the 11/27 group meeting on the past month of work, aimed at PhD students and faculty without a quantum background and organized around the story and the idea: Western template, 10 content pages, sections on how the search edits circuits (swap, merge, delete and the search algorithm), how the lower bound is proven, and where the idea comes from; the limitations page now covers the idea itself (we cannot yet say why each step is made); figures drawn from a real rewrite path. Updated the meeting outline several times, ending with the qLDPC results."
+    },
+    {
+     "tag": "Research",
+     "text": "Story note: the goal is a flag-circuit version of Jeon et al.: enabling rules (restricted commutation, saves nothing by itself) paired with reduction rules that remove ancillas and CNOTs, compared by ancillas, then CNOTs, then depth."
+    },
+    {
+     "tag": "Research",
+     "text": "Six checks judged:",
+     "sub": [
+      "certsearch step 2 (tier one): 7176 circuits, 5-round certificate chain and per-circuit MILP agree on all, CPU ratio 0.00563.",
+      "ruleguide (tier three): choosing swaps by the pair that blocks a rejected merge loses the front point (12, 56, 14) and picks none of the 7 swaps on the known path; the 3 random baselines keep it.",
+      "certler (tier three): reordering CNOTs of a proven circuit for lower LER; none of 23 proven one-step swaps passes the screen in both bases.",
+      "altrev (tier three): reversing CNOT order in even rounds leaves all 53 rejected children at the same distance; reversed parents prove 8/8.",
+      "ferule (tier two): under paritea's fault model no merge or delete is fault-equivalent; all 16 equivalent steps are swaps.",
+      "hookdir step 2: where a hook's data error moves predicts swap progress (MH ratio 2.85, p = 3.8×10⁻¹³⁹), but almost all such swaps break FT₂, and 0 of the 41 distance-preserving ones make progress."
+     ]
+    },
+    {
+     "tag": "Research",
+     "text": "localenv: grouping one-step merges by local structure works within one d but transfers across d with accuracy 1/48. shuttydel: deleting flag-only boundary ancillas in Shutty's [[31,1,7]] circuit does not apply (those ancillas take part in face extraction). minflag stops after two steps."
+    },
+    {
+     "tag": "Research",
+     "text": "xzsim (measuring X and Z in the same round), step 1: the new representation rebuilds the superdense and Shutty circuits; on Trillium all 20 tropidist runs are exact, removing ancilla r30 keeps distance 7 in all 4 circuits, other removals drop to 6. Six 5-round MILP proofs sent to Fir; if r30 proves, ancillas go from 33 to 32."
+    },
+    {
+     "tag": "Research",
+     "text": "qLDPC (Trillium): trying all 720 uniform CNOT orders without flags reaches 8 on [[90,8,10]] and 10 on the gross code, matching IBM's interleaved circuits. Adding one flag per check on the best order brings the gross code to its full distance 12 (144 flags, 288 ancillas, no counterexample up to weight 6); [[90,8,10]] reaches 9. No prior non-interleaved circuit at 12 found. A rerun with the Khesin–Lu flag placement also gives 12 at R = 2, 6, 12."
+    },
+    {
+     "tag": "Research",
+     "text": "Literature: close reads of Ye, Pabla &amp; Palsberg 2026 (RL gate scheduling, arXiv:2609.12020) and the Google superdense and Shutty circuits (designed by hand, then distance-checked; no fault-equivalence rules); looked into AlphaSyndrome, why Jeon's rules do not apply to flag circuits, and alternating reversed schedules."
+    },
+    {
+     "tag": "Research",
+     "text": "Wrote idea notes (building on Shutty's circuit, certified LER reordering, fault-equivalence rules for FT₂ flag circuits, hook-direction features, rule-guided certificate search, sharing ancillas across blocks) and started a tracking file for tasks handed to other sessions. Committed the 11-26 project snapshot."
+    },
+    {
+     "tag": "TA",
+     "text": "CS3357: updated exam accommodation records; went through the last five questions of the Chapter 6 participation quiz."
+    },
+    {
+     "tag": "Other",
+     "text": "Updated the storyboard for the Quantum Computing Workshop videos."
     }
    ],
    "empty": false
