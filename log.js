@@ -1,7 +1,7 @@
 // Generated from Daily_Log_EN.md by .claude/build-log.mjs. Edit the markdown, not this file.
 window.LOG = {
  "first": "2026-09-17",
- "last": "2026-11-26",
+ "last": "2026-11-27",
  "weeks": [
   {
    "label": "Week 1",
@@ -148,7 +148,8 @@ window.LOG = {
     "2026-11-23",
     "2026-11-24",
     "2026-11-25",
-    "2026-11-26"
+    "2026-11-26",
+    "2026-11-27"
    ]
   }
  ],
@@ -2525,6 +2526,46 @@ window.LOG = {
     {
      "tag": "Other",
      "text": "Updated the storyboard for the Quantum Computing Workshop videos."
+    }
+   ],
+   "empty": false
+  },
+  "2026-11-27": {
+   "date": "2026-11-27",
+   "label": "",
+   "week": 10,
+   "items": [
+    {
+     "tag": "Research",
+     "text": "Gave two talks at the group meeting: a progress report on the past month (with a plain-language script), and a proposal of the ideas from the last two weeks, rebuilt on the Western template with academic slide titles and an editable 9-page pptx, plus the literature, research question and objectives. Also looked into whether ZX calculus applies to flag circuits and how Google's superdense color-code circuits were rewritten."
+    },
+    {
+     "tag": "Research",
+     "text": "Meeting feedback: the distance-verification line, including a certificate for each rewrite step, was well received; the next priority is a formal problem statement and objective."
+    },
+    {
+     "tag": "Research",
+     "text": "Problem formulation draft: saving ancillas, certified rewriting, and choosing the next step, with objectives O1–O6. Compared how others state the problem (Quartz, QUESO, GUOQ, Jeon, Rodatz, AlphaSyndrome, PropHunt, PC-QEC); framed certificates as data plus a checker, following Leroy's (CACM 2009) three kinds of compiler guarantees, and the step-selection loop as \"in the spirit of CEGIS\"."
+    },
+    {
+     "tag": "Research",
+     "text": "Weighted objective: minimize a weighted sum of normalized ancilla count, CNOT count and depth, subject to distance not dropping and LER not rising. Compared with a Pareto front: a weighted sum can miss front points on a discrete front, so the search keeps the front and the weights pick from it for reporting."
+    },
+    {
+     "tag": "Research",
+     "text": "xzsim: all six 5-round MILP proofs on Fir returned distance 7, so removing ancilla r30 keeps Shutty's [[31,1,7]] circuits at distance 7 with ancillas 33 → 32 and CNOTs 195 → 190 at the same depth. Fixed the LER comparison criterion; the comparison job passed its smoke test and is running on Fir."
+    },
+    {
+     "tag": "Research",
+     "text": "qLDPC: with the Khesin–Lu flag placement the gross code also reaches distance 12 (24 runs, both bases agree); the flag gate directions and bases match their Fig. 3(b). Settled on conservative wording: a positive example for the gross code, with a noiseless last round, R = 2, 6, 12, and one CNOT order."
+    },
+    {
+     "tag": "Research",
+     "text": "certler: the parent-circuit LER recheck finished (p = 2.5e-4: Z 3.42e-6, X 3.63e-6; p = 5e-4: Z 3.82e-5, X 4.01e-5); descriptive only, verdict unchanged."
+    },
+    {
+     "tag": "Other",
+     "text": "Completed the Mitacs Globalink pre-departure steps; looked up an IBM workshop email; wrote a monthly research summary (ideas only, no numbers)."
     }
    ],
    "empty": false
